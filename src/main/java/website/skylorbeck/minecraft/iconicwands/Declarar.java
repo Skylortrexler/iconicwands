@@ -1,19 +1,24 @@
 package website.skylorbeck.minecraft.iconicwands;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
+import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
+import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 public class Declarar {
 //    public static final ItemGroup ICONIC_WAND_GROUP = FabricItemGroupBuilder.build(Iconicwands.getId("category"), () -> new ItemStack(Declarar.ICONIC_WAND));
@@ -34,4 +39,9 @@ public class Declarar {
         Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5,7)));
         return handle.getManaCost()+tip.getManaCost();
     }));
+
+    public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
+    public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings());
+
+    public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }

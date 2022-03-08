@@ -22,6 +22,7 @@ public class ModelLoaderMixin {
     public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) throws IOException {
 //        if (!"iconicwands:item/iconicwand_item".equals(id.toString())) return;
         if (!"iconicwands".equals(id.getNamespace())) return;//filter out everything that isn't from this mod
+        if (id.getPath().contains("bench")) return;//filter out bench block
 //        Logger.getGlobal().log(Level.SEVERE,id.toString());
         String path = "cache/iconicwands/";
         if (!Files.exists(Paths.get(path))) {

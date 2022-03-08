@@ -1,8 +1,10 @@
 package website.skylorbeck.minecraft.iconicwands;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.util.Identifier;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
+import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
@@ -82,7 +84,9 @@ public class Iconicwands implements ModInitializer {
     @Override
     public void onInitialize() {
         Registrar.regItem("iconicwand_",Declarar.ICONIC_WAND,MODID);
-
+        Registrar.regBlock("wand_bench_",Declarar.WAND_BENCH,MODID);
+        Registrar.regItem("wand_bench_",Declarar.WAND_BENCH_ITEM,MODID);
+        Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"), WandBenchScreenHandler::new);
         try {
             parts = ConfigFileHandler.initConfigFile("iconic_wands.json",parts);
         } catch (IOException e) {
@@ -97,5 +101,5 @@ public class Iconicwands implements ModInitializer {
         return new Identifier(MODID, name);
     }
 
-
+    //todo crafting book
 }
