@@ -1,5 +1,7 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
+import website.skylorbeck.minecraft.iconicwands.Iconicwands;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -125,6 +127,31 @@ public class Parts {
         }
 
     }
+    public static class WandCluster{
+        Tip tip;
+        Core core;
+        Handle handle;
+        public WandCluster(Tip tip, Core core, Handle handle) {
+            this.tip = tip;
+            this.core = core;
+            this.handle = handle;
+        }
 
+        public Tip getTip() {
+            return tip;
+        }
+
+        public Core getCore() {
+            return core;
+        }
+
+        public Handle getHandle() {
+            return handle;
+        }
+
+        public int getInt(){
+            return Integer.parseInt(1 + String.format("%02d", Iconicwands.parts.tips.indexOf(tip)) + String.format("%02d", Iconicwands.parts.cores.indexOf(core)) + String.format("%02d", Iconicwands.parts.handles.indexOf(handle)));
+        }
+    }
 }
 

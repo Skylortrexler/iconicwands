@@ -11,25 +11,41 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Mixin(ModelLoader.class)
 public class ModelLoaderMixin {
 
     @Inject(method = "loadModelFromJson", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceManager;getResource(Lnet/minecraft/util/Identifier;)Lnet/minecraft/resource/Resource;"), cancellable = true)
-    public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) {
+    public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) throws IOException {
 //        if (!"iconicwands:item/iconicwand_item".equals(id.toString())) return;
         if (!"iconicwands".equals(id.getNamespace())) return;//filter out everything that isn't from this mod
 //        Logger.getGlobal().log(Level.SEVERE,id.toString());
-
+        String path = "cache/iconicwands/";
+        if (!Files.exists(Paths.get(path))) {
+            Files.createDirectories(Paths.get(path));
+        }
+        String modelJson = "";
         if ("item/iconicwand_item".equals(id.getPath())) {
-            String modelJson = createMainWandRecipe(id.toString());
+            if (Files.exists(Paths.get(path+"wand_model.json"))) {
+                modelJson = Files.readString(Paths.get(path+"wand_model.json"));
+            } else {
+                modelJson = createMainWandRecipe(id.toString());
+                Files.write(Paths.get(path+"wand_model.json"), modelJson.getBytes());
+            }
             JsonUnbakedModel model = JsonUnbakedModel.deserialize(modelJson);
             model.id = id.toString();
             cir.setReturnValue(model);
         } else if (id.getPath().contains("item/wand")) {
-            String modelJson = createSubRecipes(id.toString());
+            String subID = id.toString().replace("iconicwands:item/wand", "");
+            if (Files.exists(Paths.get(path+"wand_model_"+subID+".json"))) {
+                modelJson = Files.readString(Paths.get(path+"wand_model_"+subID+".json"));
+            } else {
+                modelJson = createSubRecipes(id.toString());
+                Files.write(Paths.get(path+"wand_model_"+subID+".json"), modelJson.getBytes());
+            }
             JsonUnbakedModel model = JsonUnbakedModel.deserialize(modelJson);
             model.id = id.toString();
             cir.setReturnValue(model);

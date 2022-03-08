@@ -22,84 +22,109 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class IconicWand extends RangedWeaponItem{
-    private Parts.Tip tip = Iconicwands.parts.tips.get(0);
-    private Parts.Core core = Iconicwands.parts.cores.get(0);
-    private Parts.Handle handle = Iconicwands.parts.handles.get(0);
-
-    int rechargeTime = 0;//counts down til recharge can start, resets on fire
-    int rechargeDelay = 0;//counts up til next recharge tick
+    int rechargeTime = 0;
+    int rechargeDelay = 0;
 
     public IconicWand(Settings settings) {
         super(settings);
     }
 
-    @Override
-    public void onCraft(ItemStack stack, World world, PlayerEntity player) {
-        saveComponents(stack);
-        super.onCraft(stack, world, player);
-    }
-
-    private void saveComponents(ItemStack stack) {
+    public static void saveComponents(ItemStack stack, Parts.Core core, Parts.Handle handle, Parts.Tip tip) {
         NbtCompound nbt = stack.getOrCreateNbt();
-        nbt.putInt("custom_model_data", Integer.parseInt(1 + String.format("%02d", Iconicwands.parts.tips.indexOf(tip)) + String.format("%02d", Iconicwands.parts.cores.indexOf(core)) + String.format("%02d", Iconicwands.parts.handles.indexOf(handle))));
-        Logger.getGlobal().log(Level.SEVERE, nbt.getInt("custom_model_data") + "");
+        nbt.putInt("CustomModelData", Integer.parseInt(1 + String.format("%02d", Iconicwands.parts.tips.indexOf(tip)) + String.format("%02d", Iconicwands.parts.cores.indexOf(core)) + String.format("%02d", Iconicwands.parts.handles.indexOf(handle))));
+//        Logger.getGlobal().log(Level.SEVERE, nbt.getInt("CustomModelData") + "");
+    }
+    public static String getPartCombo(ItemStack stack) {
+        String modelData = String.valueOf(stack.getOrCreateNbt().getInt("CustomModelData"));
+        if (modelData.length() <= 6) {
+            modelData = "1000000";
+        }
+        return modelData;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (context.isAdvanced() || Screen.hasShiftDown()) {
-            tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + handle.getDamage()));
-            tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (core.getFirerate() + handle.getFirerate())));
-            tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (tip.getManaCost() + handle.getManaCost())));
-            tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (tip.getRechargeAmount() + core.getRechargeAmount())));
-            tooltip.add(new TranslatableText("item.iconicwands.recharge_rate").append(": " + (core.getRechargeRate())));
-            tooltip.add(new TranslatableText("item.iconicwands.recharge_delay").append(": " + (core.getRechargeDelay())));
-            tooltip.add(new TranslatableText("item.iconicwands.range").append(": " + (core.getRange())));
-            tooltip.add(new TranslatableText("item.iconicwands.speed").append(": " + (tip.getSpeed())));
-        } else {
-            tooltip.add(new TranslatableText("item.iconicwands.advanced_tooltip"));
+        if (stack.getOrCreateNbt().getInt("CustomModelData") >=1000000) {
+            if (context.isAdvanced() || Screen.hasShiftDown()) {
+                String modelData = getPartCombo(stack);
+                Parts.Tip tip = Iconicwands.parts.tips.get(Integer.parseInt(modelData.substring(1, 3)));
+                Parts.Core core = Iconicwands.parts.cores.get(Integer.parseInt(modelData.substring(3, 5)));
+                Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5, 7)));
+                tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + handle.getDamage()));
+                tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (core.getFirerate() + handle.getFirerate())));
+                tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (tip.getManaCost() + handle.getManaCost())));
+                tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (tip.getRechargeAmount() + core.getRechargeAmount())));
+                tooltip.add(new TranslatableText("item.iconicwands.recharge_rate").append(": " + (core.getRechargeRate())));
+                tooltip.add(new TranslatableText("item.iconicwands.recharge_delay").append(": " + (core.getRechargeDelay())));
+                tooltip.add(new TranslatableText("item.iconicwands.range").append(": " + (core.getRange())));
+                tooltip.add(new TranslatableText("item.iconicwands.speed").append(": " + (tip.getSpeed())));
+            } else {
+                tooltip.add(new TranslatableText("item.iconicwands.advanced_tooltip"));
+            }
         }
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        IconicWand wand =  ((IconicWand)stack.getItem());
         DefaultedList<ItemStack> defaultedList = DefaultedList.of();
-        defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(wand.tip.getIdentifier()))));
-        defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(wand.core.getIdentifier()))));
-        defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(wand.handle.getIdentifier()))));
-//        defaultedList.add(ItemStack.EMPTY);
-        return Optional.of(new WandTooltipData(defaultedList));
+        if (stack.getOrCreateNbt().getInt("CustomModelData") >=1000000) {
+            String modelData = getPartCombo(stack);
+            Parts.Tip tip = Iconicwands.parts.tips.get(Integer.parseInt(modelData.substring(1, 3)));
+            Parts.Core core = Iconicwands.parts.cores.get(Integer.parseInt(modelData.substring(3, 5)));
+            Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5, 7)));
+            defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(tip.getIdentifier()))));
+            defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(core.getIdentifier()))));
+            defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(handle.getIdentifier()))));
+            return Optional.of(new WandTooltipData(defaultedList));
+        }
+        return Optional.empty();
     }
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient) return;
+        String modelData = getPartCombo(stack);
+        Parts.Tip tip = Iconicwands.parts.tips.get(Integer.parseInt(modelData.substring(1, 3)));
+        Parts.Core core = Iconicwands.parts.cores.get(Integer.parseInt(modelData.substring(3, 5)));
+        NbtCompound nbtCompound = stack.getOrCreateNbt();
+        Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5,7)));
+        int rechargeTime = nbtCompound.getInt("recharge_time");
+//        int rechargeDelay = nbtCompound.getInt("recharge_delay");
         if (stack.isDamaged()) {
-            if (rechargeTime > 0)
-                rechargeTime--;
-            else {
-                if (++rechargeDelay % core.getRechargeRate() == 0) {
-                    stack.setDamage(stack.getDamage() - (core.getRechargeAmount()+tip.getRechargeAmount()));
-                    rechargeDelay = 0;
+            if (rechargeTime > 0 ) {
+                if (world.getTime() % 20 == 0)
+                    rechargeTime--;
+            }else {
+                if (world.getTime() % (core.getRechargeRate()* 20L) == 0) {
+//                if (++rechargeDelay % core.getRechargeRate() == 0) {
+                    stack.setDamage(stack.getDamage() - (core.getRechargeAmount() + tip.getRechargeAmount()));
+//                    rechargeDelay = 0;
                 }
             }
         } else if (rechargeTime < core.getRechargeDelay()) {
-            resetRechargeTime();
+            rechargeTime = core.getRechargeDelay();
+//            rechargeDelay = 0;
         }
+        if (nbtCompound.getInt("recharge_time") != rechargeTime)
+            nbtCompound.putInt("recharge_time", rechargeTime);
+//        if (nbtCompound.getInt("recharge_delay") != rechargeDelay)
+//            nbtCompound.putInt("recharge_delay", rechargeDelay);
+
         super.inventoryTick(stack, world, entity, slot, selected);
     }
 
@@ -111,6 +136,10 @@ public class IconicWand extends RangedWeaponItem{
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity playerEntity, int remainingUseTicks) {
         if (!world.isClient) {
+            String modelData = getPartCombo(stack);
+            Parts.Tip tip = Iconicwands.parts.tips.get(Integer.parseInt(modelData.substring(1,3)));
+            Parts.Core core = Iconicwands.parts.cores.get(Integer.parseInt(modelData.substring(3,5)));
+            Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5,7)));
             int k;
             int j;
             MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
@@ -132,20 +161,26 @@ public class IconicWand extends RangedWeaponItem{
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
             persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
             world.spawnEntity(persistentProjectileEntity);
-            resetRechargeTime();
+//            rechargeTime = core.getRechargeDelay();
+            stack.getOrCreateNbt().putInt("recharge_time", core.getRechargeDelay());
+            stack.getOrCreateNbt().putInt("recharge_delay",0);
+
             if (playerEntity instanceof PlayerEntity player) {
                 player.getItemCooldownManager().set(this, core.getFirerate() + handle.getFirerate());
-//                this.handle = Iconicwands.parts.handles.get(world.random.nextInt(Iconicwands.parts.handles.size()));
-//                this.core = Iconicwands.parts.cores.get(world.random.nextInt(Iconicwands.parts.cores.size()));
-//                this.tip = Iconicwands.parts.tips.get(world.random.nextInt(Iconicwands.parts.tips.size()));
+                //todo remove this
+                /*for (int i = 0; i < 3 ; i++) {
+                    for (int l = 0; l < 3; l++) {
+                        for (int m = 0; m < 3; m++) {
+                            ItemStack itemStack = new ItemStack(Declarar.ICONIC_WAND);
+                            saveComponents(itemStack,Iconicwands.parts.cores.get(i),Iconicwands.parts.handles.get(l),Iconicwands.parts.tips.get(m));
+                            player.getInventory().offerOrDrop(itemStack);
+                        }
+                    }
+                }*/
+//                this.saveComponents(stack,Iconicwands.parts.cores.get(world.random.nextInt(Iconicwands.parts.cores.size())), Iconicwands.parts.handles.get(world.random.nextInt(Iconicwands.parts.handles.size())), Iconicwands.parts.tips.get(world.random.nextInt(Iconicwands.parts.tips.size())));
             }
-            saveComponents(stack);
         }
         super.onStoppedUsing(stack, world, playerEntity, remainingUseTicks);
-    }
-
-    private void resetRechargeTime() {
-        rechargeTime = core.getRechargeDelay();
     }
 
     @Override
@@ -175,33 +210,4 @@ public class IconicWand extends RangedWeaponItem{
         return 15;
     }
 
-    public Parts.Tip getTip() {
-        return tip;
-    }
-
-    public void setTip(Parts.Tip tip) {
-        this.tip = tip;
-    }
-
-    public Parts.Core getCore() {
-        return core;
-    }
-
-    public void setCore(Parts.Core core) {
-        this.core = core;
-    }
-
-    public Parts.Handle getHandle() {
-        return handle;
-    }
-
-    public void setHandle(Parts.Handle handle) {
-        this.handle = handle;
-    }
-
-    public void setComponents(Parts.Core core, Parts.Handle handle, Parts.Tip tip) {
-        this.core = core;
-        this.handle = handle;
-        this.tip = tip;
-    }
 }

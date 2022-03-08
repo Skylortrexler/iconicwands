@@ -14,22 +14,22 @@ public class Iconicwands implements ModInitializer {
         parts.addCores(
                 new Parts.Core(
                         "minecraft:stick",
-                        20,
-                        200,
+                        1,
+                        10,
                         5,
                         10,
                         10
                 ),new Parts.Core(
                         "minecraft:blaze_rod",
-                        10,
-                        100,
+                        1,
+                        5,
                         10,
                         20,
                         10
                 ),new Parts.Core(
                         "minecraft:end_rod",
-                        100,
-                        100,
+                        5,
+                        5,
                         50,
                         10,
                         10
