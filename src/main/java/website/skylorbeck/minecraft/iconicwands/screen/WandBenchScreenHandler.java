@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ScreenHandler;
@@ -20,6 +21,7 @@ import net.minecraft.screen.slot.CraftingResultSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
@@ -27,7 +29,7 @@ import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WandBenchScreenHandler
 extends AbstractRecipeScreenHandler<CraftingInventory> {
@@ -46,9 +48,42 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         int i;
         this.context = context;
         this.player = playerInventory.player;
-        this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35));
+        this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35){
+            @Override
+            public void onTakeItem(PlayerEntity player, ItemStack stack) {
+                this.onCrafted(stack);
+                for (int i = 0; i < 3; ++i) {
+                    ItemStack itemStack = input.getStack(i);
+                    if (!itemStack.isEmpty()) {
+                        input.removeStack(i, 1);
+                    }
+
+                }
+            }
+        });
         for (i = 0; i < 3; ++i) {
-                this.addSlot(new Slot(this.input, i, 30 + i * 18, 17));
+            int finalI = i;
+            this.addSlot(new Slot(this.input, finalI, 30 + i * 18, 17){
+                    @Override
+                    public boolean canInsert(ItemStack stack) {
+                        AtomicBoolean bl = new AtomicBoolean(false);
+                        switch (finalI) {
+                            case 0 -> Iconicwands.parts.tips.forEach(tip -> {
+                                if (tip.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
+                                    bl.set(true);
+                            });
+                            case 1 -> Iconicwands.parts.cores.forEach(core -> {
+                                if (core.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
+                                    bl.set(true);
+                            });
+                            case 2 -> Iconicwands.parts.handles.forEach(handle -> {
+                                if (handle.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
+                                    bl.set(true);
+                            });
+                        }
+                        return super.canInsert(stack) && bl.get();
+                    }
+                });
         }
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 9; ++j) {
@@ -150,11 +185,12 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
             itemStack = itemStack2.copy();
             if (index == 0) {
                 this.context.run((world, pos) -> itemStack2.getItem().onCraft(itemStack2, (World)world, player));
-                if (!this.insertItem(itemStack2, 10, 46, true)) {
+                if (!this.insertItem(itemStack2, 4, 40, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot.onQuickTransfer(itemStack2, itemStack);
-            } else if (index >= 10 && index < 46 ? !this.insertItem(itemStack2, 1, 10, false) && (index < 37 ? !this.insertItem(itemStack2, 37, 46, false) : !this.insertItem(itemStack2, 10, 37, false)) : !this.insertItem(itemStack2, 10, 46, false)) {
+                //todo fix this vVv
+            } else if (index >= 4 && index < 40 ? !this.insertItem(itemStack2, 1, 4, false) && (index < 31 ? !this.insertItem(itemStack2, 31, 40, false) : !this.insertItem(itemStack2, 4, 31, false)) : !this.insertItem(itemStack2, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
@@ -195,7 +231,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
 
     @Override
     public int getCraftingSlotCount() {
-        return 10;
+        return 4;
     }
 
     @Override
