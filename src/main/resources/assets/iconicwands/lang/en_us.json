@@ -1,0 +1,13 @@
+{
+  "itemGroup.iconicwands.category": "Iconic Wands",
+  "item.iconicwands.iconicwand_item": "Wand",
+  "item.iconicwands.advanced_tooltip": "Hold Shift or enable Advanced Tooltips",
+  "item.iconicwands.damage": "Damage",
+  "item.iconicwands.firerate": "Fire Rate",
+  "item.iconicwands.mana_cost": "Mana Cost",
+  "item.iconicwands.recharge_amount": "Recharge Amount",
+  "item.iconicwands.recharge_rate": "Recharge Rate",
+  "item.iconicwands.recharge_delay": "Recharge Delay",
+  "item.iconicwands.range": "Range",
+  "item.iconicwands.speed": "Speed"
+}
