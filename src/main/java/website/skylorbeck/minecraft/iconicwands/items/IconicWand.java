@@ -12,6 +12,9 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
@@ -139,8 +142,9 @@ public class IconicWand extends RangedWeaponItem{
             MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
             persistentProjectileEntity.setNoGravity(true);
             persistentProjectileEntity.setMaxDist(core.getRange());
+//            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 0, tip.getDivergence());
             persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, tip.getSpeed(), tip.getDivergence());
-            if (world.random.nextFloat() <= 0.05f) {
+            if (world.random.nextFloat() <= 0.05f) {//todo wand based?
                 persistentProjectileEntity.setCritical(true);
             }
             if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
@@ -155,23 +159,13 @@ public class IconicWand extends RangedWeaponItem{
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
             persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
             world.spawnEntity(persistentProjectileEntity);
+            world.playSoundFromEntity(null,playerEntity, SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS,0.5f+world.random.nextFloat(0.5f),(persistentProjectileEntity.isCritical()?2f:0.25f)+world.random.nextFloat(0.75f));
 //            rechargeTime = core.getRechargeDelay();
             stack.getOrCreateNbt().putInt("recharge_time", core.getRechargeDelay());
             stack.getOrCreateNbt().putInt("recharge_delay",0);
 
             if (playerEntity instanceof PlayerEntity player) {
                 player.getItemCooldownManager().set(this, core.getFirerate() + handle.getFirerate());
-                //todo remove this
-                /*for (int i = 0; i < 3 ; i++) {
-                    for (int l = 0; l < 3; l++) {
-                        for (int m = 0; m < 3; m++) {
-                            ItemStack itemStack = new ItemStack(Declarar.ICONIC_WAND);
-                            saveComponents(itemStack,Iconicwands.parts.cores.get(i),Iconicwands.parts.handles.get(l),Iconicwands.parts.tips.get(m));
-                            player.getInventory().offerOrDrop(itemStack);
-                        }
-                    }
-                }*/
-//                this.saveComponents(stack,Iconicwands.parts.cores.get(world.random.nextInt(Iconicwands.parts.cores.size())), Iconicwands.parts.handles.get(world.random.nextInt(Iconicwands.parts.handles.size())), Iconicwands.parts.tips.get(world.random.nextInt(Iconicwands.parts.tips.size())));
             }
         }
         super.onStoppedUsing(stack, world, playerEntity, remainingUseTicks);

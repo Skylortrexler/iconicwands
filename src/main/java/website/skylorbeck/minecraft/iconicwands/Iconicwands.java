@@ -102,4 +102,8 @@ public class Iconicwands implements ModInitializer {
     }
 
     //todo crafting book
+    //todo balance
+    //todo model for bench
+    //todo projectile
+    //todo particles
 }

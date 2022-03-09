@@ -17,6 +17,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -54,34 +56,9 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         this.maxDist = maxDist;
     }
 
-    public void initFromStack(ItemStack stack) {
-        if (stack.isOf(Items.TIPPED_ARROW)) {
-            int i;
-            this.potion = PotionUtil.getPotion(stack);
-            List<StatusEffectInstance> collection = PotionUtil.getCustomPotionEffects(stack);
-            if (!collection.isEmpty()) {
-                for (StatusEffectInstance statusEffectInstance : collection) {
-                    this.effects.add(new StatusEffectInstance(statusEffectInstance));
-                }
-            }
-            if ((i = MagicProjectileEntity.getCustomPotionColor(stack)) == -1) {
-                this.initColor();
-            } else {
-                this.setColor(i);
-            }
-        } else if (stack.isOf(Items.ARROW)) {
-            this.potion = Potions.EMPTY;
-            this.effects.clear();
-            this.dataTracker.set(COLOR, -1);
-        }
-    }
-
-    public static int getCustomPotionColor(ItemStack stack) {
-        NbtCompound nbtCompound = stack.getNbt();
-        if (nbtCompound != null && nbtCompound.contains("CustomPotionColor", 99)) {
-            return nbtCompound.getInt("CustomPotionColor");
-        }
-        return -1;
+    @Override
+    protected SoundEvent getHitSound() {
+        return SoundEvents.BLOCK_AMETHYST_BLOCK_HIT;
     }
 
     private void initColor() {
@@ -184,16 +161,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        if (this.effects.isEmpty() && this.potion == Potions.EMPTY) {
-            return new ItemStack(Items.ARROW);
-        }
-        ItemStack itemStack = new ItemStack(Items.TIPPED_ARROW);
-        PotionUtil.setPotion(itemStack, this.potion);
-        PotionUtil.setCustomPotionEffects(itemStack, this.effects);
-        if (this.colorSet) {
-            itemStack.getOrCreateNbt().putInt("CustomPotionColor", this.getColor());
-        }
-        return itemStack;
+        return ItemStack.EMPTY;
     }
 
     @Override
