@@ -19,13 +19,13 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 
 @Environment(value=EnvType.CLIENT)
 public class WandBenchScreen
 extends HandledScreen<WandBenchScreenHandler>
 implements RecipeBookProvider {
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/crafting_table.png");
-    private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
+    private static final Identifier TEXTURE = Iconicwands.getId("textures/container/wand_bench.png");
     private boolean narrow;
 
     public WandBenchScreen(WandBenchScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -36,7 +36,7 @@ implements RecipeBookProvider {
     protected void init() {
         super.init();
         this.narrow = this.width < 379;
-        this.titleX = 29;
+        this.playerInventoryTitleY = this.backgroundHeight - 96;
     }
 
     @Override

@@ -1,5 +1,6 @@
 {
   "itemGroup.iconicwands.category": "Iconic Wands",
+  "container.iconicwands.wand_bench": "Wand Bench",
   "item.iconicwands.iconicwand_item": "Wand",
   "item.iconicwands.advanced_tooltip": "Hold Shift or enable Advanced Tooltips",
   "item.iconicwands.damage": "Damage",

@@ -48,7 +48,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         int i;
         this.context = context;
         this.player = playerInventory.player;
-        this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 124, 35){
+        this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 80, 18){
             @Override
             public void onTakeItem(PlayerEntity player, ItemStack stack) {
                 this.onCrafted(stack);
@@ -63,7 +63,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         });
         for (i = 0; i < 3; ++i) {
             int finalI = i;
-            this.addSlot(new Slot(this.input, finalI, 30 + i * 18, 17){
+            this.addSlot(new Slot(this.input, finalI, 54 + i * 26, 52){
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         AtomicBoolean bl = new AtomicBoolean(false);
@@ -87,11 +87,11 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         }
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 80 + i * 18));
             }
         }
         for (i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 138));
         }
     }
 
