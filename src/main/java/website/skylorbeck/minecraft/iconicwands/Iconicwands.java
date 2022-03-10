@@ -106,4 +106,6 @@ public class Iconicwands implements ModInitializer {
     //todo model for bench
     //todo projectile
     //todo particles
+
+    //todo rewrite nbt storage to use bitmasking
 }

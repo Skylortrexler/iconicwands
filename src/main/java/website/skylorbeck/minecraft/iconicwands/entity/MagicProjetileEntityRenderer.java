@@ -16,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
+import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 
 public class MagicProjetileEntityRenderer
@@ -39,14 +40,15 @@ public class MagicProjetileEntityRenderer
         Matrix4f matrix4f = entry.getPositionMatrix();
         Matrix3f matrix3f = entry.getNormalMatrix();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(getTexture(persistentProjectileEntity)));
-        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0f, 0f, 0, 0.2f);
-        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1f, 0f, 0.2f, 0.2f);
-        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1f, 1f, 0.2f, 0);
-        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0f, 1f, 0, 0);
+        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0f, 0f, 0, 0.2f,persistentProjectileEntity);
+        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1f, 0f, 0.2f, 0.2f,persistentProjectileEntity);
+        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1f, 1f, 0.2f, 0,persistentProjectileEntity);
+        produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0f, 1f, 0, 0,persistentProjectileEntity);
         matrixStack.pop();
         super.render(persistentProjectileEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
-    private static void produceVertex(VertexConsumer vertexConsumer, Matrix4f positionMatrix, Matrix3f normalMatrix, int light, float x, float y, float textureU, float textureV) {
-        vertexConsumer.vertex(positionMatrix, x-0.4f , y-0.3f, 0.0f).color(255, 255, 255, 255).texture(textureU, textureV).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
+
+    private static void produceVertex(VertexConsumer vertexConsumer, Matrix4f positionMatrix, Matrix3f normalMatrix, int light, float x, float y, float textureU, float textureV, MagicProjectileEntity mpe) {
+        vertexConsumer.vertex(positionMatrix, x-0.4f , y-0.3f, 0.0f).color(Color.getRed(mpe.getColor()), Color.getGreen(mpe.getColor()), Color.getBlue(mpe.getColor()), 255).texture(textureU, textureV).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
     }
 }

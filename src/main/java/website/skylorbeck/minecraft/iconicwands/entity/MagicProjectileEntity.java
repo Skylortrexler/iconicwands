@@ -106,7 +106,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         return this.dataTracker.get(COLOR);
     }
 
-    private void setColor(int color) {
+    public void setColor(int color) {
         this.colorSet = true;
         this.dataTracker.set(COLOR, color);
     }
