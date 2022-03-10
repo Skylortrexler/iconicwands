@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gDg",
+    "DLD",
+    "iDi"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "D": {
+      "tag": "minecraft:planks"
+    },
+    "L": {
+      "item": "minecraft:lapis_block"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "iconicwands:wand_bench_item"
+  }
+}

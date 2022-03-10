@@ -90,7 +90,6 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         }
     }
 
-
     private void spawnParticles(int amount) {
         if (amount <= 0) {
             return;

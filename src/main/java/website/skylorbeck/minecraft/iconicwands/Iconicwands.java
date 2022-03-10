@@ -107,9 +107,8 @@ public class Iconicwands implements ModInitializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
     public static String MODID = "iconicwands";
 
     public static Identifier getId(String name) {
@@ -119,6 +118,6 @@ public class Iconicwands implements ModInitializer {
     //todo crafting book
     //todo balance
     //todo model for bench
-    //todo projectile
     //todo particles
+    //todo show parts on table
 }

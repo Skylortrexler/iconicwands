@@ -6,7 +6,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
 import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.CraftingScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
@@ -24,5 +26,6 @@ public class IconicwandsClient implements ClientModInitializer {
         EntityRendererRegistryImpl.register(Declarar.MAGIC_PROJECTILE, MagicProjetileEntityRenderer::new);
         TooltipComponentCallback.EVENT.register(data -> new WandTooltipComponent((WandTooltipData) data));
         ScreenRegistry.register(Declarar.WANDING, WandBenchScreen::new);
+        BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_BENCH, RenderLayer.getTranslucent());
     }
 }

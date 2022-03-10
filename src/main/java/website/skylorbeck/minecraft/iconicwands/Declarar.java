@@ -8,12 +8,18 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
+import vazkii.patchouli.api.PatchouliAPI;
+import vazkii.patchouli.common.base.PatchouliAPIImpl;
+import vazkii.patchouli.common.item.PatchouliItems;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
@@ -37,7 +43,15 @@ public class Declarar {
     }));
 
     public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
-    public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings());
+    public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings()){
+        @Override
+        public void onCraft(ItemStack stack, World world, PlayerEntity player) {
+            ItemStack book = PatchouliAPI.get().getBookStack(Iconicwands.getId("book_1"));
+            if (!player.getInventory().contains(book))
+            player.getInventory().offerOrDrop(book);
+            super.onCraft(stack, world, player);
+        }
+    };
 
     public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }

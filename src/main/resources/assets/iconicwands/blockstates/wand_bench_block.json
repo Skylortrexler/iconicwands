@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "iconicwands:block/wand_bench_block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "iconicwands:block/wand_bench_block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "iconicwands:block/wand_bench_block"
+    },
+    "facing=west": {
+      "model": "iconicwands:block/wand_bench_block",
+      "y": 90
+    }
+  }
+}
