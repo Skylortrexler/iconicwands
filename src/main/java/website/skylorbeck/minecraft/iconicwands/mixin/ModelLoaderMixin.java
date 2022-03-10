@@ -66,7 +66,8 @@ public class ModelLoaderMixin {
         for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
             for (int j = 0; j <Iconicwands.parts.cores.size() ; j++) {
                 for (int k = 0; k <Iconicwands.parts.handles.size() ; k++) {
-                    int index = Integer.parseInt(1 + String.format("%02d", i) + String.format("%02d", j) + String.format("%02d", k));
+                    int index = (i & 0xFF)<< 16 | (j & 0xFF) << 8 | (k & 0xFF);
+
                     JsonObject predicate = new JsonObject();
                     JsonObject custom_model = new JsonObject();
                     custom_model.addProperty("custom_model_data", index);
@@ -81,14 +82,16 @@ public class ModelLoaderMixin {
         return json.toString();
     }
     private static String createSubRecipes(String id) {
-        id = id.replace("iconicwands:item/wand", "");
-//                Logger.getGlobal().log(Level.SEVERE, id);
+        int shiftedParts = Integer.parseInt(id.replace("iconicwands:item/wand", ""));
         JsonObject json = new JsonObject();
         JsonObject textures = new JsonObject();
+        int tipInt = shiftedParts >> 16 & 0xFF;
+        int coreInt = shiftedParts >> 8 & 0xFF;
+        int handleInt = shiftedParts & 0xFF;
         json.addProperty("parent", "iconicwands:item/iconicwand_item");
-        textures.addProperty("layer0","iconicwands:item/core/"+ id.substring(3,5));
-        textures.addProperty("layer1","iconicwands:item/tip/"+ id.substring(1,3));
-        textures.addProperty("layer2","iconicwands:item/handle/"+ id.substring(5,7));
+        textures.addProperty("layer0","iconicwands:item/core/"+ tipInt);
+        textures.addProperty("layer1","iconicwands:item/tip/"+ coreInt);
+        textures.addProperty("layer2","iconicwands:item/handle/"+ handleInt);
         json.add("textures", textures);
 
 //        Logger.getGlobal().log(Level.SEVERE,json.toString());

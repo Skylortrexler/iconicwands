@@ -32,12 +32,8 @@ public class Declarar {
     public static final EntityType<MagicProjectileEntity> MAGIC_PROJECTILE = Registry.register(Registry.ENTITY_TYPE, MAGIC_PROJECTILE_ENTITY_ID,createMagicEntityType(MagicProjectileEntity::new));
 
     public static final Item ICONIC_WAND = new IconicWand(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-        IconicWand wand =  ((IconicWand)stack.getItem());
-        String modelData = wand.getPartCombo(stack);
-        Parts.Tip tip = Iconicwands.parts.tips.get(Integer.parseInt(modelData.substring(1,3)));
-        Parts.Core core = Iconicwands.parts.cores.get(Integer.parseInt(modelData.substring(3,5)));
-        Parts.Handle handle = Iconicwands.parts.handles.get(Integer.parseInt(modelData.substring(5,7)));
-        return handle.getManaCost()+tip.getManaCost();
+        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
+        return wand.getHandle().getManaCost()+wand.getTip().getManaCost();
     }));
 
     public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
