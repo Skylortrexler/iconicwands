@@ -46,16 +46,13 @@ public class IconicWand extends RangedWeaponItem{
     public static void saveComponents(ItemStack stack, Parts.Core core, Parts.Handle handle, Parts.Tip tip) {
         NbtCompound nbt = stack.getOrCreateNbt();
         nbt.putInt("CustomModelData",partsToInt(tip, core, handle));
-//        nbt.putInt("CustomModelData", Integer.parseInt(1 + String.format("%02d", Iconicwands.parts.tips.indexOf(tip)) + String.format("%02d", Iconicwands.parts.cores.indexOf(core)) + String.format("%02d", Iconicwands.parts.handles.indexOf(handle))));
-//        Logger.getGlobal().log(Level.SEVERE, nbt.getInt("CustomModelData") + "");
     }
 
     public static int partsToInt(Parts.Tip tip, Parts.Core core, Parts.Handle handle) {
         int tipInt = Iconicwands.parts.tips.indexOf(tip);
         int coreInt = Iconicwands.parts.cores.indexOf(core);
         int handleInt = Iconicwands.parts.handles.indexOf(handle);
-        int shiftedParts = (tipInt & 0xFF)<< 16 | (coreInt & 0xFF) << 8 | (handleInt & 0xFF);
-        return shiftedParts;
+        return (tipInt & 0xFF)<< 16 | (coreInt & 0xFF) << 8 | (handleInt & 0xFF);
     }
     public static Parts.WandCluster intToParts(int shiftedParts) {
         int tipInt = shiftedParts >> 16 & 0xFF;
@@ -76,6 +73,7 @@ public class IconicWand extends RangedWeaponItem{
             if (context.isAdvanced() || Screen.hasShiftDown()) {
                 Parts.WandCluster wand = IconicWand.getPartComobo(stack);
                 tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
+                tooltip.add(new TranslatableText("item.iconicwands.crit").append(": " + (wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
                 tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
                 tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
                 tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (wand.getTip().getRechargeAmount() + wand.getCore().getRechargeAmount())));
@@ -150,12 +148,11 @@ public class IconicWand extends RangedWeaponItem{
             persistentProjectileEntity.setMaxDist(wand.getCore().getRange());
 //            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 0, wand.getTip().getDivergence());
             persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence());
-            if (world.random.nextFloat() <= 0.05f) {//todo wand based?
+            if (world.random.nextFloat() <= wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance()) {
                 persistentProjectileEntity.setCritical(true);
             }
 
-            //todo make this a wand stat
-            persistentProjectileEntity.setColor(Color.ofRGB(world.random.nextInt(255),world.random.nextInt(255),world.random.nextInt(255)).getColor());
+            persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(),wand.getCore().getGreen(),wand.getHandle().getBlue()).getColor());
 
             if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
                 persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
@@ -188,7 +185,7 @@ public class IconicWand extends RangedWeaponItem{
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.NONE;
+        return UseAction.BOW;
     }
 
     @Override

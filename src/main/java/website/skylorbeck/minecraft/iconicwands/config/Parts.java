@@ -1,6 +1,7 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
+import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +21,14 @@ public class Parts {
     }
 
     public static class Tip {
-        public Tip(String identifier, int speed,int rechargeAmount, int manaCost, float divergence) {
+        public Tip(String identifier, int speed, int rechargeAmount, int manaCost, float divergence, float criticalChance, int red) {
             this.identifier = identifier;
             this.speed = speed;
             this.rechargeAmount = rechargeAmount;
             this.manaCost = manaCost;
             this.divergence = divergence;
+            this.criticalChance = criticalChance;
+            this.red = red;
         }
 
         String identifier;
@@ -33,6 +36,8 @@ public class Parts {
         int rechargeAmount;
         int manaCost;
         float divergence;
+        float criticalChance;
+        int red;
 
         public String getIdentifier() {
             return identifier;
@@ -53,16 +58,25 @@ public class Parts {
         public float getDivergence() {
             return divergence;
         }
+
+        public float getCriticalChance() {
+            return criticalChance;
+        }
+
+        public int getRed() {
+            return red;
+        }
     }
 
     public static class Core {
-        public Core(String identifier, int rechargeRate, int rechargeDelay,int rechargeAmount, int firerate, int range) {
+        public Core(String identifier, int rechargeRate, int rechargeDelay, int rechargeAmount, int firerate, int range, int green) {
             this.identifier = identifier;
             this.rechargeRate = rechargeRate;
             this.rechargeDelay = rechargeDelay;
             this.rechargeAmount = rechargeAmount;
             this.firerate = firerate;
             this.range = range;
+            this.green = green;
         }
 
         String identifier;
@@ -71,6 +85,7 @@ public class Parts {
         int rechargeAmount;
         int firerate;
         int range;
+        int green;
 
         public String getIdentifier() {
             return identifier;
@@ -95,20 +110,28 @@ public class Parts {
         public int getFirerate() {
             return firerate;
         }
+
+        public int getGreen() {
+            return green;
+        }
     }
 
     public static class Handle {
-        public Handle(String identifier, int damage, int firerate, int manaCost) {
+        public Handle(String identifier, int damage, int firerate, int manaCost, float criticalChance, int blue) {
             this.identifier = identifier;
             this.damage = damage;
             this.firerate = firerate;
             this.manaCost = manaCost;
+            this.criticalChance = criticalChance;
+            this.blue = blue;
         }
 
         String identifier;
         int damage;
         int firerate;
         int manaCost;
+        float criticalChance;
+        int blue;
 
         public String getIdentifier() {
             return identifier;
@@ -126,6 +149,13 @@ public class Parts {
             return manaCost;
         }
 
+        public float getCriticalChance() {
+            return criticalChance;
+        }
+
+        public int getBlue() {
+            return blue;
+        }
     }
     public static class WandCluster{
         Tip tip;
@@ -150,7 +180,7 @@ public class Parts {
         }
 
         public int getInt(){
-            return Integer.parseInt(1 + String.format("%02d", Iconicwands.parts.tips.indexOf(tip)) + String.format("%02d", Iconicwands.parts.cores.indexOf(core)) + String.format("%02d", Iconicwands.parts.handles.indexOf(handle)));
+            return IconicWand.partsToInt(tip,core,handle);
         }
     }
 }

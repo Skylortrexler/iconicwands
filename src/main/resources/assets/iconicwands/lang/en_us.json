@@ -10,5 +10,6 @@
   "item.iconicwands.recharge_rate": "Recharge Rate",
   "item.iconicwands.recharge_delay": "Recharge Delay",
   "item.iconicwands.range": "Range",
-  "item.iconicwands.speed": "Speed"
+  "item.iconicwands.speed": "Speed",
+  "item.iconicwands.crit": "Crit %"
 }
