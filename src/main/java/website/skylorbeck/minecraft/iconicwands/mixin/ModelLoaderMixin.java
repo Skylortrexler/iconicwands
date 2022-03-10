@@ -89,12 +89,10 @@ public class ModelLoaderMixin {
         int coreInt = shiftedParts >> 8 & 0xFF;
         int handleInt = shiftedParts & 0xFF;
         json.addProperty("parent", "iconicwands:item/iconicwand_item");
-        textures.addProperty("layer0","iconicwands:item/core/"+ tipInt);
-        textures.addProperty("layer1","iconicwands:item/tip/"+ coreInt);
+        textures.addProperty("layer1","iconicwands:item/tip/"+ tipInt);
+        textures.addProperty("layer0","iconicwands:item/core/"+ coreInt);
         textures.addProperty("layer2","iconicwands:item/handle/"+ handleInt);
         json.add("textures", textures);
-
-//        Logger.getGlobal().log(Level.SEVERE,json.toString());
         return json.toString();
     }
 }

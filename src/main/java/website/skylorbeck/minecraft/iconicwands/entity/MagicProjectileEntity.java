@@ -84,21 +84,22 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
+         spawnParticles(world.random.nextInt(4)+1);
         if (!world.isClient && !this.startingPos.isWithinDistance(this.getPos(),maxDist) || this.inGround){
             this.discard();
         }
     }
 
+
     private void spawnParticles(int amount) {
-        int i = this.getColor();
-        if (i == -1 || amount <= 0) {
+        if (amount <= 0) {
             return;
         }
-        double d = (double)(i >> 16 & 0xFF) / 255.0;
-        double e = (double)(i >> 8 & 0xFF) / 255.0;
-        double f = (double)(i >> 0 & 0xFF) / 255.0;
+        double x = -0.25f + world.random.nextFloat(0.5f);
+        double y = world.random.nextFloat(0.25f);
+        double z = -0.25f +world.random.nextFloat(0.5f);
         for (int j = 0; j < amount; ++j) {
-            this.world.addParticle(ParticleTypes.ENTITY_EFFECT, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), d, e, f);
+            this.world.addParticle(ParticleTypes.ENCHANT, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), x, y, z);
         }
     }
 

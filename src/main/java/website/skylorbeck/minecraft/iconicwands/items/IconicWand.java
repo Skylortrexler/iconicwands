@@ -73,7 +73,7 @@ public class IconicWand extends RangedWeaponItem{
             if (context.isAdvanced() || Screen.hasShiftDown()) {
                 Parts.WandCluster wand = IconicWand.getPartComobo(stack);
                 tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
-                tooltip.add(new TranslatableText("item.iconicwands.crit").append(": " + (wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
+                tooltip.add(new TranslatableText("item.iconicwands.crit").append(": " + 100*(wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
                 tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
                 tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
                 tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (wand.getTip().getRechargeAmount() + wand.getCore().getRechargeAmount())));
@@ -91,7 +91,7 @@ public class IconicWand extends RangedWeaponItem{
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
         DefaultedList<ItemStack> defaultedList = DefaultedList.of();
-        if (stack.getOrCreateNbt().getInt("CustomModelData") >=1000000) {
+        if (stack.getOrCreateNbt().getInt("CustomModelData") >=0) {
             Parts.WandCluster wand = IconicWand.getPartComobo(stack);
             defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(wand.getTip().getIdentifier()))));
             defaultedList.add(new ItemStack(Registry.ITEM.get(new Identifier(wand.getCore().getIdentifier()))));
