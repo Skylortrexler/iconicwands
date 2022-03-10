@@ -2,9 +2,12 @@ package website.skylorbeck.minecraft.iconicwands;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -23,6 +26,7 @@ import vazkii.patchouli.common.item.PatchouliItems;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
+import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
@@ -43,6 +47,10 @@ public class Declarar {
     }));
 
     public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
+    public static final BlockEntityType<WandBenchEntity> WAND_BENCH_ENTITY =Registry.register(
+            Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_bench_entity"),
+            FabricBlockEntityTypeBuilder.create(WandBenchEntity::new, WAND_BENCH).build(null));
+
     public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings()){
         @Override
         public void onCraft(ItemStack stack, World world, PlayerEntity player) {

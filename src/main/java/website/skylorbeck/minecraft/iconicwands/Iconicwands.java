@@ -2,6 +2,7 @@ package website.skylorbeck.minecraft.iconicwands;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.util.Identifier;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;

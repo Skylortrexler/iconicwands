@@ -1,6 +1,7 @@
 package website.skylorbeck.minecraft.iconicwands.blocks;
 
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +12,8 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -25,15 +28,19 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import website.skylorbeck.minecraft.iconicwands.Declarar;
+import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 import java.util.stream.Stream;
 
-public class WandBench extends FacingBlock {
+public class WandBench extends Block {
     public WandBench(Settings settings) {
         super(settings);
     }
     private static final Text TITLE = new TranslatableText("container.iconicwands.wand_bench");
+    public static final DirectionProperty FACING = Properties.FACING;
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -104,4 +111,9 @@ public class WandBench extends FacingBlock {
     }
 
 
+//    @Nullable
+//    @Override
+//    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+//        return Declarar.WAND_BENCH_ENTITY.instantiate(pos,state);
+//    }
 }
