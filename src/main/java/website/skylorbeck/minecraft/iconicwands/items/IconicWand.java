@@ -25,6 +25,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
@@ -147,6 +148,10 @@ public class IconicWand extends RangedWeaponItem{
             if (world.random.nextFloat() <= 0.05f) {//todo wand based?
                 persistentProjectileEntity.setCritical(true);
             }
+
+            //todo make this a wand stat
+            persistentProjectileEntity.setColor(Color.ofRGB(world.random.nextInt(255),world.random.nextInt(255),world.random.nextInt(255)).getColor());
+
             if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
                 persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
             }
