@@ -4,7 +4,8 @@
   "category": "iconicwands:crafting",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "iconicwands:iconicwand_item",
       "text": "This is a test entry, but it should show up!"
     }
   ]

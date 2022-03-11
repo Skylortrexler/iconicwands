@@ -116,9 +116,8 @@ public class Iconicwands implements ModInitializer {
         return new Identifier(MODID, name);
     }
 
-    //todo crafting book
-    //todo balance
-    //todo model for bench
-    //todo particles
-    //todo show parts on table
+    //todo
+    // crafting book
+    // balance
+    // iconics
 }

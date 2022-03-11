@@ -12,7 +12,9 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 
 public class WandBenchEntityRenderer<T extends BlockEntity> implements BlockEntityRenderer<WandBenchEntity> {
@@ -22,7 +24,15 @@ public class WandBenchEntityRenderer<T extends BlockEntity> implements BlockEnti
 
     @Override
     public void render(WandBenchEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        Direction direction = entity.getWorld().getBlockState(entity.getPos()).get(Properties.FACING);
         matrices.push();
+        matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()));
+        switch (direction){
+            case NORTH -> matrices.translate(-1,0,-1);
+            case SOUTH -> matrices.translate(0,0,0);
+            case WEST -> matrices.translate(0,0,-1);
+            case EAST -> matrices.translate(-1,0,0);
+        }
         DefaultedList<ItemStack> items = entity.getInventory();
         ItemStack itemStack = items.get(1);
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
