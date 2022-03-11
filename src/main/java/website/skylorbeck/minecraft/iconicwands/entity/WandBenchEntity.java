@@ -10,7 +10,9 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -136,13 +138,26 @@ public class WandBenchEntity extends BlockEntity implements Inventory, NamedScre
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        StorageUtils.readNbt(nbt,inventory);
+        Inventories.readNbt(nbt,inventory);
         super.readNbt(nbt);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        StorageUtils.writeNbt(nbt,inventory);
+        NbtList nbtList = new NbtList();
+        for (int i = 0; i < inventory.size(); ++i) {
+            ItemStack itemStack = inventory.get(i);
+            if (itemStack.isEmpty()){
+                itemStack = Items.BARRIER.getDefaultStack();
+            };
+            NbtCompound nbtCompound = new NbtCompound();
+            nbtCompound.putByte("Slot", (byte)i);
+            itemStack.writeNbt(nbtCompound);
+            nbtList.add(nbtCompound);
+        }
+        if (!nbtList.isEmpty()) {
+            nbt.put("Items", nbtList);
+        }
         super.writeNbt(nbt);
     }
 

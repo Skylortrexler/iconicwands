@@ -71,14 +71,8 @@ extends Slot {
             if (!itemStack.isEmpty()) {
                 input.removeStack(i, 1);
             }
-            if (input instanceof WandBenchEntity wandBench) {
-                wandBench.getHandler().onContentChanged(input);
-                Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
-                if (updatePacket != null && !player.world.isClient) {
-                    ((ServerPlayerEntity)player).networkHandler.sendPacket(updatePacket);
-                }
-            }
         }
+        input.markDirty();
     }
 }
 

@@ -152,13 +152,13 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         wandBenchEntity.setStack(0,result);
         handler.setPreviousTrackedSlot(0, result);
         serverPlayerEntity.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(handler.syncId, handler.nextRevision(), 0, result));
-        if (wandBenchEntity instanceof WandBenchEntity wandBench) {
-            Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
-
-            if (updatePacket != null ) {
-                serverPlayerEntity.networkHandler.sendPacket(updatePacket);
-            }
-        }
+//        if (wandBenchEntity instanceof WandBenchEntity wandBench) {
+//            Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
+//
+//            if (updatePacket != null ) {
+//                serverPlayerEntity.networkHandler.sendPacket(updatePacket);
+//            }
+//        }
     }
 
     @Override
