@@ -63,6 +63,7 @@ public class IconicWand extends RangedWeaponItem{
     public static int getPartIntCombo(ItemStack stack){
         return stack.getOrCreateNbt().getInt("CustomModelData");
     }
+
     public static Parts.WandCluster getPartComobo(ItemStack stack){
         return intToParts(getPartIntCombo(stack));
     }

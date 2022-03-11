@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "type": "patchouli:item",
+      "item": "#item",
+      "framed": true,
+      "x": 50,
+      "y": 15
+    },
+    {
+      "type": "patchouli:header",
+      "text": "#title",
+      "centered": true,
+      "x": -1,
+      "y": -1
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Damage:",
+      "x": 0,
+      "y": 40
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#damage",
+      "x": 35,
+      "y": 40
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cooldown Time:",
+      "x": 0,
+      "y": 50
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#firerate",
+      "x": 65,
+      "y": 50
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Mana Per Shot:",
+      "x": 0,
+      "y": 60
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#manaCost",
+      "x": 65,
+      "y": 60
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Critical Chance:",
+      "x": 0,
+      "y": 70
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#criticalChance",
+      "x": 70,
+      "y": 70
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#description",
+      "x": 0,
+      "y": 100
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "Wand Tips",
+  "icon": "minecraft:glow_berries",
+  "category": "iconicwands:parts",
+  "pages": [
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:glow_berries",
+      "title": "Glow Berries",
+      "speed": "1 Block/s",
+      "recharge": "5 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "4%",
+      "divergence": "1",
+      "description": "A tip that glows with a bright light."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:ghast_tear",
+      "title": "Ghast Tear",
+      "speed": "1 Block/s",
+      "recharge": "75 Mana",
+      "manaCost": "25 Mana",
+      "criticalChance": "7%",
+      "divergence": "2",
+      "description": "A crystlized tear from a ghast. It's very sharp."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:shulker_shell",
+      "title": "Shulker Shell",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "A shell from a shulker. It's very durable."
+    }
+  ]
+}

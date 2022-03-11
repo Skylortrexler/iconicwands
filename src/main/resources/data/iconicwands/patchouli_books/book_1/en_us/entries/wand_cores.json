@@ -1,0 +1,40 @@
+{
+  "name": "Wand Cores",
+  "icon": "minecraft:stick",
+  "category": "iconicwands:parts",
+  "pages": [
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:stick",
+      "title": "Stick",
+      "firerate": "10 Ticks",
+      "rechargeRate": "1 Second",
+      "rechargeDelay": "10 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "A basic wand core. It's pretty useless, but it's a core."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:blaze_rod",
+      "title": "Blaze Rod",
+      "firerate": "20 Ticks",
+      "rechargeRate": "1 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "10 Mana",
+      "range": "10 Blocks",
+      "description": "A firey wand core. Warm to the touch."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:end_rod",
+      "title": "End Rod",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "An otherworldly wand core. It's cold."
+    }
+  ]
+}

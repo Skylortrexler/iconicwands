@@ -1,0 +1,37 @@
+{
+  "name": "Wand Handles",
+  "icon": "minecraft:gold_nugget",
+  "category": "iconicwands:parts",
+  "pages": [
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:gold_nugget",
+      "title": "Gold Nugget",
+      "damage": "1",
+      "firerate": "10 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "1%",
+      "description": "Gold Nuggets are the most common wand handle."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:iron_nugget",
+      "title": "Iron Nugget",
+      "damage": "1",
+      "firerate": "5 Ticks",
+      "manaCost": "25 Mana",
+      "criticalChance": "5%",
+      "description": "Iron Nuggets are the second most common wand handle."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:shulker_shell",
+      "title": "Shulker Shell",
+      "damage": "2",
+      "firerate": "10 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "3%",
+      "description": "Shulker Shells are the most rare wand handle."
+    }
+  ]
+}

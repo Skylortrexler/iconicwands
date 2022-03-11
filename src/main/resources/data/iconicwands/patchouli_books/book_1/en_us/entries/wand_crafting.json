@@ -1,11 +1,11 @@
 {
   "name": "Crafting a Wand",
-  "icon": "iconicwands:iconicwand_item",
+  "icon": "iconicwands:iconicwand_item{CustomModelData:-1}",
   "category": "iconicwands:crafting",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "iconicwands:iconicwand_item",
+      "item": "iconicwands:iconicwand_item{CustomModelData:-1}",
       "text": "This is a test entry, but it should show up!"
     }
   ]

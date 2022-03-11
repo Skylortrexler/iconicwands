@@ -1,0 +1,12 @@
+{
+  "name": "Iconic Wands",
+  "icon": "iconicwands:iconicwand_item",
+  "category": "iconicwands:crafting",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "iconicwands:iconicwand_item{CustomModelData:0}",
+      "text": "Overworlder's Friend"
+    }
+  ]
+}

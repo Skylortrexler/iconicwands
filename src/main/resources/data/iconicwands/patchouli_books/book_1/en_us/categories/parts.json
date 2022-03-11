@@ -1,0 +1,5 @@
+{
+  "name": "Part List",
+  "description": "All the parts you need to craft a wand.",
+  "icon": "iconicwands:iconicwand_item{CustomModelData:-1}"
+}

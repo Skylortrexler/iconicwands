@@ -1,0 +1,84 @@
+{
+  "components": [
+    {
+      "type": "patchouli:item",
+      "item": "#item",
+      "framed": true,
+      "x": 50,
+      "y": 15
+    },
+    {
+      "type": "patchouli:header",
+      "text": "#title",
+      "centered": true,
+      "x": -1,
+      "y": -1
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cooldown Time:",
+      "x": 0,
+      "y": 40
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#firerate",
+      "x": 62,
+      "y": 40
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Recharge Rate:",
+      "x": 0,
+      "y": 50
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#rechargeRate",
+      "x": 65,
+      "y": 50
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Recharge Delay:",
+      "x": 0,
+      "y": 60
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#rechargeDelay",
+      "x": 68,
+      "y": 60
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Recharge Amount:",
+      "x": 0,
+      "y": 70
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#rechargeAmount",
+      "x": 72,
+      "y": 70
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Range:",
+      "x": 0,
+      "y": 80
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#range",
+      "x": 30,
+      "y": 80
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#description",
+      "x": 0,
+      "y": 100
+    }
+  ]
+}
