@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.CraftingScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -35,7 +36,7 @@ import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 import java.util.stream.Stream;
 
-public class WandBench extends Block {
+public class WandBench extends BlockWithEntity {
     public WandBench(Settings settings) {
         super(settings);
     }
@@ -53,8 +54,13 @@ public class WandBench extends Block {
     }
 
     @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> new WandBenchScreenHandler(syncId, inventory, ScreenHandlerContext.create(world, pos)), TITLE);
+        return new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> new WandBenchScreenHandler(syncId, inventory, (Inventory) world.getBlockEntity(pos), ScreenHandlerContext.create(world, pos)), TITLE);
     }
 
     @Override
@@ -111,9 +117,9 @@ public class WandBench extends Block {
     }
 
 
-//    @Nullable
-//    @Override
-//    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-//        return Declarar.WAND_BENCH_ENTITY.instantiate(pos,state);
-//    }
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return Declarar.WAND_BENCH_ENTITY.instantiate(pos,state);
+    }
 }

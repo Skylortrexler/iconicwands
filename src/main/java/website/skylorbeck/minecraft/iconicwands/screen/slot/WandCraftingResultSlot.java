@@ -7,10 +7,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.collection.DefaultedList;
+import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 
 public class WandCraftingResultSlot
 extends Slot {
@@ -66,6 +70,13 @@ extends Slot {
             ItemStack itemStack = input.getStack(i);
             if (!itemStack.isEmpty()) {
                 input.removeStack(i, 1);
+            }
+            if (input instanceof WandBenchEntity wandBench) {
+                wandBench.getHandler().onContentChanged(input);
+                Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
+                if (updatePacket != null && !player.world.isClient) {
+                    ((ServerPlayerEntity)player).networkHandler.sendPacket(updatePacket);
+                }
             }
         }
     }

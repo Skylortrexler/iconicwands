@@ -8,7 +8,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeMatcher;
@@ -26,44 +29,38 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
+import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
+import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
+import website.skylorbeck.minecraft.iconicwands.screen.slot.WandCraftingResultSlot;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WandBenchScreenHandler
 extends AbstractRecipeScreenHandler<CraftingInventory> {
-    private final CraftingInventory input = new CraftingInventory(this, 3,1);
-    private final CraftingResultInventory result = new CraftingResultInventory();
     private final ScreenHandlerContext context;
     private final PlayerEntity player;
+    private final Inventory wandBenchEntity;
 
-    public WandBenchScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
+    public WandBenchScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        this(syncId, playerInventory, inventory, ScreenHandlerContext.EMPTY);
     }
 
-    public WandBenchScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+    public WandBenchScreenHandler(int syncId, PlayerInventory playerInventory,Inventory wandBenchEntity, ScreenHandlerContext context) {
         super(Declarar.WANDING, syncId);
         int j;
         int i;
         this.context = context;
         this.player = playerInventory.player;
-        this.addSlot(new CraftingResultSlot(playerInventory.player, this.input, this.result, 0, 80, 18){
-            @Override
-            public void onTakeItem(PlayerEntity player, ItemStack stack) {
-                this.onCrafted(stack);
-                for (int i = 0; i < 3; ++i) {
-                    ItemStack itemStack = input.getStack(i);
-                    if (!itemStack.isEmpty()) {
-                        input.removeStack(i, 1);
-                    }
-
-                }
-            }
-        });
+        this.wandBenchEntity = wandBenchEntity;
+        if (wandBenchEntity instanceof WandBenchEntity wandBench) {
+            wandBench.setHandler(this);
+        }
+        this.addSlot(new WandCraftingResultSlot(playerInventory.player, wandBenchEntity, 0, 80, 18));
         for (i = 0; i < 3; ++i) {
             int finalI = i;
-            this.addSlot(new Slot(this.input, finalI, 54 + i * 26, 52){
+            this.addSlot(new Slot(wandBenchEntity, finalI+1, 54 + i * 26, 52){
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         AtomicBoolean bl = new AtomicBoolean(false);
@@ -83,7 +80,21 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
                         }
                         return super.canInsert(stack) && bl.get();
                     }
-                });
+
+                @Override
+                public void markDirty() {
+                        if (wandBenchEntity instanceof WandBenchEntity wandBench) {
+                            wandBench.getHandler().onContentChanged(wandBenchEntity);
+
+                            Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
+
+                            if (updatePacket != null && !player.world.isClient) {
+                                ((ServerPlayerEntity)player).networkHandler.sendPacket(updatePacket);
+                            }
+                        }
+                    super.markDirty();
+                }
+            });
         }
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 9; ++j) {
@@ -95,7 +106,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         }
     }
 
-    protected static void updateResult(ScreenHandler handler, World world, PlayerEntity player, CraftingInventory craftingInventory, CraftingResultInventory resultInventory) {
+    protected static void updateResult(ScreenHandler handler, World world, PlayerEntity player,Inventory wandBenchEntity) {
         if (world.isClient) {
             return;
         }
@@ -104,29 +115,28 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
         Parts.Tip tipResult = null;
         Parts.Core coreResult = null;
         Parts.Handle handleResult = null;
-        //todo wand crafting logic goes here
-        for (int i = 0; i < craftingInventory.size() ; i++) {
-            if (craftingInventory.getStack(i).isEmpty()){
+        for (int i = 1; i < 4 ; i++) {
+            if (wandBenchEntity.getStack(i).isEmpty()){
                 continue;
             }
-            ItemStack ingredient = craftingInventory.getStack(i);
+            ItemStack ingredient = wandBenchEntity.getStack(i);
             Identifier identifier = Registry.ITEM.getId(ingredient.getItem());
             switch (i) {
-                case 0:
+                case 1:
                     for (Parts.Tip tip : Iconicwands.parts.tips) {
                         if (tip.getIdentifier().equals(identifier.toString())) {
                             tipResult = tip;
                         }
                     }
                     break;
-                case 1:
+                case 2:
                     for (Parts.Core core : Iconicwands.parts.cores) {
                         if (core.getIdentifier().equals(identifier.toString())) {
                             coreResult = core;
                         }
                     }
                     break;
-                case 2:
+                case 3:
                     for (Parts.Handle handle : Iconicwands.parts.handles) {
                         if (handle.getIdentifier().equals(identifier.toString())) {
                             handleResult = handle;
@@ -139,25 +149,32 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
             result = new ItemStack(Declarar.ICONIC_WAND);
             IconicWand.saveComponents(result, coreResult, handleResult, tipResult);
         }
-        resultInventory.setStack(0, result);
+        wandBenchEntity.setStack(0,result);
         handler.setPreviousTrackedSlot(0, result);
         serverPlayerEntity.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(handler.syncId, handler.nextRevision(), 0, result));
+        if (wandBenchEntity instanceof WandBenchEntity wandBench) {
+            Packet<ClientPlayPacketListener> updatePacket = wandBench.toUpdatePacket();
+
+            if (updatePacket != null ) {
+                serverPlayerEntity.networkHandler.sendPacket(updatePacket);
+            }
+        }
     }
 
     @Override
     public void onContentChanged(Inventory inventory) {
-        this.context.run((world, pos) -> WandBenchScreenHandler.updateResult(this, world, this.player, this.input, this.result));
+        this.context.run((world, pos) -> WandBenchScreenHandler.updateResult(this, world, this.player, this.wandBenchEntity));
+        this.sendContentUpdates();
     }
 
     @Override
     public void populateRecipeFinder(RecipeMatcher finder) {
-        this.input.provideRecipeInputs(finder);
+
     }
 
     @Override
     public void clearCraftingSlots() {
-        this.input.clear();
-        this.result.clear();
+        this.wandBenchEntity.clear();
     }
 
     @Override
@@ -168,7 +185,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
     @Override
     public void close(PlayerEntity player) {
         super.close(player);
-        this.context.run((world, pos) -> this.dropInventory(player, this.input));
+//        this.context.run((world, pos) -> this.dropInventory(player, this.input));
     }
 
     @Override
@@ -179,7 +196,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.slots.get(index);
+        Slot slot = this.slots.get(index);
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
@@ -189,7 +206,6 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
                     return ItemStack.EMPTY;
                 }
                 slot.onQuickTransfer(itemStack2, itemStack);
-                //todo fix this vVv
             } else if (index >= 4 && index < 40 ? !this.insertItem(itemStack2, 1, 4, false) && (index < 31 ? !this.insertItem(itemStack2, 31, 40, false) : !this.insertItem(itemStack2, 4, 31, false)) : !this.insertItem(itemStack2, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
@@ -211,7 +227,7 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
 
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        return slot.inventory != this.result && super.canInsertIntoSlot(stack, slot);
+        return slot.getIndex()!=getCraftingResultSlotIndex() && super.canInsertIntoSlot(stack, slot);
     }
 
     @Override
@@ -221,12 +237,12 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
 
     @Override
     public int getCraftingWidth() {
-        return this.input.getWidth();
+        return 3;
     }
 
     @Override
     public int getCraftingHeight() {
-        return this.input.getHeight();
+        return 1;
     }
 
     @Override
