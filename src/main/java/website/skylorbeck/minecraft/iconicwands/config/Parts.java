@@ -1,6 +1,5 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
-import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
 import java.util.ArrayList;
@@ -182,6 +181,7 @@ public class Parts {
         public int getInt(){
             return IconicWand.partsToInt(tip,core,handle);
         }
+
     }
 }
 

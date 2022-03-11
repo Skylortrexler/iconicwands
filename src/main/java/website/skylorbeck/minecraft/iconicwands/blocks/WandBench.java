@@ -2,12 +2,9 @@ package website.skylorbeck.minecraft.iconicwands.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.CraftingScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
@@ -31,7 +28,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
-import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 import java.util.stream.Stream;

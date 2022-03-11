@@ -1,14 +1,11 @@
 package website.skylorbeck.minecraft.iconicwands.entity;
 
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -25,10 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
-import website.skylorbeck.minecraft.skylorlib.SkylorLib;
-import website.skylorbeck.minecraft.skylorlib.storage.StorageUtils;
-
-import java.util.Set;
 
 public class WandBenchEntity extends BlockEntity implements Inventory, NamedScreenHandlerFactory {
     private Text customName;

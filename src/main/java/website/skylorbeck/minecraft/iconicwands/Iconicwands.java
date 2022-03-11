@@ -99,6 +99,7 @@ public class Iconicwands implements ModInitializer {
     }
     @Override
     public void onInitialize() {
+        Registrar.regBlock("timed_light_",Declarar.TIMED_LIGHT,MODID);
         Registrar.regItem("iconicwand_",Declarar.ICONIC_WAND,MODID);
         Registrar.regBlock("wand_bench_",Declarar.WAND_BENCH,MODID);
         Registrar.regItem("wand_bench_",Declarar.WAND_BENCH_ITEM,MODID);
@@ -117,10 +118,10 @@ public class Iconicwands implements ModInitializer {
     }
 
     //todo
+    // iconics
     // crafting book
     //   wand_presets.json
     //   wand_crafting.json
-    // iconics
     // balance
     // more parts
 }

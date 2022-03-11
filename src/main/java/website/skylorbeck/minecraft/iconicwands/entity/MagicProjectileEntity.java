@@ -10,7 +10,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.ParticleTypes;
@@ -19,12 +18,13 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class MagicProjectileEntity extends PersistentProjectileEntity {
@@ -34,7 +34,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     private boolean colorSet;
     private BlockPos startingPos = BlockPos.ORIGIN;
     private int maxDist = 5;
-
+    private boolean doesLight = false;
     public MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -160,6 +160,15 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     }
 
     @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        if (this.doesLight){
+                Optional<BlockPos> optional = BlockPos.findClosest(blockHitResult.getBlockPos(),2,2,(blockPos -> world.getBlockState(blockPos).isAir()));
+                optional.ifPresent(blockPos -> world.setBlockState(blockPos, Declarar.TIMED_LIGHT.getDefaultState()));
+        }
+        super.onBlockHit(blockHitResult);
+    }
+
+    @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;
     }
@@ -179,5 +188,13 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         } else {
             super.handleStatus(status);
         }
+    }
+
+    public boolean isDoesLight() {
+        return doesLight;
+    }
+
+    public void setDoesLight(boolean doesLight) {
+        this.doesLight = doesLight;
     }
 }

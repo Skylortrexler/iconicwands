@@ -4,16 +4,13 @@
 package website.skylorbeck.minecraft.iconicwands.screen.slot;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.collection.DefaultedList;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 
 public class WandCraftingResultSlot

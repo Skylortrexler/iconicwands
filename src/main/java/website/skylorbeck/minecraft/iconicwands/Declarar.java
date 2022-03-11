@@ -3,10 +3,8 @@ package website.skylorbeck.minecraft.iconicwands;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -21,8 +19,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import vazkii.patchouli.api.PatchouliAPI;
-import vazkii.patchouli.common.base.PatchouliAPIImpl;
-import vazkii.patchouli.common.item.PatchouliItems;
+import website.skylorbeck.minecraft.iconicwands.blocks.TimedLightBlock;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
@@ -60,6 +57,8 @@ public class Declarar {
             super.onCraft(stack, world, player);
         }
     };
+
+    public static Block TIMED_LIGHT = new TimedLightBlock(FabricBlockSettings.copy(Blocks.LIGHT));
 
     public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }
