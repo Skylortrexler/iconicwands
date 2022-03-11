@@ -118,6 +118,9 @@ public class Iconicwands implements ModInitializer {
 
     //todo
     // crafting book
-    // balance
+    //   wand_presets.json
+    //   wand_crafting.json
     // iconics
+    // balance
+    // more parts
 }
