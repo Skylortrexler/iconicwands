@@ -5,9 +5,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -28,17 +32,15 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
-import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntity;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 import java.util.stream.Stream;
 
-public class WandBench extends BlockWithEntity {
-    public WandBench(Settings settings) {
+public class WandPedestal extends BlockWithEntity {
+    public WandPedestal(Settings settings) {
         super(settings);
     }
-    private static final Text TITLE = new TranslatableText("container.iconicwands.wand_bench");
     public static final DirectionProperty FACING = Properties.FACING;
 
     @Override
@@ -46,8 +48,20 @@ public class WandBench extends BlockWithEntity {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }
-        player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
-        player.incrementStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+        WandPedestalEntity entity = (WandPedestalEntity) world.getBlockEntity(pos);
+        if (entity != null) {
+            if (!entity.getStack(0).isEmpty()) {
+                player.getInventory().offerOrDrop(entity.getStack(0));
+            } else if (player.getStackInHand(hand).isOf(Declarar.ICONIC_WAND)) {
+                entity.setStack(0,player.getStackInHand(hand));
+                player.setStackInHand(hand, ItemStack.EMPTY);
+            }
+            Packet<ClientPlayPacketListener> updatePacket = entity.toUpdatePacket();
+            if (updatePacket != null && !player.world.isClient) {
+                ((ServerPlayerEntity)player).networkHandler.sendPacket(updatePacket);
+            }
+            entity.markDirty();
+        }
         return ActionResult.CONSUME;
     }
 
@@ -57,13 +71,8 @@ public class WandBench extends BlockWithEntity {
     }
 
     @Override
-    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> new WandBenchScreenHandler(syncId, inventory, (Inventory) world.getBlockEntity(pos), ScreenHandlerContext.create(world, pos)), TITLE);
-    }
-
-    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return rotateShape(Direction.SOUTH,state.get(FACING),SHAPE);
+        return WandBench.rotateShape(Direction.SOUTH,state.get(FACING),SHAPE);
     }
 
     @Override
@@ -84,51 +93,23 @@ public class WandBench extends BlockWithEntity {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    private static final VoxelShape SHAPE = Stream.of(
-            Block.createCuboidShape(0, 0, 0, 16, 12, 16),
-            Block.createCuboidShape(0, 12, 3, 1, 13, 16),
-            Block.createCuboidShape(0, 13, 5, 1, 14, 16),
-            Block.createCuboidShape(0, 14, 8, 1, 15, 16),
-            Block.createCuboidShape(0, 15, 11, 1, 16, 16),
-            Block.createCuboidShape(15, 12, 3, 16, 13, 16),
-            Block.createCuboidShape(15, 13, 5, 16, 14, 16),
-            Block.createCuboidShape(15, 14, 8, 16, 15, 16),
-            Block.createCuboidShape(15, 15, 11, 16, 16, 16),
-            Block.createCuboidShape(0, 12, 13, 16, 16, 16),
-            Block.createCuboidShape(2, 12, 7, 14, 13, 13),
-            Block.createCuboidShape(3, 13, 8, 13, 14, 13),
-            Block.createCuboidShape(11, 12, 2, 14, 13, 5),
-            Block.createCuboidShape(2, 12, 2, 5, 13, 5),
-            Block.createCuboidShape(6, 12, 2, 10, 13, 5)
+    private static final VoxelShape SHAPE = Stream.of(//
+            Block.createCuboidShape(3, 0, 3, 13, 2, 13),
+            Block.createCuboidShape(4, 2,4, 12, 16, 12)
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-
-    public static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {//todo move to skylib
-        VoxelShape[] buffer = new VoxelShape[]{ shape, VoxelShapes.empty() };
-
-        int times = (to.getHorizontal() - from.getHorizontal() + 4) % 4;
-        for (int i = 0; i < times; i++) {
-            buffer[0].forEachBox((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = VoxelShapes.combine(buffer[1], VoxelShapes.cuboid(1-maxZ, minY, minX, 1-minZ, maxY, maxX), BooleanBiFunction.OR));
-            buffer[0] = buffer[1];
-            buffer[1] = VoxelShapes.empty();
-        }
-        return buffer[0];
-    }
-
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return Declarar.WAND_BENCH_ENTITY.instantiate(pos,state);
+        return Declarar.WAND_PEDESTAL_ENTITY.instantiate(pos,state);
     }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
-            WandBenchEntity entity = (WandBenchEntity) world.getBlockEntity(pos);
-            for (int i = 1; i < 4; i++) {
-                if (!entity.getStack(i).isEmpty()) {
-                    player.getInventory().offerOrDrop(entity.getStack(i));
-                }
+            WandPedestalEntity entity = (WandPedestalEntity) world.getBlockEntity(pos);
+            if (!entity.getStack(0).isEmpty()) {
+                player.getInventory().offerOrDrop(entity.getStack(0));
             }
         }
         super.onBreak(world, pos, state, player);

@@ -12,6 +12,7 @@ import net.minecraft.client.render.RenderLayer;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjetileEntityRenderer;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntityRenderer;
+import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntityRenderer;
 import website.skylorbeck.minecraft.iconicwands.items.WandTooltipComponent;
 import website.skylorbeck.minecraft.iconicwands.items.WandTooltipData;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreen;
@@ -25,5 +26,6 @@ public class IconicwandsClient implements ClientModInitializer {
         ScreenRegistry.register(Declarar.WANDING, WandBenchScreen::new);
         BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_BENCH, RenderLayer.getTranslucent());
         BlockEntityRendererRegistryImpl.register(Declarar.WAND_BENCH_ENTITY, WandBenchEntityRenderer::new);
+        BlockEntityRendererRegistryImpl.register(Declarar.WAND_PEDESTAL_ENTITY, WandPedestalEntityRenderer::new);
     }
 }

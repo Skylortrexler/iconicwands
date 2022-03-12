@@ -4,14 +4,19 @@
   "category": "iconicwands:crafting",
   "pages": [
     {
-      "type": "patchouli:crafting",
-      "recipe": "iconicwands:wand_bench_item",
-      "text": "Crafting a Wand starts with a Wand Crafting Bench. You will be given a copy of this book when you craft the bench, but you already know that if you are reading this."
-    },
-    {
       "type": "patchouli:spotlight",
       "item": "iconicwands:iconicwand_item{CustomModelData:-1}",
       "text": "Every wand is made of three parts, $(l:wand_cores)a core$(), $(l:wand_tips)a tip$(), and $(l:wand_handles)a handle$(). Each of these parts contributes different stats to the wand. You may mix and match any combination of these parts to create a new wand, but $(l:wand_presets)certain combos $()have special attributes. "
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "iconicwands:wand_bench_item",
+      "text": "Crafting a Wand starts with a Wand Crafting Bench. You will be given a copy of this book when you craft the bench, but you already know that if you are reading this."
+    },{
+      "type": "patchouli:crafting",
+      "recipe": "iconicwands:wand_pedestal_item",
+      "text": "Display your wand collection with this!"
     }
+
   ]
 }

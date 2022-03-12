@@ -20,11 +20,13 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import vazkii.patchouli.api.PatchouliAPI;
-import website.skylorbeck.minecraft.iconicwands.blocks.TimedLightBlock;
+import website.skylorbeck.minecraft.iconicwands.blocks.WandPedestal;
+import website.skylorbeck.minecraft.iconicwands.blocks.WeakLightBlock;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
+import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntity;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
@@ -45,6 +47,7 @@ public class Declarar {
     }));
 
     public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
+
     public static final BlockEntityType<WandBenchEntity> WAND_BENCH_ENTITY =Registry.register(
             Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_bench_entity"),
             FabricBlockEntityTypeBuilder.create(WandBenchEntity::new, WAND_BENCH).build(null));
@@ -58,8 +61,15 @@ public class Declarar {
             super.onCraft(stack, world, player);
         }
     };
+    public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE));
 
-    public static Block TIMED_LIGHT = new TimedLightBlock(FabricBlockSettings.copy(Blocks.LIGHT));
+    public static final BlockEntityType<WandPedestalEntity> WAND_PEDESTAL_ENTITY =Registry.register(
+            Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_pedestal_entity"),
+            FabricBlockEntityTypeBuilder.create(WandPedestalEntity::new, WAND_PEDESTAL).build(null));
+
+    public static final BlockItem WAND_PEDESTAL_ITEM = new BlockItem(WAND_PEDESTAL, new FabricItemSettings().group(ItemGroup.MISC));
+
+    public static Block TIMED_LIGHT = new WeakLightBlock(FabricBlockSettings.copy(Blocks.LIGHT));
 
     public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }

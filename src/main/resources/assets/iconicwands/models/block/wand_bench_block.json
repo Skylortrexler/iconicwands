@@ -3,7 +3,8 @@
 	"parent": "minecraft:block/cube",
 	"texture_size": [128, 128],
 	"textures": {
-		"1": "iconicwands:block/bench"
+		"1": "iconicwands:block/bench",
+		"particle": "iconicwands:block/bench"
 	},
 	"elements": [
 		{
