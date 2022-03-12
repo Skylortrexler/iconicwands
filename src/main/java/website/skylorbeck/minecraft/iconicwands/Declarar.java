@@ -28,6 +28,7 @@ import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntity;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
+import website.skylorbeck.minecraft.iconicwands.items.WandTester;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 public class Declarar {
@@ -70,6 +71,8 @@ public class Declarar {
     public static final BlockItem WAND_PEDESTAL_ITEM = new BlockItem(WAND_PEDESTAL, new FabricItemSettings().group(ItemGroup.MISC));
 
     public static Block TIMED_LIGHT = new WeakLightBlock(FabricBlockSettings.copy(Blocks.LIGHT));
+
+    public static Item WAND_TESTER = new WandTester(new Item.Settings());
 
     public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }

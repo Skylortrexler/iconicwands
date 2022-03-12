@@ -170,6 +170,8 @@ public class Iconicwands implements ModInitializer {
         Registrar.regBlock("wand_pedestal_",Declarar.WAND_PEDESTAL,MODID);
         Registrar.regItem("wand_pedestal_",Declarar.WAND_PEDESTAL_ITEM,MODID);
 
+        Registrar.regItem("wand_tester_",Declarar.WAND_TESTER,MODID);
+
         Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"),((syncId, inventory) -> new WandBenchScreenHandler(syncId,inventory,new SimpleInventory(4))));
 
         try {

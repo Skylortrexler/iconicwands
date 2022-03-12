@@ -40,6 +40,9 @@ public class IconicWand extends RangedWeaponItem{
         super(settings);
     }
 
+    public static void saveComponents(ItemStack stack,Parts.Tip tip, Parts.Core core, Parts.Handle handle) {
+        saveComponents(stack, core, handle, tip);
+    }
     public static void saveComponents(ItemStack stack, Parts.Core core, Parts.Handle handle, Parts.Tip tip) {
         NbtCompound nbt = stack.getOrCreateNbt();
         nbt.putInt("CustomModelData",partsToInt(tip, core, handle));
