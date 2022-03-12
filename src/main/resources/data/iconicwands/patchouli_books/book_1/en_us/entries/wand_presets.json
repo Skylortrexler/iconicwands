@@ -4,9 +4,29 @@
   "category": "iconicwands:crafting",
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "iconicwands:iconicwand_item{CustomModelData:0}",
-      "text": "Overworlder's Friend"
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:0}",
+      "title": "Cavers Friend",
+      "tip": "minecraft:glow_berries",
+      "core": "minecraft:stick",
+      "handle": "minecraft:gold_nugget",
+      "description": "This wand can be used to summon a dim light."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:65793}",
+      "title": "Burning Passion",
+      "tip": "minecraft:ghast_tear",
+      "core": "minecraft:blaze_rod",
+      "handle": "minecraft:iron_nugget",
+      "description": "This warm wand allows the user to create fire, like a blaze."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:131586}",
+      "title": "Warped Wand",
+      "tip": "minecraft:shulker_shell",
+      "core": "minecraft:end_rod",
+      "handle": "minecraft:shulker_shell",
+      "description": "Sneaking while using this wand will allow the user to teleport."
     }
   ]
 }

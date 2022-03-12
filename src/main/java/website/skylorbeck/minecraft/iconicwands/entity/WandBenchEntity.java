@@ -131,8 +131,10 @@ public class WandBenchEntity extends BlockEntity implements Inventory, NamedScre
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt,inventory);
+        Inventories.readNbt(nbt, inventory);
+        if(world!=null &&!world.isClient) {
             inventory.removeIf((itemStack -> itemStack.isOf(Items.BARRIER)));
+        }
         super.readNbt(nbt);
     }
 

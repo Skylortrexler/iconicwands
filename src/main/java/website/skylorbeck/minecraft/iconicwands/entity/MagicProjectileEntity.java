@@ -1,6 +1,8 @@
 package website.skylorbeck.minecraft.iconicwands.entity;
 
 import com.google.common.collect.Sets;
+import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -24,6 +26,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,6 +38,8 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     private BlockPos startingPos = BlockPos.ORIGIN;
     private int maxDist = 5;
     private boolean doesLight = false;
+    private boolean doesBurn = false;
+    private boolean doesWarp = false;
     public MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -161,9 +166,15 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
+        BlockPos blockPos = blockHitResult.getBlockPos();
         if (this.doesLight){
-                Optional<BlockPos> optional = BlockPos.findClosest(blockHitResult.getBlockPos(),2,2,(blockPos -> world.getBlockState(blockPos).isAir()));
-                optional.ifPresent(blockPos -> world.setBlockState(blockPos, Declarar.TIMED_LIGHT.getDefaultState()));
+            Optional<BlockPos> optional = BlockPos.findClosest(blockHitResult.getBlockPos(),2,2,(block -> world.getBlockState(block).isAir()));
+            optional.ifPresent(block -> world.setBlockState(block, Declarar.TIMED_LIGHT.getDefaultState()));
+        } else if (this.doesBurn && AbstractFireBlock.canPlaceAt(world, blockPos = blockPos.offset(blockHitResult.getSide()), blockHitResult.getSide().getOpposite())){
+            world.setBlockState(blockPos, AbstractFireBlock.getState(world,blockPos));
+        } else if (this.doesWarp){
+            if(this.getOwner()!=null)
+            this.getOwner().teleport(blockPos.getX()+0.5,blockPos.getY()+1.5,blockPos.getZ()+0.5);
         }
         super.onBlockHit(blockHitResult);
     }
@@ -188,6 +199,22 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         } else {
             super.handleStatus(status);
         }
+    }
+
+    public boolean isDoesWarp() {
+        return doesWarp;
+    }
+
+    public void setDoesWarp(boolean doesWarp) {
+        this.doesWarp = doesWarp;
+    }
+
+    public boolean isDoesBurn() {
+        return doesBurn;
+    }
+
+    public void setDoesBurn(boolean doesBurn) {
+        this.doesBurn = doesBurn;
     }
 
     public boolean isDoesLight() {

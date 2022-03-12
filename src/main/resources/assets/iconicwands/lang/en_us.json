@@ -1,6 +1,7 @@
 {
   "itemGroup.iconicwands.category": "Iconic Wands",
   "container.iconicwands.wand_bench": "Wand Bench",
+  "block.iconicwands.wand_bench_block": "Wand Bench",
   "item.iconicwands.iconicwand_item": "Wand",
   "item.iconicwands.advanced_tooltip": "Hold Shift or enable Advanced Tooltips",
   "item.iconicwands.damage": "Damage",
@@ -12,5 +13,7 @@
   "item.iconicwands.range": "Range",
   "item.iconicwands.speed": "Speed",
   "item.iconicwands.crit": "Crit %",
-  "block.iconicwands.wand_bench_block": "Wand Bench"
+  "item.iconicwands.overworld_wand": "Cavers Friend",
+  "item.iconicwands.nether_wand": "Burning Passion",
+  "item.iconicwands.end_wand": "Warped Wand"
 }

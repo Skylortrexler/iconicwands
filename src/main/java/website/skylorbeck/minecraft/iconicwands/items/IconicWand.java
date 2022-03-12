@@ -144,8 +144,16 @@ public class IconicWand extends RangedWeaponItem{
             int k;
             int j;
             MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
+            persistentProjectileEntity.setOwner(playerEntity);
             if (wandInt==(Presets.overworld.getWand().getInt())){
                 persistentProjectileEntity.setDoesLight(true);
+            } else if (wandInt==(Presets.nether.getWand().getInt())){
+                persistentProjectileEntity.setDoesBurn(true);
+            } else if (wandInt==(Presets.end.getWand().getInt())){
+                persistentProjectileEntity.setOnFireFor(100);
+                if (playerEntity.isSneaking()){
+                    persistentProjectileEntity.setDoesWarp(true);
+                }
             }
 
             persistentProjectileEntity.setNoGravity(true);
@@ -229,7 +237,13 @@ public class IconicWand extends RangedWeaponItem{
     public Text getName(ItemStack stack) {
         int wand = IconicWand.getPartIntCombo(stack);
         if (wand==(Presets.overworld.getWand().getInt())){
-            return new TranslatableText("item.iconicwands.overworld_wand.name");
+            return new TranslatableText("item.iconicwands.overworld_wand");
+        } else
+        if (wand==(Presets.nether.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.nether_wand");
+        } else
+        if (wand==(Presets.end.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.end_wand");
         }
 
         return super.getName(stack);
