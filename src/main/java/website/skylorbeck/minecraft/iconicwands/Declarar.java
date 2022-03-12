@@ -12,6 +12,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
@@ -48,7 +49,7 @@ public class Declarar {
             Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_bench_entity"),
             FabricBlockEntityTypeBuilder.create(WandBenchEntity::new, WAND_BENCH).build(null));
 
-    public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings()){
+    public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings().group(ItemGroup.MISC)){
         @Override
         public void onCraft(ItemStack stack, World world, PlayerEntity player) {
             ItemStack book = PatchouliAPI.get().getBookStack(Iconicwands.getId("book_1"));

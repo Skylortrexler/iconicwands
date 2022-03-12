@@ -35,6 +35,39 @@
       "rechargeAmount": "50 Mana",
       "range": "10 Blocks",
       "description": "An otherworldly wand core. It's cold."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:bone",
+      "title": "Bone",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "That's morbid."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:copper_ingot",
+      "title": "Copper Ingot",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "Copper is known to have ties to witchery."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:amethyst_shard",
+      "title": "Amethyst Shard",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "Amethyst channels the power of the universe through it, I'm pretty sure."
     }
   ]
 }

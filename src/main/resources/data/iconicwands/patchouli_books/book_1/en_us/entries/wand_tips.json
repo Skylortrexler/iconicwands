@@ -35,6 +35,39 @@
       "criticalChance": "3%",
       "divergence": "1.5",
       "description": "A shell from a shulker. It's very durable."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:quartz",
+      "title": "Quartz",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "A quartz crystal. It's very durable."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:emerald",
+      "title": "Emerald",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "Prized by Villagers for it's rarity."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:lapis_lazuli",
+      "title": "Lapis Lazuli",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "Lapis Lazuli helps channel the ambient magic around you."
     }
   ]
 }

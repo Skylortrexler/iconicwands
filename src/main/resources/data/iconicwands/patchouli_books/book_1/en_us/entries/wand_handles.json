@@ -1,27 +1,27 @@
 {
   "name": "Wand Handles",
-  "icon": "minecraft:gold_nugget",
+  "icon": "minecraft:gold_ingot",
   "category": "iconicwands:parts",
   "pages": [
     {
       "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:gold_nugget",
-      "title": "Gold Nugget",
+      "item": "minecraft:gold_ingot",
+      "title": "Gold Ingot",
       "damage": "1",
       "firerate": "10 Ticks",
       "manaCost": "50 Mana",
       "criticalChance": "1%",
-      "description": "Gold Nuggets are the most common wand handle."
+      "description": "Gold is the most common wand handle."
     },
     {
       "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:iron_nugget",
-      "title": "Iron Nugget",
+      "item": "minecraft:iron_ingot",
+      "title": "Iron Ingot",
       "damage": "1",
       "firerate": "5 Ticks",
       "manaCost": "25 Mana",
       "criticalChance": "5%",
-      "description": "Iron Nuggets are the second most common wand handle."
+      "description": "Iron is the second most common wand handle."
     },
     {
       "type": "iconicwands:wand_part_handle",
@@ -32,6 +32,16 @@
       "manaCost": "50 Mana",
       "criticalChance": "3%",
       "description": "Shulker Shells are the most rare wand handle."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:leather",
+      "title": "Leather",
+      "damage": "2",
+      "firerate": "10 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "3%",
+      "description": "Leather is the handle wrap of choice for those who are closer to the natural world."
     }
   ]
 }

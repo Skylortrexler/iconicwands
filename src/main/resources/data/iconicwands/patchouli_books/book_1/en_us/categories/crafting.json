@@ -1,5 +1,5 @@
 {
   "name": "Crafting",
-  "description": "This is a test category for testing!",
-  "icon": "minecraft:crafting_table"
+  "description": "Read these to learn the basics of crafting wands.",
+  "icon": "iconicwands:wand_bench_item"
 }
