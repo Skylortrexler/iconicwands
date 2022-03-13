@@ -68,6 +68,28 @@
       "criticalChance": "3%",
       "divergence": "1.5",
       "description": "Lapis Lazuli helps channel the ambient magic around you."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:redstone_block",
+      "title": "Redstone Block",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "Redstone blocks are absolutely packed with power, great for speeding up projectiles."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:potato",
+      "title": "Potato",
+      "speed": "2 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "75 Mana",
+      "criticalChance": "3%",
+      "divergence": "1.5",
+      "description": "You're really desperate, huh?"
     }
   ]
 }

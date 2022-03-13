@@ -68,6 +68,28 @@
       "rechargeAmount": "50 Mana",
       "range": "10 Blocks",
       "description": "Amethyst channels the power of the universe through it, I'm pretty sure."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:bamboo",
+      "title": "Bamboo",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "Bamboo, while non-traditional, is a flexible wand core."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:carrot",
+      "title": "Carrot",
+      "firerate": "10 Ticks",
+      "rechargeRate": "5 Second",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "50 Mana",
+      "range": "10 Blocks",
+      "description": "Carrot is a staple in the kitchen. Not in wands."
     }
   ]
 }

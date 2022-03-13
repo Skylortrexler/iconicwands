@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -31,6 +32,7 @@ public class WandTester extends Item {
                 }
             }
         }
+        user.sendMessage(Text.of((Iconicwands.parts.tips.size()*Iconicwands.parts.cores.size()*Iconicwands.parts.handles.size())+" wands placed."),true);
         return super.use(world, user, hand);
     }
 }

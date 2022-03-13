@@ -42,6 +42,16 @@
       "manaCost": "50 Mana",
       "criticalChance": "3%",
       "description": "Leather is the handle wrap of choice for those who are closer to the natural world."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:kelp",
+      "title": "Kelp",
+      "damage": "2",
+      "firerate": "10 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "3%",
+      "description": "Kelp wraps are inexpensive and tap into the Ocean's natural magics."
     }
   ]
 }

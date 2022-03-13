@@ -20,7 +20,7 @@ public class Parts {
     }
 
     public static class Tip {
-        public Tip(String identifier, int speed, int rechargeAmount, int manaCost, float divergence, float criticalChance, int red) {
+        public Tip(String identifier, float speed, int rechargeAmount, int manaCost, float divergence, float criticalChance, int red) {
             this.identifier = identifier;
             this.speed = speed;
             this.rechargeAmount = rechargeAmount;
@@ -31,7 +31,7 @@ public class Parts {
         }
 
         String identifier;
-        int speed;
+        float speed;
         int rechargeAmount;
         int manaCost;
         float divergence;
@@ -42,7 +42,7 @@ public class Parts {
             return identifier;
         }
 
-        public int getSpeed() {
+        public float getSpeed() {
             return speed;
         }
 
@@ -116,7 +116,7 @@ public class Parts {
     }
 
     public static class Handle {
-        public Handle(String identifier, int damage, int firerate, int manaCost, float criticalChance, int blue) {
+        public Handle(String identifier, float damage, int firerate, int manaCost, float criticalChance, int blue) {
             this.identifier = identifier;
             this.damage = damage;
             this.firerate = firerate;
@@ -126,7 +126,7 @@ public class Parts {
         }
 
         String identifier;
-        int damage;
+        float damage;
         int firerate;
         int manaCost;
         float criticalChance;
@@ -136,7 +136,7 @@ public class Parts {
             return identifier;
         }
 
-        public int getDamage() {
+        public float getDamage() {
             return damage;
         }
 

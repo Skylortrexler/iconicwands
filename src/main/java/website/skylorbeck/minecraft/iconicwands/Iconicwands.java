@@ -27,62 +27,80 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Core(
                         "minecraft:blaze_rod",
                         1,
+                        1,
+                        25,
                         5,
-                        10,
-                        20,
-                        10,
+                        50,
                         0
                 ),
                 new Parts.Core(
                         "minecraft:end_rod",
                         5,
-                        5,
+                        0,
                         50,
                         10,
-                        10,
-                        50
+                        100,
+                        175
                 ),
                 new Parts.Core(
                         "minecraft:bone",
                         5,
-                        5,
-                        50,
                         10,
+                        15,
+                        30,
                         10,
-                        50
+                        75
                 ),
                 new Parts.Core(
                         "minecraft:copper_ingot",
                         5,
                         5,
-                        50,
+                        20,
                         10,
-                        10,
-                        50
+                        35,
+                        25
                 ),
                 new Parts.Core(
                         "minecraft:amethyst_shard",
+                        1,
                         5,
+                        75,
                         5,
                         50,
-                        10,
-                        10,
                         50
+                ),
+                new Parts.Core(
+                        "minecraft:bamboo",
+                        2,
+                        3,
+                        30,
+                        10,
+                        25,
+                        255
+                ),
+                new Parts.Core(
+                        "minecraft:carrot",
+                        5,
+                        5,
+                        5,
+                        20,
+                        10,
+                        0
                 )
         );
         parts.addTips(
                 new Parts.Tip(
                         "minecraft:glow_berries",
-                        1,
+                        0.25f,
                         5,
                         50,
-                        1,
+                        0.5f,
                         0.04f,
                         150
                 ),
                 new Parts.Tip(
                         "minecraft:ghast_tear",
-                        1,
+                        0.4f,
                         75,
                         25,
                         2,
@@ -91,73 +109,99 @@ public class Iconicwands implements ModInitializer {
                 ),
                 new Parts.Tip(
                         "minecraft:shulker_shell",
-                        2,
+                        0.7f,
                         25,
                         75,
-                        1.5f,
+                        0.5f,
                         0.03f,
                         100
                 ),
                 new Parts.Tip(
                         "minecraft:quartz",
-                        2,
-                        25,
-                        75,
-                        1.5f,
-                        0.03f,
-                        100
+                        1,
+                        5,
+                        10,
+                        1f,
+                        0.06f,
+                        200
                 ),
                 new Parts.Tip(
                         "minecraft:emerald",
-                        2,
-                        25,
-                        75,
+                        0.5f,
+                        100,
+                        50,
                         1.5f,
-                        0.03f,
-                        100
+                        0.01f,
+                        50
                 ),
                 new Parts.Tip(
                         "minecraft:lapis_lazuli",
-                        2,
+                        0.25f,
                         25,
-                        75,
+                        100,
+                        1.5f,
+                        0.1f,
+                        0
+                ),
+                new Parts.Tip(
+                        "minecraft:redstone_block",
+                        2,
+                        15,
+                        100,
                         1.5f,
                         0.03f,
-                        100
+                        255
+                ),
+                new Parts.Tip(
+                        "minecraft:potato",
+                        0.1f,
+                        5,
+                        5,
+                        5,
+                        0f,
+                        165
                 )
         );
         parts.addHandles(
                 new Parts.Handle(
                         "minecraft:gold_ingot",
-                        1,
-                        10,
-                        50,
+                        4,
+                        5,
+                        15,
                         0.01f,
-                        150
+                        75
                 ),
                 new Parts.Handle(
                         "minecraft:iron_ingot",
-                        1,
-                        5,
+                        3,
+                        10,
                         25,
-                        0.05f,
+                        0.03f,
                         100
                 ),
                 new Parts.Handle(
                         "minecraft:shulker_shell",
-                        2,
+                        3,
                         10,
                         50,
-                        0.03f,
+                        0.05f,
                         200
                 ),
                 new Parts.Handle(
                         "minecraft:leather",
-                        2,
+                        3,
                         10,
-                        50,
+                        10,
+                        0.02f,
+                        69
+                ),
+                new Parts.Handle(
+                        "minecraft:kelp",
+                        2,
+                        5,
+                        20,
                         0.03f,
-                        200
+                        50
                 )
         );
     }
@@ -189,5 +233,7 @@ public class Iconicwands implements ModInitializer {
 
     //todo
     // balance
-    // more parts
+    // presets in book
+    // update stats in book
+    // presets effects
 }

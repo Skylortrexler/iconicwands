@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
@@ -151,12 +152,20 @@ public class IconicWand extends RangedWeaponItem{
             if (wandInt==(Presets.overworld.getWand().getInt())){
                 persistentProjectileEntity.setDoesLight(true);
             } else if (wandInt==(Presets.nether.getWand().getInt())){
+                persistentProjectileEntity.setOnFireFor(100);
                 persistentProjectileEntity.setDoesBurn(true);
             } else if (wandInt==(Presets.end.getWand().getInt())){
-                persistentProjectileEntity.setOnFireFor(100);
                 if (playerEntity.isSneaking()){
                     persistentProjectileEntity.setDoesWarp(true);
                 }
+            } else if (wandInt==(Presets.food.getWand().getInt())){
+                playerEntity.eatFood(world,new ItemStack(Items.APPLE));
+            } else if (wandInt==(Presets.forest.getWand().getInt())){
+                world.playSoundFromEntity(null,playerEntity,SoundEvents.ENTITY_PARROT_AMBIENT,SoundCategory.PLAYERS,1.0F,1.0F);
+            } else if (wandInt==(Presets.magus.getWand().getInt())){
+                //todo
+            } else if (wandInt==(Presets.neo.getWand().getInt())){
+                //todo
             }
 
             persistentProjectileEntity.setNoGravity(true);
@@ -198,6 +207,10 @@ public class IconicWand extends RangedWeaponItem{
         overworld(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
         nether(new Parts.WandCluster(Iconicwands.parts.tips.get(1),Iconicwands.parts.cores.get(1),Iconicwands.parts.handles.get(1))),
         end(new Parts.WandCluster(Iconicwands.parts.tips.get(2),Iconicwands.parts.cores.get(2),Iconicwands.parts.handles.get(2))),
+        food(new Parts.WandCluster(Iconicwands.parts.tips.get(7),Iconicwands.parts.cores.get(7),Iconicwands.parts.handles.get(4))),
+        forest(new Parts.WandCluster(Iconicwands.parts.tips.get(4),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(3))),
+        magus(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(1))),
+        neo(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(4),Iconicwands.parts.handles.get(0))),
         ;
         final Parts.WandCluster wand;
         Presets(Parts.WandCluster wand){
@@ -247,6 +260,18 @@ public class IconicWand extends RangedWeaponItem{
         } else
         if (wand==(Presets.end.getWand().getInt())){
             return new TranslatableText("item.iconicwands.end_wand");
+        } else
+        if (wand==(Presets.food.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.food_wand");
+        } else
+        if (wand==(Presets.forest.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.forest_wand");
+        } else
+        if (wand==(Presets.magus.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.magus_wand");
+        } else
+        if (wand==(Presets.neo.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.neo_wand");
         }
 
         return super.getName(stack);
