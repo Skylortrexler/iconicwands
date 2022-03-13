@@ -35,12 +35,18 @@ import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class IconicWand extends RangedWeaponItem{
 
     public IconicWand(Settings settings) {
         super(settings);
+    }
+
+    public static void saveComponents(ItemStack stack, Parts.WandCluster wandCluster) {
+        saveComponents(stack, wandCluster.getTip(), wandCluster.getCore(), wandCluster.getHandle());
     }
 
     public static void saveComponents(ItemStack stack,Parts.Tip tip, Parts.Core core, Parts.Handle handle) {
@@ -74,17 +80,18 @@ public class IconicWand extends RangedWeaponItem{
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (stack.getOrCreateNbt().getInt("CustomModelData") >= 0) {
+            Parts.WandCluster wand = IconicWand.getPartComobo(stack);
+            tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
+            tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
+            tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
             if (context.isAdvanced() || Screen.hasShiftDown()) {
-                Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-                tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
                 tooltip.add(new TranslatableText("item.iconicwands.crit").append(": " + 100*(wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
-                tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
-                tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
                 tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (wand.getTip().getRechargeAmount() + wand.getCore().getRechargeAmount())));
                 tooltip.add(new TranslatableText("item.iconicwands.recharge_rate").append(": " + (wand.getCore().getRechargeRate())));
                 tooltip.add(new TranslatableText("item.iconicwands.recharge_delay").append(": " + (wand.getCore().getRechargeDelay())));
                 tooltip.add(new TranslatableText("item.iconicwands.range").append(": " + (wand.getCore().getRange())));
                 tooltip.add(new TranslatableText("item.iconicwands.speed").append(": " + (wand.getTip().getSpeed())));
+                tooltip.add(new TranslatableText("item.iconicwands.divergence").append(": " + (wand.getTip().getDivergence())));
             } else {
                 tooltip.add(new TranslatableText("item.iconicwands.advanced_tooltip"));
             }
@@ -143,53 +150,55 @@ public class IconicWand extends RangedWeaponItem{
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity playerEntity, int remainingUseTicks) {
         if (!world.isClient) {
-            boolean crit = false;
             int wandInt = getPartIntCombo(stack);
             Parts.WandCluster wand = intToParts(wandInt);
+            boolean crit = world.random.nextFloat() <= wand.getTip().getCriticalChance() + wand.getHandle().getCriticalChance();
 
             int k;
             int j;
-            MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
-            persistentProjectileEntity.setOwner(playerEntity);
-            persistentProjectileEntity.setNoGravity(true);
-            persistentProjectileEntity.setMaxDist(wand.getCore().getRange());
-            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence());
-            persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
-            persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+            int projectileCount = wandInt == Presets.boomstick.getWand().getInt()?6:1;
+            for (int i = 0; i < projectileCount; i++) {
+                MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
+                persistentProjectileEntity.setOwner(playerEntity);
+                persistentProjectileEntity.setNoGravity(true);
+                persistentProjectileEntity.setMaxDist(wand.getCore().getRange());
+                persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence()*2);
+                persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
+                persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
 
-            if (wandInt==(Presets.overworld.getWand().getInt())){
-                persistentProjectileEntity.setDoesLight(true);
-            } else if (wandInt==(Presets.nether.getWand().getInt())){
-                persistentProjectileEntity.setOnFireFor(100);
-                persistentProjectileEntity.setDoesBurn(true);
-            } else if (wandInt==(Presets.end.getWand().getInt())){
-                if (playerEntity.isSneaking()){
-                    persistentProjectileEntity.setDoesWarp(true);
+                if (wandInt == (Presets.overworld.getWand().getInt())) {
+                    persistentProjectileEntity.setDoesLight(true);
+                } else if (wandInt == (Presets.nether.getWand().getInt())) {
+                    persistentProjectileEntity.setOnFireFor(100);
+                    persistentProjectileEntity.setDoesBurn(true);
+                } else if (wandInt == (Presets.end.getWand().getInt())) {
+                    if (playerEntity.isSneaking()) {
+                        persistentProjectileEntity.setDoesWarp(true);
+                    }
+                } else if (wandInt == (Presets.food.getWand().getInt())) {
+                    playerEntity.eatFood(world, new ItemStack(Items.APPLE));
+                } else if (wandInt == (Presets.forest.getWand().getInt())) {
+                    world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                } else if (wandInt == (Presets.magus.getWand().getInt())) {
+                    persistentProjectileEntity.setDoesExplode(true);
                 }
-            } else if (wandInt==(Presets.food.getWand().getInt())){
-                playerEntity.eatFood(world,new ItemStack(Items.APPLE));
-            } else if (wandInt==(Presets.forest.getWand().getInt())){
-                world.playSoundFromEntity(null,playerEntity,SoundEvents.ENTITY_PARROT_AMBIENT,SoundCategory.PLAYERS,1.0F,1.0F);
-            } else if (wandInt==(Presets.magus.getWand().getInt())){
-                persistentProjectileEntity.setDoesExplode(true);
-            }
-            if (world.random.nextFloat() <= wand.getTip().getCriticalChance() + wand.getHandle().getCriticalChance()) {
-                persistentProjectileEntity.setCritical(true);
-            }
+                if (crit) {
+                    persistentProjectileEntity.setCritical(true);
+                }
 
 
-            if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
-                persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
+                if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
+                    persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
+                }
+                if ((k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack)) > 0) {
+                    persistentProjectileEntity.setPunch(k);
+                }
+                if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
+                    persistentProjectileEntity.setOnFireFor(100);
+                }
+                stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
+                world.spawnEntity(persistentProjectileEntity);
             }
-            if ((k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack)) > 0) {
-                persistentProjectileEntity.setPunch(k);
-            }
-            if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-                persistentProjectileEntity.setOnFireFor(100);
-            }
-            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-            world.spawnEntity(persistentProjectileEntity);
-            crit = persistentProjectileEntity.isCritical();
 
             world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS, 0.5f + world.random.nextFloat(0.5f), (crit ? 2f : 0.25f) + world.random.nextFloat(0.75f));
             stack.getOrCreateNbt().putInt("recharge_time", wand.getCore().getRechargeDelay());
@@ -202,14 +211,15 @@ public class IconicWand extends RangedWeaponItem{
         super.onStoppedUsing(stack, world, playerEntity, remainingUseTicks);
     }
 
-    enum Presets{
+    public enum Presets{
         overworld(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
         nether(new Parts.WandCluster(Iconicwands.parts.tips.get(1),Iconicwands.parts.cores.get(1),Iconicwands.parts.handles.get(1))),
         end(new Parts.WandCluster(Iconicwands.parts.tips.get(2),Iconicwands.parts.cores.get(2),Iconicwands.parts.handles.get(2))),
         food(new Parts.WandCluster(Iconicwands.parts.tips.get(7),Iconicwands.parts.cores.get(7),Iconicwands.parts.handles.get(4))),
         forest(new Parts.WandCluster(Iconicwands.parts.tips.get(4),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(3))),
         magus(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(1))),
-        ;
+        rapid(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
+        boomstick(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(2)));
         final Parts.WandCluster wand;
         Presets(Parts.WandCluster wand){
             this.wand = wand;
@@ -267,6 +277,12 @@ public class IconicWand extends RangedWeaponItem{
         } else
         if (wand==(Presets.magus.getWand().getInt())){
             return new TranslatableText("item.iconicwands.magus_wand");
+        } else
+        if (wand==(Presets.rapid.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.rapid_wand");
+        } else
+        if (wand==(Presets.boomstick.getWand().getInt())){
+            return new TranslatableText("item.iconicwands.boomstick_wand");
         } else
 
         return super.getName(stack);

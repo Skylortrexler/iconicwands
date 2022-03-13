@@ -5,9 +5,17 @@
   "name": "Iconic Wands",
   "description": "adds customizable wands",
   "authors": [
-    "skylorbeck"
+    "Skylor Beck",
+    "Patrons:",
+    "Striker99974",
+    "TheNoobGamer07"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://www.skylorbeck.website",
+    "source": "https://github.com/Skylortrexler/iconicwands",
+    "repo": "https://github.com/Skylortrexler/iconicwands",
+    "issues": "https://github.com/Skylortrexler/iconicwands/issues"
+  },
   "license": "LGPL-3.0",
   "icon": "assets/iconicwands/icon.png",
   "environment": "*",
