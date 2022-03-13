@@ -11,9 +11,9 @@
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:gold_ingot",
       "title": "Gold Ingot",
-      "damage": "1",
-      "firerate": "10 Ticks",
-      "manaCost": "50 Mana",
+      "damage": "5",
+      "firerate": "5 Ticks",
+      "manaCost": "40 Mana",
       "criticalChance": "1%",
       "description": "Gold is the most common wand handle."
     },
@@ -21,30 +21,30 @@
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:iron_ingot",
       "title": "Iron Ingot",
-      "damage": "1",
-      "firerate": "5 Ticks",
+      "damage": "3",
+      "firerate": "10 Ticks",
       "manaCost": "25 Mana",
-      "criticalChance": "5%",
+      "criticalChance": "1%",
       "description": "Iron is the second most common wand handle."
     },
     {
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:shulker_shell",
       "title": "Shulker Shell",
-      "damage": "2",
+      "damage": "4",
       "firerate": "10 Ticks",
       "manaCost": "50 Mana",
-      "criticalChance": "3%",
+      "criticalChance": "5%",
       "description": "Shulker Shells are the most rare wand handle."
     },
     {
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:leather",
       "title": "Leather",
-      "damage": "2",
-      "firerate": "10 Ticks",
-      "manaCost": "50 Mana",
-      "criticalChance": "3%",
+      "damage": "3",
+      "firerate": "Instant",
+      "manaCost": "40 Mana",
+      "criticalChance": "2%",
       "description": "Leather is the handle wrap of choice for those who are closer to the natural world."
     },
     {
@@ -52,9 +52,9 @@
       "item": "minecraft:kelp",
       "title": "Kelp",
       "damage": "2",
-      "firerate": "10 Ticks",
-      "manaCost": "50 Mana",
-      "criticalChance": "3%",
+      "firerate": "20 Ticks",
+      "manaCost": "30 Mana",
+      "criticalChance": "5%",
       "description": "Kelp wraps are inexpensive and tap into the Ocean's natural magics."
     }
   ]

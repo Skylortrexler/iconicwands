@@ -16,11 +16,11 @@ public class Iconicwands implements ModInitializer {
     static {
         // 20 points
         //Stat Name || Base stat || per point spent
-        //rate     10 -1
-        //delay    10 -1
-        //amount   5  +5
-        //cooldown 20 -5
-        //range    10 +10
+        //rate      10 -1
+        //delay     10 -1
+        //amount    5  +5
+//firerate/cooldown 20 -5
+        //range     10 +10
 
         parts.addCores(
                 new Parts.Core(//average
@@ -79,20 +79,20 @@ public class Iconicwands implements ModInitializer {
                         -2,
                         2
                 ),
-                new Parts.Core(//joke, all recharge amount with one range
+                new Parts.Core(//joke, all range
                         "minecraft:carrot",
                         0,
                         0,
-                        19,
                         0,
-                        1
+                        0,
+                        20
                 )
         );
         // 20 points
         //Stat Name || Base stat || per point spent
         //speed      0.5f  +0.05f
         //amount     0     +5
-        //cost       100    -5
+        //cost       50    -5
         //divergence 2f    -0.1f
         //crit       0.05f +0.01f
         parts.addTips(
@@ -155,8 +155,8 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Tip(//joke, low mana cost
                         "minecraft:potato",
                         0,
-                        1,
-                        19,
+                        11,
+                        9,
                         0,
                         0
                 )
@@ -215,6 +215,7 @@ public class Iconicwands implements ModInitializer {
         Registrar.regItem("wand_pedestal_",Declarar.WAND_PEDESTAL_ITEM,MODID);
 
         Registrar.regItem("wand_tester_",Declarar.WAND_TESTER,MODID);
+        Registrar.regItem("wand_preset_tester_",Declarar.WAND_PRESET_TESTER,MODID);
 
         Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"),((syncId, inventory) -> new WandBenchScreenHandler(syncId,inventory,new SimpleInventory(4))));
 
@@ -231,7 +232,4 @@ public class Iconicwands implements ModInitializer {
         return new Identifier(MODID, name);
     }
 
-    //todo
-    // presets in book
-    // update stats in book
 }

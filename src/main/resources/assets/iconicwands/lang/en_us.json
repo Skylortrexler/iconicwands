@@ -14,10 +14,13 @@
   "item.iconicwands.range": "Range",
   "item.iconicwands.speed": "Speed",
   "item.iconicwands.crit": "Crit %",
+  "item.iconicwands.divergence": "Divergence",
   "item.iconicwands.overworld_wand": "Cavers Friend",
   "item.iconicwands.nether_wand": "Burning Passion",
   "item.iconicwands.end_wand": "Warped Wand",
   "item.iconicwands.food_wand": "Munchies",
-  "item.iconicwands.forest_wand": "Strikers Wand",
-  "item.iconicwands.magus_wand": "NoobGamers Wand"
+  "item.iconicwands.forest_wand": "Chirp",
+  "item.iconicwands.magus_wand": "NoobGamers Wand",
+  "item.iconicwands.rapid_wand": "Rapid Wand",
+  "item.iconicwands.boomstick_wand": "Strikers Wand"
 }

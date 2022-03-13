@@ -1,5 +1,6 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
+import net.minecraft.text.TranslatableText;
 import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
@@ -27,7 +28,7 @@ public class Parts {
             this.identifier = identifier;
             this.speed = 0.5f + (speed*0.05f);
             this.rechargeAmount = rechargeAmount*5;
-            this.manaCost =100-(5*manaCost);
+            this.manaCost =50-(5*manaCost);
             this.divergence = 2f- (divergence*0.1f);
             this.criticalChance = 0.05f +(0.01f*criticalChance);
             String num = Math.abs(speed)+""+Math.abs(rechargeAmount)+""+Math.abs(manaCost)+""+Math.abs(divergence)+""+Math.abs(criticalChance);
@@ -166,6 +167,7 @@ public class Parts {
         Tip tip;
         Core core;
         Handle handle;
+        String name;
         public WandCluster(Tip tip, Core core, Handle handle) {
             this.tip = tip;
             this.core = core;
@@ -187,6 +189,8 @@ public class Parts {
         public int getInt(){
             return IconicWand.partsToInt(tip,core,handle);
         }
+
+
 
     }
 }

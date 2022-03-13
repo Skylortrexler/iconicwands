@@ -27,6 +27,38 @@
       "core": "minecraft:end_rod",
       "handle": "minecraft:shulker_shell",
       "description": "Sneaking while using this wand will allow the user to teleport."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:460548}",
+      "title": "Munchies",
+      "tip": "minecraft:potato",
+      "core": "minecraft:carrot",
+      "handle": "minecraft:kelp",
+      "description": "Using this wand will prevent you from being hungry... and not much else."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:263683}",
+      "title": "Chirp",
+      "tip": "minecraft:emerald",
+      "core": "minecraft:bamboo",
+      "handle": "minecraft:leather",
+      "description": "I swear there's a parrot around here somewhere."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:197889}",
+      "title": "NoobGamers Wand",
+      "tip": "minecraft:quartz",
+      "core": "minecraft:amethyst_shard",
+      "handle": "minecraft:iron_ingot",
+      "description": "Creates explosions at the point of contact."
+    },{
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:394754}",
+      "title": "Strikers Wand",
+      "tip": "minecraft:redstone_block",
+      "core": "minecraft:bamboo",
+      "handle": "minecraft:shulker_shell",
+      "description": "Shoots 6 projectiles at once."
     }
   ]
 }
