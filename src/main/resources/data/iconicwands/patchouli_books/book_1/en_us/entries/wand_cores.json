@@ -4,6 +4,10 @@
   "category": "iconicwands:parts",
   "pages": [
     {
+      "type": "patchouli:text",
+      "text": "Every Core contributes a cooldown rate, recharge delay, recharge rate, recharge amount and range to the crafted wand."
+    },
+    {
       "type": "iconicwands:wand_part_core",
       "item": "minecraft:stick",
       "title": "Stick",

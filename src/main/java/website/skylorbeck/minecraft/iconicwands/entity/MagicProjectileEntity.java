@@ -24,6 +24,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 
 import java.util.Objects;
@@ -40,6 +41,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     private boolean doesLight = false;
     private boolean doesBurn = false;
     private boolean doesWarp = false;
+    private boolean doesExplode = false;
     public MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -90,7 +92,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     public void tick() {
         super.tick();
          spawnParticles(world.random.nextInt(4)+1);
-        if (!world.isClient && !this.startingPos.isWithinDistance(this.getPos(),maxDist) || this.inGround){
+        if (!world.isClient && !this.startingPos.isWithinDistance(this.getPos(),maxDist) || this.inGround || this.getVelocity().length()<0.1f){
             this.discard();
         }
     }
@@ -162,6 +164,9 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
                 target.addStatusEffect(statusEffectInstance, entity);
             }
         }
+        if (this.doesExplode) {
+            world.createExplosion(target, target.getX(), target.getY()+1, target.getZ(), 1.0f, Explosion.DestructionType.NONE);
+        }
     }
 
     @Override
@@ -175,6 +180,9 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         } else if (this.doesWarp){
             if(this.getOwner()!=null)
             this.getOwner().teleport(blockPos.getX()+0.5,blockPos.getY()+1.5,blockPos.getZ()+0.5);
+        }
+        if (this.doesExplode) {
+            world.createExplosion(this, blockPos.getX()+0.5, blockPos.getY()+1, blockPos.getZ()+0.5, 1.0f, Explosion.DestructionType.NONE);
         }
         super.onBlockHit(blockHitResult);
     }
@@ -223,5 +231,13 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     public void setDoesLight(boolean doesLight) {
         this.doesLight = doesLight;
+    }
+
+    public boolean isDoesExplode() {
+        return doesExplode;
+    }
+
+    public void setDoesExplode(boolean doesExplode) {
+        this.doesExplode = doesExplode;
     }
 }

@@ -4,6 +4,10 @@
   "category": "iconicwands:parts",
   "pages": [
     {
+      "type": "patchouli:text",
+      "text": "Every Handle contributes damage, cooldown rate, mana cost, and crit chance to the crafted wand."
+    },
+    {
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:gold_ingot",
       "title": "Gold Ingot",

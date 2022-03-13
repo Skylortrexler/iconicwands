@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -24,6 +25,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
@@ -114,8 +116,8 @@ public class IconicWand extends RangedWeaponItem{
             if (rechargeTime > 0 ) {
                 if (world.getTime() % 20 == 0)
                     rechargeTime--;
-            }else {
-                if (world.getTime() % (wand.getCore().getRechargeRate()* 20L) == 0) {
+            } else {
+                if (wand.getCore().getRechargeRate()==0 || world.getTime() % (wand.getCore().getRechargeRate()* 20L) == 0) {
 //                if (++rechargeDelay % wand.getCore().getRechargeRate() == 0) {
                     stack.setDamage(stack.getDamage() - (wand.getCore().getRechargeAmount() + wand.getTip().getRechargeAmount()));
 //                    rechargeDelay = 0;
@@ -149,6 +151,12 @@ public class IconicWand extends RangedWeaponItem{
             int j;
             MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
             persistentProjectileEntity.setOwner(playerEntity);
+            persistentProjectileEntity.setNoGravity(true);
+            persistentProjectileEntity.setMaxDist(wand.getCore().getRange());
+            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence());
+            persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
+            persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+
             if (wandInt==(Presets.overworld.getWand().getInt())){
                 persistentProjectileEntity.setDoesLight(true);
             } else if (wandInt==(Presets.nether.getWand().getInt())){
@@ -163,20 +171,12 @@ public class IconicWand extends RangedWeaponItem{
             } else if (wandInt==(Presets.forest.getWand().getInt())){
                 world.playSoundFromEntity(null,playerEntity,SoundEvents.ENTITY_PARROT_AMBIENT,SoundCategory.PLAYERS,1.0F,1.0F);
             } else if (wandInt==(Presets.magus.getWand().getInt())){
-                //todo
-            } else if (wandInt==(Presets.neo.getWand().getInt())){
-                //todo
+                persistentProjectileEntity.setDoesExplode(true);
             }
-
-            persistentProjectileEntity.setNoGravity(true);
-            persistentProjectileEntity.setMaxDist(wand.getCore().getRange());
-//            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 0, wand.getTip().getDivergence());
-            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence());
             if (world.random.nextFloat() <= wand.getTip().getCriticalChance() + wand.getHandle().getCriticalChance()) {
                 persistentProjectileEntity.setCritical(true);
             }
 
-            persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
 
             if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
                 persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
@@ -188,7 +188,6 @@ public class IconicWand extends RangedWeaponItem{
                 persistentProjectileEntity.setOnFireFor(100);
             }
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-            persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
             world.spawnEntity(persistentProjectileEntity);
             crit = persistentProjectileEntity.isCritical();
 
@@ -210,7 +209,6 @@ public class IconicWand extends RangedWeaponItem{
         food(new Parts.WandCluster(Iconicwands.parts.tips.get(7),Iconicwands.parts.cores.get(7),Iconicwands.parts.handles.get(4))),
         forest(new Parts.WandCluster(Iconicwands.parts.tips.get(4),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(3))),
         magus(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(1))),
-        neo(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(4),Iconicwands.parts.handles.get(0))),
         ;
         final Parts.WandCluster wand;
         Presets(Parts.WandCluster wand){
@@ -270,9 +268,6 @@ public class IconicWand extends RangedWeaponItem{
         if (wand==(Presets.magus.getWand().getInt())){
             return new TranslatableText("item.iconicwands.magus_wand");
         } else
-        if (wand==(Presets.neo.getWand().getInt())){
-            return new TranslatableText("item.iconicwands.neo_wand");
-        }
 
         return super.getName(stack);
     }

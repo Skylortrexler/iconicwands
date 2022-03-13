@@ -4,6 +4,10 @@
   "category": "iconicwands:parts",
   "pages": [
     {
+      "type": "patchouli:text",
+      "text": "Every Tip contributes projectile speed, recharge amount, mana cost, crit chance and projectile divergence to the crafted wand."
+    },
+    {
       "type": "iconicwands:wand_part_tip",
       "item": "minecraft:glow_berries",
       "title": "Glow Berries",
