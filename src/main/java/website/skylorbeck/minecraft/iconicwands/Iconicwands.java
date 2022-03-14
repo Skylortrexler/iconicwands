@@ -217,6 +217,14 @@ public class Iconicwands implements ModInitializer {
         Registrar.regItem("wand_tester_",Declarar.WAND_TESTER,MODID);
         Registrar.regItem("wand_preset_tester_",Declarar.WAND_PRESET_TESTER,MODID);
 
+//        Registrar.regItem("overworld_wand_preset_",Declarar.OVERWORLD_WAND_REI,MODID);
+//        Registrar.regItem("nether_wand_preset_",Declarar.NETHER_WAND_REI,MODID);
+//        Registrar.regItem("end_wand_preset_",Declarar.END_WAND_REI,MODID);
+//        Registrar.regItem("food_wand_preset_",Declarar.FOOD_WAND_REI,MODID);
+//        Registrar.regItem("forest_wand_preset_",Declarar.FOREST_WAND_REI,MODID);
+//        Registrar.regItem("magus_wand_preset_",Declarar.MAGUS_WAND_REI,MODID);
+//        Registrar.regItem("boomstick_wand_preset_",Declarar.BOOMSTICK_WAND_REI,MODID);
+
         Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"),((syncId, inventory) -> new WandBenchScreenHandler(syncId,inventory,new SimpleInventory(4))));
 
         try {
@@ -231,5 +239,6 @@ public class Iconicwands implements ModInitializer {
     public static Identifier getId(String name) {
         return new Identifier(MODID, name);
     }
+
 
 }

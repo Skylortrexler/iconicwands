@@ -182,10 +182,7 @@ public class IconicWand extends RangedWeaponItem{
                 } else if (wandInt == (Presets.magus.getWand().getInt())) {
                     persistentProjectileEntity.setDoesExplode(true);
                 }
-                if (crit) {
-                    persistentProjectileEntity.setCritical(true);
-                }
-
+                    persistentProjectileEntity.setCritical(crit);
 
                 if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
                     persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
