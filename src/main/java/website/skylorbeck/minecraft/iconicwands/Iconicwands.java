@@ -213,6 +213,8 @@ public class Iconicwands implements ModInitializer {
         Registrar.regItem("wand_bench_",Declarar.WAND_BENCH_ITEM,MODID);
         Registrar.regBlock("wand_pedestal_",Declarar.WAND_PEDESTAL,MODID);
         Registrar.regItem("wand_pedestal_",Declarar.WAND_PEDESTAL_ITEM,MODID);
+        Registrar.regBlock("wand_display_pedestal_",Declarar.WAND_PEDESTAL_DISPLAY,MODID);
+        Registrar.regItem("wand_display_pedestal_",Declarar.WAND_PEDESTAL_DISPLAY_ITEM,MODID);
 
         Registrar.regItem("wand_tester_",Declarar.WAND_TESTER,MODID);
         Registrar.regItem("wand_preset_tester_",Declarar.WAND_PRESET_TESTER,MODID);

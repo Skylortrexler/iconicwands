@@ -15,12 +15,17 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
+import website.skylorbeck.minecraft.iconicwands.Iconicwands;
+import website.skylorbeck.minecraft.iconicwands.config.Parts;
+import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 public class WandPedestalEntity extends BlockEntity implements Inventory, NamedScreenHandlerFactory {
@@ -169,5 +174,28 @@ public class WandPedestalEntity extends BlockEntity implements Inventory, NamedS
     @Override
     public NbtCompound toInitialChunkDataNbt() {
         return createNbt();
+    }
+
+    public static <E extends BlockEntity> void tick(World world, BlockPos blockPos, BlockState blockState, WandPedestalEntity pedestalEntity) {
+        if (!world.isClient) {
+            if (blockState.isOf(Declarar.WAND_PEDESTAL_DISPLAY))
+            if (world.getTime() % 20 == 0) {
+                ItemStack itemStack = new ItemStack(Declarar.ICONIC_WAND);
+                IconicWand.saveComponents(itemStack,
+                        new Parts.WandCluster(
+                                Iconicwands.parts.tips.get(world.random.nextInt(Iconicwands.parts.tips.size())),
+                                Iconicwands.parts.cores.get(world.random.nextInt(Iconicwands.parts.cores.size())),
+                                Iconicwands.parts.handles.get(world.random.nextInt(Iconicwands.parts.handles.size()))
+                        ));
+                pedestalEntity.setStack(0,itemStack);
+                pedestalEntity.markDirty();
+                Packet<ClientPlayPacketListener> updatePacket = pedestalEntity.toUpdatePacket();
+
+                world.getPlayers().forEach(player -> {
+                    if(updatePacket != null )
+                    ((ServerPlayerEntity) player).networkHandler.sendPacket(updatePacket);
+                });
+            }
+        }
     }
 }

@@ -74,12 +74,14 @@ public class Declarar {
         }
     };
     public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE));
+    public static final Block WAND_PEDESTAL_DISPLAY = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE));
+
+    public static final BlockItem WAND_PEDESTAL_ITEM = new BlockItem(WAND_PEDESTAL, new FabricItemSettings().group(ICONIC_WAND_GROUP));
+    public static final BlockItem WAND_PEDESTAL_DISPLAY_ITEM = new BlockItem(WAND_PEDESTAL_DISPLAY, new FabricItemSettings().group(ICONIC_WAND_GROUP));
 
     public static final BlockEntityType<WandPedestalEntity> WAND_PEDESTAL_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_pedestal_entity"),
-            FabricBlockEntityTypeBuilder.create(WandPedestalEntity::new, WAND_PEDESTAL).build(null));
-
-    public static final BlockItem WAND_PEDESTAL_ITEM = new BlockItem(WAND_PEDESTAL, new FabricItemSettings().group(ICONIC_WAND_GROUP));
+            FabricBlockEntityTypeBuilder.create(WandPedestalEntity::new, WAND_PEDESTAL,WAND_PEDESTAL_DISPLAY).build(null));
 
     public static Block TIMED_LIGHT = new WeakLightBlock(FabricBlockSettings.copy(Blocks.LIGHT));
 

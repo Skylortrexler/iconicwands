@@ -24,7 +24,7 @@ public class WandPedestalEntityRenderer<T extends BlockEntity> implements BlockE
     @Override
     public void render(WandPedestalEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         BlockState state = entity.getWorld().getBlockState(entity.getPos());
-        if (state.getBlock() == Declarar.WAND_PEDESTAL) {
+        if (state.isOf(Declarar.WAND_PEDESTAL)||state.isOf(Declarar.WAND_PEDESTAL_DISPLAY)) {
             Direction direction = state.get(Properties.FACING);
             matrices.push();
             matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()));

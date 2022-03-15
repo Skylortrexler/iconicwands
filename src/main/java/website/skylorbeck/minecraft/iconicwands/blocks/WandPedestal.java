@@ -2,6 +2,9 @@ package website.skylorbeck.minecraft.iconicwands.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
@@ -113,5 +116,11 @@ public class WandPedestal extends BlockWithEntity {
             }
         }
         super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ?null: ChestBlock.checkType(type, Declarar.WAND_PEDESTAL_ENTITY, WandPedestalEntity::tick) ;
     }
 }

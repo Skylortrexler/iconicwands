@@ -14,6 +14,14 @@
     "facing=west": {
       "model": "iconicwands:block/wand_bench_block",
       "y": 90
+    },
+    "facing=up": {
+      "model": "iconicwands:block/wand_bench_block",
+      "y": 90
+    },
+    "facing=down": {
+      "model": "iconicwands:block/wand_bench_block",
+      "y": 90
     }
   }
 }

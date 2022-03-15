@@ -25,6 +25,7 @@ public class IconicwandsClient implements ClientModInitializer {
         TooltipComponentCallback.EVENT.register(data -> new WandTooltipComponent((WandTooltipData) data));
         ScreenRegistry.register(Declarar.WANDING, WandBenchScreen::new);
         BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_BENCH, RenderLayer.getTranslucent());
+        BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_PEDESTAL, RenderLayer.getTranslucent());
         BlockEntityRendererRegistryImpl.register(Declarar.WAND_BENCH_ENTITY, WandBenchEntityRenderer::new);
         BlockEntityRendererRegistryImpl.register(Declarar.WAND_PEDESTAL_ENTITY, WandPedestalEntityRenderer::new);
     }
