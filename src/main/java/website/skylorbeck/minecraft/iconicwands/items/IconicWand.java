@@ -216,6 +216,8 @@ public class IconicWand extends RangedWeaponItem{
         forest(new Parts.WandCluster(Iconicwands.parts.tips.get(4),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(3))),
         magus(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(1))),
         rapid(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
+//        scarlet(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
+//        kynan(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
         boomstick(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(2)));
         final Parts.WandCluster wand;
         Presets(Parts.WandCluster wand){

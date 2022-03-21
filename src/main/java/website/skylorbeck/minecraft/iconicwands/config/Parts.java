@@ -124,7 +124,7 @@ public class Parts {
     public static class Handle {
         public Handle(String identifier, int damage, int firerate, int manaCost, int criticalChance) {
             this.identifier = identifier;
-            this.damage = 1 +damage;
+            this.damage = 2* (1 + damage);
             this.firerate = 20 -(5*firerate);
             this.manaCost = 50-(5*manaCost);
             this.criticalChance = 0.01f*criticalChance;

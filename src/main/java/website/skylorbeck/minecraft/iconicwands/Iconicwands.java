@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Iconicwands implements ModInitializer {
     public static Parts parts = new Parts();
     static {
-        // 20 points
+        // 10 points per level
         //Stat Name || Base stat || per point spent
         //rate      10 -1
         //delay     10 -1
@@ -24,71 +24,23 @@ public class Iconicwands implements ModInitializer {
 
         parts.addCores(
                 new Parts.Core(//average
-                        "minecraft:stick",
-                        5,
-                        5,
-                        5,
-                        2,
-                        3
-                ),
+                        "minecraft:stick",5,5,5,2,3),
                 new Parts.Core(//always takes 5s to recharge but has zero delay
-                        "minecraft:blaze_rod",
-                        5,
-                        10,
-                        1,
-                        3,
-                        1
-                ),
+                        "minecraft:blaze_rod",5,10,1,3,1),
                 new Parts.Core(//long range, high recharge amount
-                        "minecraft:end_rod",
-                        0,
-                        0,
-                        9,
-                        2,
-                        9
-                ),
+                        "minecraft:end_rod",0,0,9,2,9),
                 new Parts.Core(//low recharge amount, rapid recharge rate
-                        "minecraft:bone",
-                        10,
-                        5,
-                        0,
-                        1,
-                        4
-                ),
+                        "minecraft:bone",10,5,0,1,4),
                 new Parts.Core(//fast recharge
-                        "minecraft:copper_ingot",
-                        7,
-                        7,
-                        1,
-                        2,
-                        3
-                ),
+                        "minecraft:copper_ingot",7,7,1,2,3),
                 new Parts.Core(//high firerate
-                        "minecraft:amethyst_shard",
-                        6,
-                        6,
-                        0,
-                        4,
-                        4
-                ),
+                        "minecraft:amethyst_shard",6,6,0,4,4),
                 new Parts.Core(//instant recharge , low firerate
-                        "minecraft:bamboo",
-                        10,
-                        10,
-                        0,
-                        -2,
-                        2
-                ),
+                        "minecraft:bamboo",10,10,0,-2,2),
                 new Parts.Core(//joke, all range
-                        "minecraft:carrot",
-                        0,
-                        0,
-                        0,
-                        0,
-                        20
-                )
+                        "minecraft:carrot",0,0,0,0,20)
         );
-        // 20 points
+        // 10 points per level
         //Stat Name || Base stat || per point spent
         //speed      0.5f  +0.05f
         //amount     0     +5
@@ -97,71 +49,31 @@ public class Iconicwands implements ModInitializer {
         //crit       0.05f +0.01f
         parts.addTips(
                 new Parts.Tip(//average
-                        "minecraft:glow_berries",
-                        -5,
-                        5,
-                        10,
-                        15,
-                        0
-                ),
+                        "minecraft:glow_berries",-5,5,10,15,0),
                 new Parts.Tip(//high recharge amount
-                        "minecraft:ghast_tear",
-                        -2,
-                        15,
-                        5,
-                        0,
-                        2
-                ),
+                        "minecraft:ghast_tear",-2,15,5,0,2),
                 new Parts.Tip(//low crit, low divergence, medium mana cost and recharge
-                        "minecraft:shulker_shell",
-                        4,
-                        5,
-                        5,
-                        8,
-                        -2
-                ),
+                        "minecraft:shulker_shell",4,5,5,8,-2),
                 new Parts.Tip(//low mana cost, medium speed and recharge
-                        "minecraft:quartz",
-                        5,
-                        5,
-                        10,
-                        0,
-                        0
-                ),
+                        "minecraft:quartz",5,5,10,0,0 ),
                 new Parts.Tip(//high recharge amount
-                        "minecraft:emerald",
-                        0,
-                        20,
-                        0,
-                        4,
-                        -4
-                ),
+                        "minecraft:emerald",0,20,0,4,-4),
                 new Parts.Tip(//high crit
-                        "minecraft:lapis_lazuli",
-                        0,
-                        5,
-                        0,
-                        5,
-                        10
-                ),
+                        "minecraft:lapis_lazuli",0,5,0,5,10),
                 new Parts.Tip(//high speed
-                        "minecraft:redstone_block",
-                        15,
-                        2,
-                        0,
-                        5,
-                        -2
-                ),
+                        "minecraft:redstone_block",15,2,0,5,-2),
                 new Parts.Tip(//joke, low mana cost
-                        "minecraft:potato",
-                        0,
-                        11,
-                        9,
-                        0,
-                        0
-                )
+                        "minecraft:potato",0,11,9,0,0),
+                new Parts.Tip(//
+                        "minecraft:gold_nugget",5,3,0,2,10),
+                new Parts.Tip(//
+                        "minecraft:prismarine_crystals",0,6,6,10,-2),
+                new Parts.Tip(//
+                        "minecraft:glass",5,0,5,5,5),
+                new Parts.Tip(//
+                        "minecraft:nether_star",10,0,0,0,10)
         );
-        //10 points
+        // 5 points per level
         //Stat Name || Base stat || per point spent
         //damage   1   +1
         //cooldown 20  -5
@@ -169,40 +81,23 @@ public class Iconicwands implements ModInitializer {
         //crit     0   +0.01f
         parts.addHandles(
                 new Parts.Handle(//average, damage focus
-                        "minecraft:gold_ingot",
-                        4,
-                        3,
-                        2,
-                        1
-                ),
+                        "minecraft:gold_ingot",4,3,2,1),
                 new Parts.Handle(//low mana cost
-                        "minecraft:iron_ingot",
-                        2,
-                        2,
-                        5,
-                        1
-                ),
+                        "minecraft:iron_ingot",2,2,5,1),
                 new Parts.Handle(//higher crit
-                        "minecraft:shulker_shell",
-                        3,
-                        2,
-                        0,
-                        5
-                ),
+                        "minecraft:shulker_shell",3,2,0,5),
                 new Parts.Handle(//firerate
-                        "minecraft:leather",
-                        2,
-                        4,
-                        2,
-                        2
-                ),
+                        "minecraft:leather",2,4,2,2),
                 new Parts.Handle(
-                        "minecraft:kelp",
-                        1,
-                        0,
-                        4,
-                        5
-                )
+                        "minecraft:kelp",1,0,4,5),
+                new Parts.Handle(
+                        "minecraft:quartz",5,0,0,5),
+                new Parts.Handle(
+                        "minecraft:emerald",0,0,10,0),
+                new Parts.Handle(
+                        "minecraft:prismarine_shard",3,0,7,0),
+                new Parts.Handle(
+                        "minecraft:glass",10,0,0,0)
         );
     }
     @Override
@@ -244,3 +139,6 @@ public class Iconicwands implements ModInitializer {
 
 
 }
+
+//todo Fix REI related crash?
+//todo crafting noise
