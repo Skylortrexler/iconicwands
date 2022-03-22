@@ -29,6 +29,7 @@ public class WandTester extends Item {
                     IconicWand.saveComponents(wand, Iconicwands.parts.tips.get(i), Iconicwands.parts.cores.get(j), Iconicwands.parts.handles.get(k));
                     world.setBlockState(pos,Declarar.WAND_PEDESTAL.getDefaultState());
                     ((WandPedestalEntity)world.getBlockEntity(pos)).setStack(0,wand);
+                    ((WandPedestalEntity)world.getBlockEntity(pos)).setHide(true);
                 }
             }
         }

@@ -26,23 +26,26 @@ public class WandPedestalEntityRenderer<T extends BlockEntity> implements BlockE
         BlockState state = entity.getWorld().getBlockState(entity.getPos());
         if (state.isOf(Declarar.WAND_PEDESTAL)||state.isOf(Declarar.WAND_PEDESTAL_DISPLAY)) {
             Direction direction = state.get(Properties.FACING);
-            matrices.push();
-            matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()));
-            switch (direction) {
-                case NORTH -> matrices.translate(-1, 0, -1);
-                case SOUTH -> matrices.translate(0, 0, 0);
-                case WEST -> matrices.translate(0, 0, -1);
-                case EAST -> matrices.translate(-1, 0, 0);
-            }
             ItemStack itemStack = entity.getInventory().get(0);
             ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
-
-            double time = entity.getWorld().getTime();
-            matrices.translate(0.4, 0.5+(0.1 * Math.sin(0.05*time)), 0.5);
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float) (10 * Math.sin(0.05 * time))));
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion((float) (10 * Math.cos(0.05 * time))));
-            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-45));
-            itemRenderer.renderItem(itemStack, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0);
+            matrices.push();
+            if (entity.isHide()){
+                itemRenderer.renderItem(itemStack, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0);
+            } else {
+                matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(direction.asRotation()));
+                switch (direction) {
+                    case NORTH -> matrices.translate(-1, 0, -1);
+                    case SOUTH -> matrices.translate(0, 0, 0);
+                    case WEST -> matrices.translate(0, 0, -1);
+                    case EAST -> matrices.translate(-1, 0, 0);
+                }
+                double time = entity.getWorld().getTime();
+                matrices.translate(0.4, 0.5 + (0.1 * Math.sin(0.05 * time)), 0.5);
+                matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float) (10 * Math.sin(0.05 * time))));
+                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion((float) (10 * Math.cos(0.05 * time))));
+                matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-45));
+                itemRenderer.renderItem(itemStack, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0);
+            }
             matrices.pop();
         }
     }

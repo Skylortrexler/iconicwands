@@ -31,14 +31,20 @@ import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 public class WandPedestalEntity extends BlockEntity implements Inventory, NamedScreenHandlerFactory {
     private Text customName;
     private ScreenHandler handler;
-
+    private boolean hide = false;
     protected DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public WandPedestalEntity(BlockPos pos, BlockState state) {
         super(Declarar.WAND_PEDESTAL_ENTITY, pos, state);
     }
 
+    public boolean isHide() {
+        return hide;
+    }
 
+    public void setHide(boolean hide) {
+        this.hide = hide;
+    }
 
     public DefaultedList<ItemStack> getInventory() {
         return inventory;
@@ -143,6 +149,7 @@ public class WandPedestalEntity extends BlockEntity implements Inventory, NamedS
             if (inventory.get(i).isOf(Items.BARRIER))
                 inventory.set(i, ItemStack.EMPTY);
         }
+        this.setHide(nbt.getBoolean("hide"));
         super.readNbt(nbt);
     }
 
@@ -162,6 +169,7 @@ public class WandPedestalEntity extends BlockEntity implements Inventory, NamedS
         if (!nbtList.isEmpty()) {
             nbt.put("Items", nbtList);
         }
+        nbt.putBoolean("hide",this.isHide());
         super.writeNbt(nbt);
     }
 

@@ -14,7 +14,11 @@ import java.io.IOException;
 public class Iconicwands implements ModInitializer {
     public static Parts parts = new Parts();
     static {
-        // 10 points per level
+
+        //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
+        //t2 10/10 | 10/5/5 | 5/5/5/5 | 4/4/4/4/4
+        //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
+
         //Stat Name || Base stat || per point spent
         //rate      10 -1
         //delay     10 -1
@@ -23,24 +27,29 @@ public class Iconicwands implements ModInitializer {
         //range     10 +10
 
         parts.addCores(
-                new Parts.Core(//average
-                        "minecraft:stick",5,5,5,2,3),
-                new Parts.Core(//always takes 5s to recharge but has zero delay
-                        "minecraft:blaze_rod",5,10,1,3,1),
-                new Parts.Core(//long range, high recharge amount
-                        "minecraft:end_rod",0,0,9,2,9),
-                new Parts.Core(//low recharge amount, rapid recharge rate
-                        "minecraft:bone",10,5,0,1,4),
-                new Parts.Core(//fast recharge
-                        "minecraft:copper_ingot",7,7,1,2,3),
-                new Parts.Core(//high firerate
-                        "minecraft:amethyst_shard",6,6,0,4,4),
-                new Parts.Core(//instant recharge , low firerate
-                        "minecraft:bamboo",10,10,0,-2,2),
-                new Parts.Core(//joke, all range
-                        "minecraft:carrot",0,0,0,0,20)
+                //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
+                new Parts.Core("minecraft:oak_planks",6,2,0,2,0),
+                new Parts.Core("minecraft:spruce_planks",3,3,0,2, 2),
+                new Parts.Core("minecraft:birch_planks",2,2,6,0,0),
+                new Parts.Core("minecraft:jungle_planks",5,5,0,0,0),
+                new Parts.Core("minecraft:acacia_planks",2,2,0,3,3),
+                new Parts.Core("minecraft:dark_oak_planks",0,0,5,0,5),
+                new Parts.Core("minecraft:bone",10,5,0,-5,0),
+                new Parts.Core("minecraft:carrot",2,2,2,2,2),
+
+                //t2 10/10 | 10/5/5 | 5/5/5/5 | 4/4/4/4/4
+                new Parts.Core("minecraft:blaze_rod",5,10,0,5,0),
+                new Parts.Core("minecraft:amethyst_shard",5,5,0,5,5),
+                new Parts.Core("minecraft:bamboo",10,10,0,0,0),
+                new Parts.Core("minecraft:crimson_planks",5,5,0,10,0),
+                new Parts.Core("minecraft:warped_planks",0,0,10,0,10),
+//                new Parts.Core("minecraft:copper_ingot",7,7,1,2,3),
+
+                //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
+                new Parts.Core("minecraft:end_rod",0,0,5,5,10),
+                new Parts.Core("minecraft:golden_carrot",6,6,6,6,6)
+
         );
-        // 10 points per level
         //Stat Name || Base stat || per point spent
         //speed      0.5f  +0.05f
         //amount     0     +5
@@ -48,30 +57,30 @@ public class Iconicwands implements ModInitializer {
         //divergence 2f    -0.1f
         //crit       0.05f +0.01f
         parts.addTips(
-                new Parts.Tip(//average
-                        "minecraft:glow_berries",-5,5,10,15,0),
-                new Parts.Tip(//high recharge amount
-                        "minecraft:ghast_tear",-2,15,5,0,2),
-                new Parts.Tip(//low crit, low divergence, medium mana cost and recharge
-                        "minecraft:shulker_shell",4,5,5,8,-2),
-                new Parts.Tip(//low mana cost, medium speed and recharge
-                        "minecraft:quartz",5,5,10,0,0 ),
-                new Parts.Tip(//high recharge amount
-                        "minecraft:emerald",0,20,0,4,-4),
-                new Parts.Tip(//high crit
-                        "minecraft:lapis_lazuli",0,5,0,5,10),
-                new Parts.Tip(//high speed
-                        "minecraft:redstone_block",15,2,0,5,-2),
-                new Parts.Tip(//joke, low mana cost
-                        "minecraft:potato",0,11,9,0,0),
-                new Parts.Tip(//
-                        "minecraft:gold_nugget",5,3,0,2,10),
-                new Parts.Tip(//
-                        "minecraft:prismarine_crystals",0,6,6,10,-2),
-                new Parts.Tip(//
-                        "minecraft:glass",5,0,5,5,5),
-                new Parts.Tip(//
-                        "minecraft:nether_star",10,0,0,0,10)
+                //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
+                new Parts.Tip("minecraft:oak_planks",3,2,0,2,3),
+                new Parts.Tip("minecraft:spruce_planks",3,3,0,2, 2),
+                new Parts.Tip("minecraft:birch_planks",2,2,3,3,0),
+                new Parts.Tip("minecraft:jungle_planks",2,3,2,0,3),
+                new Parts.Tip("minecraft:acacia_planks",2,2,0,3,3),
+                new Parts.Tip("minecraft:dark_oak_planks",0,2,3,2,3),
+                new Parts.Tip("minecraft:glow_berries",3,3,2,2,0),
+                new Parts.Tip("minecraft:lapis_lazuli",0,0,0,0,5),
+                new Parts.Tip("minecraft:potato",0,0,5,0,0),
+                new Parts.Tip("minecraft:gold_nugget",0,5,5,0,0),
+                new Parts.Tip("minecraft:redstone",6,2,0,2,0),
+                new Parts.Tip("minecraft:glass",2,0,2,0,6),
+
+                //t2 10/10 | 10/5/5 | 5/5/5/5 | 4/4/4/4/4
+                new Parts.Tip("minecraft:ghast_tear",5,0,5,5,5),
+                new Parts.Tip("minecraft:quartz",5,5,10,0,0 ),
+                new Parts.Tip("minecraft:emerald",0,5,5,0,10),
+                new Parts.Tip("minecraft:redstone_block",10,0,0,10,0),
+
+                //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
+                new Parts.Tip("minecraft:shulker_shell",10,0,0,20,0),
+                new Parts.Tip("minecraft:prismarine_crystals",0,0,0,0,0),
+                new Parts.Tip("minecraft:nether_star",0,0,0,0,0)
         );
         // 5 points per level
         //Stat Name || Base stat || per point spent
@@ -80,24 +89,26 @@ public class Iconicwands implements ModInitializer {
         //cost     50  -5
         //crit     0   +0.01f
         parts.addHandles(
-                new Parts.Handle(//average, damage focus
-                        "minecraft:gold_ingot",4,3,2,1),
-                new Parts.Handle(//low mana cost
-                        "minecraft:iron_ingot",2,2,5,1),
-                new Parts.Handle(//higher crit
-                        "minecraft:shulker_shell",3,2,0,5),
-                new Parts.Handle(//firerate
-                        "minecraft:leather",2,4,2,2),
-                new Parts.Handle(
-                        "minecraft:kelp",1,0,4,5),
-                new Parts.Handle(
-                        "minecraft:quartz",5,0,0,5),
-                new Parts.Handle(
-                        "minecraft:emerald",0,0,10,0),
-                new Parts.Handle(
-                        "minecraft:prismarine_shard",3,0,7,0),
-                new Parts.Handle(
-                        "minecraft:glass",10,0,0,0)
+                //t1 3/2 | 3/1/1 | 2/1/1/1
+                new Parts.Handle("minecraft:oak_planks",2,1,1,1),
+                new Parts.Handle("minecraft:spruce_planks",1,2,1, 1),
+                new Parts.Handle("minecraft:birch_planks",1,1,2,1),
+                new Parts.Handle("minecraft:jungle_planks",1,1,1,2),
+                new Parts.Handle("minecraft:acacia_planks",1,3,0,1),
+                new Parts.Handle("minecraft:dark_oak_planks",1,0,3,1),
+                new Parts.Handle("minecraft:kelp",0,2,3,0),
+                new Parts.Handle("minecraft:glass",3,0,0,2),
+
+                //t2 5/5 | 6/2/2 | 3/3/2/2
+                new Parts.Handle("minecraft:gold_ingot",3,3,2,2),
+                new Parts.Handle("minecraft:iron_ingot",2,2,3,3),
+                new Parts.Handle("minecraft:leather",2,6,2,0),
+                new Parts.Handle("minecraft:quartz",5,0,5,0),
+                new Parts.Handle("minecraft:emerald",2,0,2,6),
+
+                //t3 10/5 | 6/6/3 | 6/3/3/3
+                new Parts.Handle("minecraft:shulker_shell",3,6,6,0),
+                new Parts.Handle("minecraft:prismarine_shard",5,0,10,0)
         );
     }
     @Override
