@@ -191,9 +191,9 @@ public class WandPedestalEntity extends BlockEntity implements Inventory, NamedS
                 ItemStack itemStack = new ItemStack(Declarar.ICONIC_WAND);
                 IconicWand.saveComponents(itemStack,
                         new Parts.WandCluster(
-                                Iconicwands.parts.tips.get(world.random.nextInt(Iconicwands.parts.tips.size())),
-                                Iconicwands.parts.cores.get(world.random.nextInt(Iconicwands.parts.cores.size())),
-                                Iconicwands.parts.handles.get(world.random.nextInt(Iconicwands.parts.handles.size()))
+                                Iconicwands.parts.getAllTips().get(world.random.nextInt(Iconicwands.parts.getAllTips().size())),
+                                Iconicwands.parts.getAllCores().get(world.random.nextInt(Iconicwands.parts.getAllCores().size())),
+                                Iconicwands.parts.getAllHandles().get(world.random.nextInt(Iconicwands.parts.getAllHandles().size()))
                         ));
                 pedestalEntity.setStack(0,itemStack);
                 pedestalEntity.markDirty();

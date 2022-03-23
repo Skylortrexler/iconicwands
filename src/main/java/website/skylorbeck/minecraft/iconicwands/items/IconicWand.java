@@ -58,16 +58,17 @@ public class IconicWand extends RangedWeaponItem{
     }
 
     public static int partsToInt(Parts.Tip tip, Parts.Core core, Parts.Handle handle) {
-        int tipInt = Iconicwands.parts.tips.indexOf(tip);
-        int coreInt = Iconicwands.parts.cores.indexOf(core);
-        int handleInt = Iconicwands.parts.handles.indexOf(handle);
-        return (tipInt & 0xFF)<< 16 | (coreInt & 0xFF) << 8 | (handleInt & 0xFF);
+        int tipInt = Iconicwands.parts.getAllTips().indexOf(tip);
+        int coreInt = Iconicwands.parts.getAllCores().indexOf(core);
+        int handleInt = Iconicwands.parts.getAllHandles().indexOf(handle);
+        int shiftedParts = (tipInt & 0xFF)<< 16 | (coreInt & 0xFF) << 8 | (handleInt & 0xFF);
+        return shiftedParts;
     }
     public static Parts.WandCluster intToParts(int shiftedParts) {
         int tipInt = shiftedParts >> 16 & 0xFF;
         int coreInt = shiftedParts >> 8 & 0xFF;
         int handleInt = shiftedParts & 0xFF;
-        return new Parts.WandCluster(Iconicwands.parts.tips.get(tipInt), Iconicwands.parts.cores.get(coreInt), Iconicwands.parts.handles.get(handleInt));
+        return new Parts.WandCluster(Iconicwands.parts.getAllTips().get(tipInt), Iconicwands.parts.getAllCores().get(coreInt), Iconicwands.parts.getAllHandles().get(handleInt));
     }
     public static int getPartIntCombo(ItemStack stack){
         return stack.getOrCreateNbt().getInt("CustomModelData");
@@ -156,7 +157,7 @@ public class IconicWand extends RangedWeaponItem{
 
             int k;
             int j;
-            int projectileCount = wandInt == Iconicwands.Presets.boomstick.getWandInt()?6:1;
+            int projectileCount = wandInt == Iconicwands.Presets.boomstick.getWandInt()?6:wandInt == Iconicwands.Presets.kynan.getWandInt()?world.random.nextInt(3)+1: 1;
             for (int i = 0; i < projectileCount; i++) {
                 MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
                 persistentProjectileEntity.setOwner(playerEntity);
@@ -176,11 +177,13 @@ public class IconicWand extends RangedWeaponItem{
                         persistentProjectileEntity.setDoesWarp(true);
                     }
                 } else if (wandInt == (Iconicwands.Presets.food.getWandInt())) {
-                    playerEntity.eatFood(world, new ItemStack(Items.APPLE));
+                    playerEntity.eatFood(world, new ItemStack(Items.POTATO));
                 } else if (wandInt == (Iconicwands.Presets.forest.getWandInt())) {
                     world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                } else if (wandInt == (Iconicwands.Presets.magus.getWandInt())) {
+                } else if (wandInt == (Iconicwands.Presets.magus.getWandInt()) || (wandInt == Iconicwands.Presets.kynan.getWandInt() && crit)) {
                     persistentProjectileEntity.setDoesExplode(true);
+                } else if (wandInt == (Iconicwands.Presets.scarlet.getWandInt()) && crit) {
+                    persistentProjectileEntity.setDoesLightning(true);
                 }
                     persistentProjectileEntity.setCritical(crit);
 
@@ -256,8 +259,11 @@ public class IconicWand extends RangedWeaponItem{
         if (wand==(Iconicwands.Presets.magus.getWandInt())){
             return new TranslatableText("item.iconicwands.magus_wand");
         } else
-        if (wand==(Iconicwands.Presets.rapid.getWandInt())){
-            return new TranslatableText("item.iconicwands.rapid_wand");
+        if (wand==(Iconicwands.Presets.kynan.getWandInt())){
+            return new TranslatableText("item.iconicwands.kynan");
+        } else
+        if (wand==(Iconicwands.Presets.scarlet.getWandInt())){
+            return new TranslatableText("item.iconicwands.scarlet");
         } else
         if (wand==(Iconicwands.Presets.boomstick.getWandInt())){
             return new TranslatableText("item.iconicwands.boomstick_wand");

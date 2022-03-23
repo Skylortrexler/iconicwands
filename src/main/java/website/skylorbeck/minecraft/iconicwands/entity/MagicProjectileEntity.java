@@ -5,6 +5,7 @@ import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -18,10 +19,12 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
@@ -42,6 +45,7 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
     private boolean doesBurn = false;
     private boolean doesWarp = false;
     private boolean doesExplode = false;
+    private boolean doesLightning = false;
     public MagicProjectileEntity(EntityType<? extends MagicProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -180,9 +184,14 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         } else if (this.doesWarp){
             if(this.getOwner()!=null)
             this.getOwner().teleport(blockPos.getX()+0.5,blockPos.getY()+1.5,blockPos.getZ()+0.5);
-        }
-        if (this.doesExplode) {
+        } else if (this.doesExplode) {
             world.createExplosion(this, blockPos.getX()+0.5, blockPos.getY()+1, blockPos.getZ()+0.5, 1.0f, Explosion.DestructionType.NONE);
+        } else if (this.doesLightning) {
+            LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.world);
+            lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
+            if (!world.isClient)
+            lightningEntity.setChanneler((ServerPlayerEntity) this.getOwner());
+            this.world.spawnEntity(lightningEntity);
         }
         super.onBlockHit(blockHitResult);
     }
@@ -239,5 +248,13 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
 
     public void setDoesExplode(boolean doesExplode) {
         this.doesExplode = doesExplode;
+    }
+
+    public boolean isDoesLightning() {
+        return doesLightning;
+    }
+
+    public void setDoesLightning(boolean doesLightning) {
+        this.doesLightning = doesLightning;
     }
 }

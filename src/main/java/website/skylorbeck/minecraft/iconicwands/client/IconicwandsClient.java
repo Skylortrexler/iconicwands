@@ -96,9 +96,9 @@ public class IconicwandsClient implements ClientModInitializer {
                         e.printStackTrace();
                     }
 
-                    for (int tip = 0; tip < Iconicwands.parts.tips.size(); tip++) {
-                        for (int core = 0; core < Iconicwands.parts.cores.size(); core++) {
-                            for (int handle = 0; handle < Iconicwands.parts.handles.size(); handle++) {
+                    for (int tip = 0; tip < Iconicwands.parts.getAllTips().size(); tip++) {
+                        for (int core = 0; core < Iconicwands.parts.getAllCores().size(); core++) {
+                            for (int handle = 0; handle < Iconicwands.parts.getAllHandles().size(); handle++) {
                                 int index = (tip & 0xFF) << 16 | (core & 0xFF) << 8 | (handle & 0xFF);
                                 try {
                                     Files.write(Paths.get(path + "/wand_model_" + index + ".json"), createSubRecipes(tip, core, handle).toString().getBytes());
@@ -112,15 +112,14 @@ public class IconicwandsClient implements ClientModInitializer {
                 //endregion
                 //region textures
                 path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/textures/item").get().toString();
-                for (int i = 0; i < Iconicwands.parts.cores.size(); i++) {
-                    Parts.Core part = Iconicwands.parts.cores.get(i);
+                for (int i = 0; i < Iconicwands.parts.getAllCores().size(); i++) {
+                    Parts.Core part = Iconicwands.parts.getAllCores().get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     String partPath = path+"/core/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
                     if (Files.exists(Paths.get(partPath))) {
                         continue;
                     }
-                    
                     try {
                         sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
                         writeImage(manager, partPath, sourceItem, sourceTexture,"core");
@@ -132,8 +131,8 @@ public class IconicwandsClient implements ClientModInitializer {
                         }
                     }
                 }
-                for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
-                    Parts.Tip part = Iconicwands.parts.tips.get(i);
+                for (int i = 0; i < Iconicwands.parts.getAllTips().size(); i++) {
+                    Parts.Tip part = Iconicwands.parts.getAllTips().get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     String partPath = path+"/tip/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
@@ -152,8 +151,8 @@ public class IconicwandsClient implements ClientModInitializer {
                     }
                 }
 
-                for (int i = 0; i < Iconicwands.parts.handles.size(); i++) {
-                    Parts.Handle part = Iconicwands.parts.handles.get(i);
+                for (int i = 0; i < Iconicwands.parts.getAllHandles().size(); i++) {
+                    Parts.Handle part = Iconicwands.parts.getAllHandles().get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     String partPath = path+"/handle/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
@@ -194,9 +193,9 @@ public class IconicwandsClient implements ClientModInitializer {
         textures.addProperty("layer2", "iconicwands:item/wand");
         json.add("textures", textures);
         JsonArray overrides = new JsonArray();
-        for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
-            for (int j = 0; j <Iconicwands.parts.cores.size() ; j++) {
-                for (int k = 0; k <Iconicwands.parts.handles.size() ; k++) {
+        for (int i = 0; i < Iconicwands.parts.getAllTips().size(); i++) {
+            for (int j = 0; j <Iconicwands.parts.getAllCores().size() ; j++) {
+                for (int k = 0; k <Iconicwands.parts.getAllHandles().size() ; k++) {
                     int index = (i & 0xFF)<< 16 | (j & 0xFF) << 8 | (k & 0xFF);
                     JsonObject predicate = new JsonObject();
                     JsonObject custom_model = new JsonObject();
@@ -208,6 +207,42 @@ public class IconicwandsClient implements ClientModInitializer {
             }
         }
         json.add("overrides", overrides);
+        JsonObject display = new JsonObject();
+        JsonObject thirdperson = new JsonObject();
+        JsonArray rotation = new JsonArray();
+        JsonArray translation = new JsonArray();
+        JsonArray scale = new JsonArray();
+        scale.add(0.5);
+        scale.add(0.5);
+        scale.add(0.5);
+        rotation.add(0);
+        rotation.add(-90);
+        rotation.add(45);
+        thirdperson.add("rotation",rotation);
+        thirdperson.add("scale",scale);
+        display.add("thirdperson_righthand",thirdperson);
+        thirdperson = new JsonObject();
+        rotation = new JsonArray();
+        rotation.add(0);
+        rotation.add(90);
+        rotation.add(-45);
+        thirdperson.add("rotation",rotation);
+        thirdperson.add("scale",scale);
+        display.add("thirdperson_lefthand",thirdperson);
+        thirdperson = new JsonObject();
+        rotation = new JsonArray();
+        translation = new JsonArray();
+        rotation.add(0);
+        rotation.add(90);
+        rotation.add(-25);
+        thirdperson.add("rotation",rotation);
+        translation.add(0);
+        translation.add(5);
+        translation.add(3);
+        thirdperson.add("translation",translation);
+        thirdperson.add("scale",scale);
+        display.add("firstperson_lefthand",thirdperson);
+        json.add("display",display);
         return json;
     }
 
@@ -215,9 +250,9 @@ public class IconicwandsClient implements ClientModInitializer {
         JsonObject json = new JsonObject();
         JsonObject textures = new JsonObject();
         json.addProperty("parent", "iconicwands:item/iconicwand_item");
-        textures.addProperty("layer1","iconicwands:item/tip/"+ Iconicwands.parts.tips.get(tipInt).getIdentifier().substring(10));
-        textures.addProperty("layer0","iconicwands:item/core/"+ Iconicwands.parts.cores.get(coreInt).getIdentifier().substring(10));
-        textures.addProperty("layer2","iconicwands:item/handle/"+ Iconicwands.parts.handles.get(handleInt).getIdentifier().substring(10));
+        textures.addProperty("layer1","iconicwands:item/tip/"+ Iconicwands.parts.getAllTips().get(tipInt).getIdentifier().substring(10));
+        textures.addProperty("layer0","iconicwands:item/core/"+ Iconicwands.parts.getAllCores().get(coreInt).getIdentifier().substring(10));
+        textures.addProperty("layer2","iconicwands:item/handle/"+ Iconicwands.parts.getAllHandles().get(handleInt).getIdentifier().substring(10));
         json.add("textures", textures);
         return json;
     }

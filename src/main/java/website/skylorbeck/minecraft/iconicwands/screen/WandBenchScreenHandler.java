@@ -59,15 +59,15 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
                     public boolean canInsert(ItemStack stack) {
                         AtomicBoolean bl = new AtomicBoolean(false);
                         switch (finalI) {
-                            case 0 -> Iconicwands.parts.tips.forEach(tip -> {
+                            case 0 -> Iconicwands.parts.getAllTips().forEach(tip -> {
                                 if (tip.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
                                     bl.set(true);
                             });
-                            case 1 -> Iconicwands.parts.cores.forEach(core -> {
+                            case 1 -> Iconicwands.parts.getAllCores().forEach(core -> {
                                 if (core.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
                                     bl.set(true);
                             });
-                            case 2 -> Iconicwands.parts.handles.forEach(handle -> {
+                            case 2 -> Iconicwands.parts.getAllHandles().forEach(handle -> {
                                 if (handle.getIdentifier().equals(Registry.ITEM.getId(stack.getItem()).toString()))
                                     bl.set(true);
                             });
@@ -117,21 +117,21 @@ extends AbstractRecipeScreenHandler<CraftingInventory> {
             Identifier identifier = Registry.ITEM.getId(ingredient.getItem());
             switch (i) {
                 case 1:
-                    for (Parts.Tip tip : Iconicwands.parts.tips) {
+                    for (Parts.Tip tip : Iconicwands.parts.getAllTips()) {
                         if (tip.getIdentifier().equals(identifier.toString())) {
                             tipResult = tip;
                         }
                     }
                     break;
                 case 2:
-                    for (Parts.Core core : Iconicwands.parts.cores) {
+                    for (Parts.Core core : Iconicwands.parts.getAllCores()) {
                         if (core.getIdentifier().equals(identifier.toString())) {
                             coreResult = core;
                         }
                     }
                     break;
                 case 3:
-                    for (Parts.Handle handle : Iconicwands.parts.handles) {
+                    for (Parts.Handle handle : Iconicwands.parts.getAllHandles()) {
                         if (handle.getIdentifier().equals(identifier.toString())) {
                             handleResult = handle;
                         }

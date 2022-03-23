@@ -1,6 +1,7 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
 import net.minecraft.text.TranslatableText;
+import org.checkerframework.checker.units.qual.A;
 import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
@@ -10,19 +11,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Parts {
-    public ArrayList<Tip> tips = new ArrayList<>();
-    public ArrayList<Core> cores = new ArrayList<>();
-    public ArrayList<Handle> handles = new ArrayList<>();
-    public void addTips(Tip... tip) {
-        tips.addAll(Arrays.asList(tip));
+    public ArrayList<ArrayList<Tip>> tips = new ArrayList<>();
+    public ArrayList<ArrayList<Core>> cores = new ArrayList<>();
+    public ArrayList<ArrayList<Handle>> handles = new ArrayList<>();
+    public void addTips(int tier,Tip... tip) {
+        if (tips.size()<=tier){
+            tips.add(new ArrayList<>());
+        }
+        tips.get(tier).addAll(Arrays.asList(tip));
     }
-    public void addCores(Core... core) {
-        cores.addAll(Arrays.asList(core));
+    public void addCores(int tier,Core... core) {
+        if (cores.size()<=tier){
+            cores.add(new ArrayList<>());
+        }
+        cores.get(tier).addAll(Arrays.asList(core));
     }
-    public void addHandles(Handle... handle) {
-        handles.addAll(Arrays.asList(handle));
+    public void addHandles(int tier,Handle... handle) {
+        if (handles.size()<=tier){
+            handles.add(new ArrayList<>());
+        }
+        handles.get(tier).addAll(Arrays.asList(handle));
     }
 
+    public ArrayList<Tip> getAllTips(){
+        ArrayList<Tip> allTips = new ArrayList<>();
+        for (ArrayList<Tip> tip : this.tips) {
+            allTips.addAll(tip);
+        }
+        return allTips;
+    }
+    public ArrayList<Core> getAllCores(){
+        ArrayList<Core> allCores = new ArrayList<>();
+        for (ArrayList<Core> core : this.cores) {
+            allCores.addAll(core);
+        }
+        return allCores;
+    }
+    public ArrayList<Handle> getAllHandles(){
+        ArrayList<Handle> allHandles = new ArrayList<>();
+        for (ArrayList<Handle> handle : this.handles) {
+            allHandles.addAll(handle);
+        }
+        return allHandles;
+    }
+    
     public static class Tip {
         public Tip(String identifier, int speed, int rechargeAmount, int manaCost, int divergence, int criticalChance) {
             this.identifier = identifier;
