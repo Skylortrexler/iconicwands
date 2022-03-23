@@ -24,7 +24,7 @@ public class ModelLoaderMixin {
         if (!"iconicwands".equals(id.getNamespace())) return;//filter out everything that isn't from this mod
         if (id.getPath().contains("bench")||id.getPath().contains("pedestal")||id.getPath().contains("tester")||id.getPath().contains("preset")) return;//filter out bench block and pedestal block
 //        Logger.getGlobal().log(Level.SEVERE,id.toString());
-        String path = "cache/iconicwands/";
+        String path = "cache/iconicwands/models/";
         if (!Files.exists(Paths.get(path))) {
             Files.createDirectories(Paths.get(path));
         }

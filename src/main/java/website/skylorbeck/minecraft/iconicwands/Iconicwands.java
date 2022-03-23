@@ -76,6 +76,8 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Tip("minecraft:quartz",5,5,10,0,0 ),
                 new Parts.Tip("minecraft:emerald",0,5,5,0,10),
                 new Parts.Tip("minecraft:redstone_block",10,0,0,10,0),
+                new Parts.Tip("minecraft:crimson_planks",5,5,0,10,0),
+                new Parts.Tip("minecraft:warped_planks",0,0,10,0,10),
 
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
                 new Parts.Tip("minecraft:shulker_shell",10,0,0,20,0),
@@ -105,6 +107,8 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Handle("minecraft:leather",2,6,2,0),
                 new Parts.Handle("minecraft:quartz",5,0,5,0),
                 new Parts.Handle("minecraft:emerald",2,0,2,6),
+                new Parts.Handle("minecraft:crimson_planks",5,5,0,0),
+                new Parts.Handle("minecraft:warped_planks",0,0,5,5),
 
                 //t3 10/5 | 6/6/3 | 6/3/3/3
                 new Parts.Handle("minecraft:shulker_shell",3,6,6,0),
@@ -153,3 +157,4 @@ public class Iconicwands implements ModInitializer {
 
 //todo Fix REI related crash?
 //todo crafting noise
+//todo autogenerate the pngs by reading texture data?
