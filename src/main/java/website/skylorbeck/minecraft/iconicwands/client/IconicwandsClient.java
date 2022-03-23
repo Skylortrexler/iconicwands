@@ -13,6 +13,9 @@ import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
 import net.fabricmc.fabric.impl.resource.loader.ModResourcePackCreator;
 import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl;
 import net.fabricmc.fabric.mixin.resource.loader.ResourcePackManagerAccessor;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.NativeImage;
@@ -46,6 +49,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,7 +74,9 @@ public class IconicwandsClient implements ClientModInitializer {
 
             @Override
             public CompletableFuture load(ResourceManager manager, Profiler profiler, Executor executor) {
-                String path = "cache/iconicwands/parts/";
+//                String path = "cache/iconicwands/parts/";
+                String path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/textures/item").get().toString();
+
                 if (!Files.exists(Paths.get(path))) {
                     try {
                         Files.createDirectories(Paths.get(path));
@@ -79,57 +85,62 @@ public class IconicwandsClient implements ClientModInitializer {
                     }
                 }
                 for (int i = 0; i < Iconicwands.parts.cores.size(); i++) {
+                    String partPath = path+"/core/"+i+".png";
                     Parts.Core part = Iconicwands.parts.cores.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     Identifier sourceTexture =null;
-                    if (Files.exists(Paths.get(path+sourceItem.getPath()+"_core.png"))) {
+                    if (Files.exists(Paths.get(partPath))) {
                         continue;
                     }
                     
                     try {
                         sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
-                        writeImage(manager, path, sourceItem, sourceTexture,"core");
+                        writeImage(manager, partPath, sourceItem, sourceTexture,"core");
                     } catch (IOException e) {
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
-                            writeImage(manager, path, sourceItem, sourceTexture,"core");
+                            writeImage(manager, partPath, sourceItem, sourceTexture,"core");
                         } catch (IOException ignored) {
                         }
                     }
                 }
                 for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
+                    String partPath = path+"/tip/"+i+".png";
+
                     Parts.Tip part = Iconicwands.parts.tips.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     Identifier sourceTexture =null;
-                    if (Files.exists(Paths.get(path+sourceItem.getPath()+"_tip.png"))) {
+                    if (Files.exists(Paths.get(partPath))) {
                         continue;
                     }
                     try {
                         sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
-                        writeImage(manager, path, sourceItem, sourceTexture,"tip");
+                        writeImage(manager, partPath, sourceItem, sourceTexture,"tip");
                     } catch (IOException e) {
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
-                            writeImage(manager, path, sourceItem, sourceTexture,"tip");
+                            writeImage(manager, partPath, sourceItem, sourceTexture,"tip");
                         } catch (IOException ignored) {
                         }
                     }
                 }
 
                 for (int i = 0; i < Iconicwands.parts.handles.size(); i++) {
+                    String partPath = path+"/handle/"+i+".png";
+
                     Parts.Handle part = Iconicwands.parts.handles.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
                     Identifier sourceTexture =null;
-                    if (Files.exists(Paths.get(path+sourceItem.getPath()+"_handle.png"))) {
+                    if (Files.exists(Paths.get(partPath))) {
                         continue;
                     }
                     try {
                         sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
-                        writeImage(manager, path, sourceItem, sourceTexture,"handle");
+                        writeImage(manager, partPath, sourceItem, sourceTexture,"handle");
                     } catch (IOException e) {
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
-                            writeImage(manager, path, sourceItem, sourceTexture,"handle");
+                            writeImage(manager, partPath, sourceItem, sourceTexture,"handle");
                         } catch (IOException ignored) {
                         }
                     }
@@ -140,8 +151,6 @@ public class IconicwandsClient implements ClientModInitializer {
 
             @Override
             public CompletableFuture<Void> apply(Object data, ResourceManager manager, Profiler profiler, Executor executor) {
-//                ModResourcePackCreator.CLIENT_RESOURCE_PACK_PROVIDER.register(new );
-                //todo inject textures
                 return CompletableFuture.completedFuture(null);
             }
         });
@@ -185,6 +194,7 @@ public class IconicwandsClient implements ClientModInitializer {
                 }
             }
         }
-        ImageIO.write(template,"png",new File(path+sourceItem.getPath()+"_"+part+".png"));
+//        ImageIO.write(template,"png",new File(path+sourceItem.getPath()+"_"+part+".png"));
+        ImageIO.write(template,"png",new File(path));
     }
 }

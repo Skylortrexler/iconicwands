@@ -30,12 +30,12 @@ public class ModelLoaderMixin {
         }
         String modelJson = "";
         if ("item/iconicwand_item".equals(id.getPath())) {
-            if (Files.exists(Paths.get(path+"wand_model.json"))) {
-                modelJson = Files.readString(Paths.get(path+"wand_model.json"));
-            } else {
+//            if (Files.exists(Paths.get(path+"wand_model.json"))) {
+//                modelJson = Files.readString(Paths.get(path+"wand_model.json"));
+//            } else {
                 modelJson = createMainWandRecipe(id.toString());
-                Files.write(Paths.get(path+"wand_model.json"), modelJson.getBytes());
-            }
+                Files.write(Paths.get(path+"wand_model.json"), modelJson.getBytes());//always make the default file to ensure it's up to date
+//            }
             JsonUnbakedModel model = JsonUnbakedModel.deserialize(modelJson);
             model.id = id.toString();
             cir.setReturnValue(model);
