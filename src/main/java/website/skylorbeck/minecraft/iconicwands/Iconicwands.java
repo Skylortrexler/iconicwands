@@ -13,6 +13,30 @@ import java.io.IOException;
 
 public class Iconicwands implements ModInitializer {
     public static Parts parts = new Parts();
+    public enum Presets{
+        overworld(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(8))),
+        nether(new Parts.WandCluster(Iconicwands.parts.tips.get(12),Iconicwands.parts.cores.get(8),Iconicwands.parts.handles.get(9))),
+        end(new Parts.WandCluster(Iconicwands.parts.tips.get(18),Iconicwands.parts.cores.get(14),Iconicwands.parts.handles.get(15))),
+        food(new Parts.WandCluster(Iconicwands.parts.tips.get(8),Iconicwands.parts.cores.get(7),Iconicwands.parts.handles.get(0))),
+        forest(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
+        magus(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
+        rapid(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
+        scarlet(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
+        kynan(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
+        boomstick(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0)));
+
+        final Parts.WandCluster wand;
+        Presets(Parts.WandCluster wand){
+            this.wand = wand;
+        }
+
+        public Parts.WandCluster getWand() {
+            return wand;
+        }
+        public int getWandInt(){
+            return wand.getInt();
+        }
+    }
     static {
 
         //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
@@ -28,25 +52,25 @@ public class Iconicwands implements ModInitializer {
 
         parts.addCores(
                 //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
-                new Parts.Core("minecraft:oak_planks",6,2,0,2,0),
+                new Parts.Core("minecraft:oak_planks",6,2,0,2,0),//0
                 new Parts.Core("minecraft:spruce_planks",3,3,0,2, 2),
-                new Parts.Core("minecraft:birch_planks",2,2,6,0,0),
+                new Parts.Core("minecraft:birch_planks",2,2,6,0,0),//2
                 new Parts.Core("minecraft:jungle_planks",5,5,0,0,0),
-                new Parts.Core("minecraft:acacia_planks",2,2,0,3,3),
+                new Parts.Core("minecraft:acacia_planks",2,2,0,3,3),//4
                 new Parts.Core("minecraft:dark_oak_planks",0,0,5,0,5),
-                new Parts.Core("minecraft:bone",10,5,0,-5,0),
+                new Parts.Core("minecraft:bone",10,5,0,-5,0),//6
                 new Parts.Core("minecraft:carrot",2,2,2,2,2),
 
                 //t2 10/10 | 10/5/5 | 5/5/5/5 | 4/4/4/4/4
-                new Parts.Core("minecraft:blaze_rod",5,10,0,5,0),
+                new Parts.Core("minecraft:blaze_rod",5,10,0,5,0),//8
                 new Parts.Core("minecraft:amethyst_shard",5,5,0,5,5),
-                new Parts.Core("minecraft:bamboo",10,10,0,0,0),
+                new Parts.Core("minecraft:bamboo",10,10,0,0,0),//10
                 new Parts.Core("minecraft:crimson_planks",5,5,0,10,0),
-                new Parts.Core("minecraft:warped_planks",0,0,10,0,10),
+                new Parts.Core("minecraft:warped_planks",0,0,10,0,10),//12
 //                new Parts.Core("minecraft:copper_ingot",7,7,1,2,3),
 
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
-                new Parts.Core("minecraft:end_rod",0,0,5,5,10),
+                new Parts.Core("minecraft:end_rod",0,0,5,5,10),//14
                 new Parts.Core("minecraft:golden_carrot",6,6,6,6,6)
 
         );
@@ -58,31 +82,31 @@ public class Iconicwands implements ModInitializer {
         //crit       0.05f +0.01f
         parts.addTips(
                 //t1 5/5 | 6/2/2 | 3/3/2/2 | 2/2/2/2/2
-                new Parts.Tip("minecraft:oak_planks",3,2,0,2,3),
+                new Parts.Tip("minecraft:oak_planks",3,2,0,2,3),//0
                 new Parts.Tip("minecraft:spruce_planks",3,3,0,2, 2),
-                new Parts.Tip("minecraft:birch_planks",2,2,3,3,0),
+                new Parts.Tip("minecraft:birch_planks",2,2,3,3,0),//2
                 new Parts.Tip("minecraft:jungle_planks",2,3,2,0,3),
-                new Parts.Tip("minecraft:acacia_planks",2,2,0,3,3),
+                new Parts.Tip("minecraft:acacia_planks",2,2,0,3,3),//4
                 new Parts.Tip("minecraft:dark_oak_planks",0,2,3,2,3),
-                new Parts.Tip("minecraft:glow_berries",3,3,2,2,0),
+                new Parts.Tip("minecraft:glow_berries",3,3,2,2,0),//6
                 new Parts.Tip("minecraft:lapis_lazuli",0,0,0,0,5),
-                new Parts.Tip("minecraft:potato",0,0,5,0,0),
+                new Parts.Tip("minecraft:potato",0,0,5,0,0),//8
                 new Parts.Tip("minecraft:gold_nugget",0,5,5,0,0),
-                new Parts.Tip("minecraft:redstone",6,2,0,2,0),
+                new Parts.Tip("minecraft:redstone",6,2,0,2,0),//10
                 new Parts.Tip("minecraft:glass",2,0,2,0,6),
 
                 //t2 10/10 | 10/5/5 | 5/5/5/5 | 4/4/4/4/4
-                new Parts.Tip("minecraft:ghast_tear",5,0,5,5,5),
+                new Parts.Tip("minecraft:ghast_tear",5,0,5,5,5),//12
                 new Parts.Tip("minecraft:quartz",5,5,10,0,0 ),
-                new Parts.Tip("minecraft:emerald",0,5,5,0,10),
+                new Parts.Tip("minecraft:emerald",0,5,5,0,10),//14
                 new Parts.Tip("minecraft:redstone_block",10,0,0,10,0),
-                new Parts.Tip("minecraft:crimson_planks",5,5,0,10,0),
+                new Parts.Tip("minecraft:crimson_planks",5,5,0,10,0),//16
                 new Parts.Tip("minecraft:warped_planks",0,0,10,0,10),
 
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
-                new Parts.Tip("minecraft:shulker_shell",10,0,0,20,0),
+                new Parts.Tip("minecraft:shulker_shell",10,0,0,20,0),//18
                 new Parts.Tip("minecraft:prismarine_crystals",0,0,0,0,0),
-                new Parts.Tip("minecraft:nether_star",0,0,0,0,0)
+                new Parts.Tip("minecraft:nether_star",0,0,0,0,0)//20
         );
         // 5 points per level
         //Stat Name || Base stat || per point spent
@@ -92,27 +116,27 @@ public class Iconicwands implements ModInitializer {
         //crit     0   +0.01f
         parts.addHandles(
                 //t1 3/2 | 3/1/1 | 2/1/1/1
-                new Parts.Handle("minecraft:oak_planks",2,1,1,1),
+                new Parts.Handle("minecraft:oak_planks",2,1,1,1),//0
                 new Parts.Handle("minecraft:spruce_planks",1,2,1, 1),
-                new Parts.Handle("minecraft:birch_planks",1,1,2,1),
+                new Parts.Handle("minecraft:birch_planks",1,1,2,1),//2
                 new Parts.Handle("minecraft:jungle_planks",1,1,1,2),
-                new Parts.Handle("minecraft:acacia_planks",1,3,0,1),
+                new Parts.Handle("minecraft:acacia_planks",1,3,0,1),//4
                 new Parts.Handle("minecraft:dark_oak_planks",1,0,3,1),
-                new Parts.Handle("minecraft:kelp",0,2,3,0),
+                new Parts.Handle("minecraft:kelp",0,2,3,0),//6
                 new Parts.Handle("minecraft:glass",3,0,0,2),
 
                 //t2 5/5 | 6/2/2 | 3/3/2/2
-                new Parts.Handle("minecraft:gold_ingot",3,3,2,2),
+                new Parts.Handle("minecraft:gold_ingot",3,3,2,2),//8
                 new Parts.Handle("minecraft:iron_ingot",2,2,3,3),
-                new Parts.Handle("minecraft:leather",2,6,2,0),
+                new Parts.Handle("minecraft:leather",2,6,2,0),//10
                 new Parts.Handle("minecraft:quartz",5,0,5,0),
-                new Parts.Handle("minecraft:emerald",2,0,2,6),
+                new Parts.Handle("minecraft:emerald",2,0,2,6),//12
                 new Parts.Handle("minecraft:crimson_planks",5,5,0,0),
-                new Parts.Handle("minecraft:warped_planks",0,0,5,5),
+                new Parts.Handle("minecraft:warped_planks",0,0,5,5),//14
 
                 //t3 10/5 | 6/6/3 | 6/3/3/3
                 new Parts.Handle("minecraft:shulker_shell",3,6,6,0),
-                new Parts.Handle("minecraft:prismarine_shard",5,0,10,0)
+                new Parts.Handle("minecraft:prismarine_shard",5,0,10,0)//16
         );
     }
     @Override
@@ -128,14 +152,6 @@ public class Iconicwands implements ModInitializer {
 
         Registrar.regItem("wand_tester_",Declarar.WAND_TESTER,MODID);
         Registrar.regItem("wand_preset_tester_",Declarar.WAND_PRESET_TESTER,MODID);
-
-//        Registrar.regItem("overworld_wand_preset_",Declarar.OVERWORLD_WAND_REI,MODID);
-//        Registrar.regItem("nether_wand_preset_",Declarar.NETHER_WAND_REI,MODID);
-//        Registrar.regItem("end_wand_preset_",Declarar.END_WAND_REI,MODID);
-//        Registrar.regItem("food_wand_preset_",Declarar.FOOD_WAND_REI,MODID);
-//        Registrar.regItem("forest_wand_preset_",Declarar.FOREST_WAND_REI,MODID);
-//        Registrar.regItem("magus_wand_preset_",Declarar.MAGUS_WAND_REI,MODID);
-//        Registrar.regItem("boomstick_wand_preset_",Declarar.BOOMSTICK_WAND_REI,MODID);
 
         Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"),((syncId, inventory) -> new WandBenchScreenHandler(syncId,inventory,new SimpleInventory(4))));
 

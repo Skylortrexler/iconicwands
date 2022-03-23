@@ -156,7 +156,7 @@ public class IconicWand extends RangedWeaponItem{
 
             int k;
             int j;
-            int projectileCount = wandInt == Presets.boomstick.getWand().getInt()?6:1;
+            int projectileCount = wandInt == Iconicwands.Presets.boomstick.getWandInt()?6:1;
             for (int i = 0; i < projectileCount; i++) {
                 MagicProjectileEntity persistentProjectileEntity = new MagicProjectileEntity(world, playerEntity);
                 persistentProjectileEntity.setOwner(playerEntity);
@@ -166,20 +166,20 @@ public class IconicWand extends RangedWeaponItem{
                 persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
                 persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
 
-                if (wandInt == (Presets.overworld.getWand().getInt())) {
+                if (wandInt == (Iconicwands.Presets.overworld.getWandInt())) {
                     persistentProjectileEntity.setDoesLight(true);
-                } else if (wandInt == (Presets.nether.getWand().getInt())) {
+                } else if (wandInt == (Iconicwands.Presets.nether.getWandInt())) {
                     persistentProjectileEntity.setOnFireFor(100);
                     persistentProjectileEntity.setDoesBurn(true);
-                } else if (wandInt == (Presets.end.getWand().getInt())) {
+                } else if (wandInt == (Iconicwands.Presets.end.getWandInt())) {
                     if (playerEntity.isSneaking()) {
                         persistentProjectileEntity.setDoesWarp(true);
                     }
-                } else if (wandInt == (Presets.food.getWand().getInt())) {
+                } else if (wandInt == (Iconicwands.Presets.food.getWandInt())) {
                     playerEntity.eatFood(world, new ItemStack(Items.APPLE));
-                } else if (wandInt == (Presets.forest.getWand().getInt())) {
+                } else if (wandInt == (Iconicwands.Presets.forest.getWandInt())) {
                     world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_PARROT_AMBIENT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                } else if (wandInt == (Presets.magus.getWand().getInt())) {
+                } else if (wandInt == (Iconicwands.Presets.magus.getWandInt())) {
                     persistentProjectileEntity.setDoesExplode(true);
                 }
                     persistentProjectileEntity.setCritical(crit);
@@ -206,27 +206,6 @@ public class IconicWand extends RangedWeaponItem{
             }
         }
         super.onStoppedUsing(stack, world, playerEntity, remainingUseTicks);
-    }
-
-    public enum Presets{
-        overworld(new Parts.WandCluster(Iconicwands.parts.tips.get(0),Iconicwands.parts.cores.get(0),Iconicwands.parts.handles.get(0))),
-        nether(new Parts.WandCluster(Iconicwands.parts.tips.get(1),Iconicwands.parts.cores.get(1),Iconicwands.parts.handles.get(1))),
-        end(new Parts.WandCluster(Iconicwands.parts.tips.get(2),Iconicwands.parts.cores.get(2),Iconicwands.parts.handles.get(2))),
-        food(new Parts.WandCluster(Iconicwands.parts.tips.get(7),Iconicwands.parts.cores.get(7),Iconicwands.parts.handles.get(4))),
-        forest(new Parts.WandCluster(Iconicwands.parts.tips.get(4),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(3))),
-        magus(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(1))),
-        rapid(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
-//        scarlet(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
-//        kynan(new Parts.WandCluster(Iconicwands.parts.tips.get(3),Iconicwands.parts.cores.get(5),Iconicwands.parts.handles.get(3))),
-        boomstick(new Parts.WandCluster(Iconicwands.parts.tips.get(6),Iconicwands.parts.cores.get(6),Iconicwands.parts.handles.get(2)));
-        final Parts.WandCluster wand;
-        Presets(Parts.WandCluster wand){
-            this.wand = wand;
-        }
-
-        public Parts.WandCluster getWand() {
-            return wand;
-        }
     }
 
     @Override
@@ -259,28 +238,28 @@ public class IconicWand extends RangedWeaponItem{
     @Override
     public Text getName(ItemStack stack) {
         int wand = IconicWand.getPartIntCombo(stack);
-        if (wand==(Presets.overworld.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.overworld.getWandInt())){
             return new TranslatableText("item.iconicwands.overworld_wand");
         } else
-        if (wand==(Presets.nether.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.nether.getWandInt())){
             return new TranslatableText("item.iconicwands.nether_wand");
         } else
-        if (wand==(Presets.end.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.end.getWandInt())){
             return new TranslatableText("item.iconicwands.end_wand");
         } else
-        if (wand==(Presets.food.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.food.getWandInt())){
             return new TranslatableText("item.iconicwands.food_wand");
         } else
-        if (wand==(Presets.forest.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.forest.getWandInt())){
             return new TranslatableText("item.iconicwands.forest_wand");
         } else
-        if (wand==(Presets.magus.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.magus.getWandInt())){
             return new TranslatableText("item.iconicwands.magus_wand");
         } else
-        if (wand==(Presets.rapid.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.rapid.getWandInt())){
             return new TranslatableText("item.iconicwands.rapid_wand");
         } else
-        if (wand==(Presets.boomstick.getWand().getInt())){
+        if (wand==(Iconicwands.Presets.boomstick.getWandInt())){
             return new TranslatableText("item.iconicwands.boomstick_wand");
         } else
 

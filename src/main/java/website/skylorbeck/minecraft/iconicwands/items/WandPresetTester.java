@@ -19,12 +19,12 @@ public class WandPresetTester extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        for (IconicWand.Presets wand : IconicWand.Presets.values()) {
+        for (Iconicwands.Presets wand : Iconicwands.Presets.values()) {
             ItemStack stack = new ItemStack(Declarar.ICONIC_WAND);
             IconicWand.saveComponents(stack,wand.getWand());
             user.getInventory().offerOrDrop(stack);
         }
-        user.sendMessage(Text.of(IconicWand.Presets.values().length+" Wands have been placed in your inventory."),false);
+        user.sendMessage(Text.of(Iconicwands.Presets.values().length+" Wands have been placed in your inventory."),false);
         return super.use(world, user, hand);
     }
 }
