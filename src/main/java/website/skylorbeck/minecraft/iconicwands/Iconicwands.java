@@ -20,7 +20,7 @@ public class Iconicwands implements ModInitializer {
         food(new Parts.WandCluster(Iconicwands.parts.tips.get(0).get(8),Iconicwands.parts.cores.get(0).get(7),Iconicwands.parts.handles.get(0).get(6))),
         forest(new Parts.WandCluster(Iconicwands.parts.tips.get(0).get(3),Iconicwands.parts.cores.get(1).get(2),Iconicwands.parts.handles.get(1).get(4))),
         magus(new Parts.WandCluster(Iconicwands.parts.tips.get(1).get(1),Iconicwands.parts.cores.get(1).get(1),Iconicwands.parts.handles.get(1).get(1))),
-        scarlet(new Parts.WandCluster(Iconicwands.parts.tips.get(0).get(11),Iconicwands.parts.cores.get(2).get(1),Iconicwands.parts.handles.get(1).get(2))),
+        scarlet(new Parts.WandCluster(Iconicwands.parts.tips.get(0).get(11),Iconicwands.parts.cores.get(1).get(5),Iconicwands.parts.handles.get(1).get(2))),
         kynan(new Parts.WandCluster(Iconicwands.parts.tips.get(0).get(9),Iconicwands.parts.cores.get(1).get(3),Iconicwands.parts.handles.get(1).get(6))),
         boomstick(new Parts.WandCluster(Iconicwands.parts.tips.get(1).get(3),Iconicwands.parts.cores.get(1).get(2),Iconicwands.parts.handles.get(2).get(0)));
 
@@ -76,9 +76,11 @@ public class Iconicwands implements ModInitializer {
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
                 new Parts.Tip("minecraft:shulker_shell", 10, 0, 0, 20, 0),
                 new Parts.Tip("minecraft:prismarine_crystals", 0, 0, 0, 0, 0),//1
-                new Parts.Tip("minecraft:nether_star", 0, 0, 0, 0, 0)
+                new Parts.Tip("minecraft:nether_star", 0, 0, 0, 0, 0),
+                new Parts.Tip("minecraft:netherite_ingot", 10, 0, 0, 10, 10)//3
+
         );
-        
+
         //Stat Name || Base stat || per point spent
         //rate      10 -1
         //delay     10 -1
@@ -102,12 +104,13 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Core("minecraft:amethyst_shard", 5, 5, 0, 5, 5),//1
                 new Parts.Core("minecraft:bamboo", 10, 10, 0, 0, 0),
                 new Parts.Core("minecraft:crimson_planks", 5, 5, 0, 10, 0),//3
-                new Parts.Core("minecraft:warped_planks", 0, 0, 10, 0, 10)
+                new Parts.Core("minecraft:warped_planks", 0, 0, 10, 0, 10),
+                new Parts.Core("minecraft:golden_carrot", 4, 4, 4, 4, 4)//5
         );
         parts.addCores(2,
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
                 new Parts.Core("minecraft:end_rod", 0, 0, 5, 5, 10),
-                new Parts.Core("minecraft:golden_carrot", 6, 6, 6, 6, 6)//1
+                new Parts.Core("minecraft:netherite_ingot", 10, 10, 0, 5, 5)//1
         );
 
         // 5 points per level
@@ -140,7 +143,9 @@ public class Iconicwands implements ModInitializer {
         parts.addHandles(2,
                 //t3 10/5 | 6/6/3 | 6/3/3/3
                 new Parts.Handle("minecraft:shulker_shell", 3, 6, 6, 0),
-                new Parts.Handle("minecraft:prismarine_shard", 5, 0, 10, 0)//1
+                new Parts.Handle("minecraft:prismarine_shard", 5, 0, 10, 0),//1
+                new Parts.Handle("minecraft:netherite_ingot", 10, 0, 5, 0)
+
         );
     }
     @Override
@@ -176,4 +181,3 @@ public class Iconicwands implements ModInitializer {
 }
 
 //todo Fix REI related crash?
-//todo redo iconics

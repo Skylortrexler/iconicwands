@@ -166,7 +166,7 @@ public class IconicWand extends RangedWeaponItem{
                 persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, wand.getTip().getSpeed(), wand.getTip().getDivergence()*2);
                 persistentProjectileEntity.setColor(Color.ofRGB(wand.getTip().getRed(), wand.getCore().getGreen(), wand.getHandle().getBlue()).getColor());
                 persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
-
+                persistentProjectileEntity.setDamage(wand.getHandle().getDamage());
                 if (wandInt == (Iconicwands.Presets.overworld.getWandInt())) {
                     persistentProjectileEntity.setDoesLight(true);
                 } else if (wandInt == (Iconicwands.Presets.nether.getWandInt())) {
@@ -260,10 +260,10 @@ public class IconicWand extends RangedWeaponItem{
             return new TranslatableText("item.iconicwands.magus_wand");
         } else
         if (wand==(Iconicwands.Presets.kynan.getWandInt())){
-            return new TranslatableText("item.iconicwands.kynan");
+            return new TranslatableText("item.iconicwands.kynan_wand");
         } else
         if (wand==(Iconicwands.Presets.scarlet.getWandInt())){
-            return new TranslatableText("item.iconicwands.scarlet");
+            return new TranslatableText("item.iconicwands.scarlet_wand");
         } else
         if (wand==(Iconicwands.Presets.boomstick.getWandInt())){
             return new TranslatableText("item.iconicwands.boomstick_wand");
