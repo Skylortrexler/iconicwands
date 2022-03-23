@@ -1,5 +1,6 @@
 package website.skylorbeck.minecraft.iconicwands.client;
 
+import com.google.gson.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -74,20 +75,48 @@ public class IconicwandsClient implements ClientModInitializer {
 
             @Override
             public CompletableFuture load(ResourceManager manager, Profiler profiler, Executor executor) {
-//                String path = "cache/iconicwands/parts/";
-                String path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/textures/item").get().toString();
-
-                if (!Files.exists(Paths.get(path))) {
+                //region models
+                String path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/models/item").get().toString();
+                JsonObject mainModel = createMainWandRecipe();
+                boolean cached = false;
+                if (Files.exists(Paths.get(path+"/iconicwand_item.json"))){
                     try {
-                        Files.createDirectories(Paths.get(path));
+                        JsonObject json = JsonParser.parseString(Files.readString(Paths.get(path+"/iconicwand_item.json"))).getAsJsonObject();
+                        if (mainModel.equals(json)){
+                            cached = true;
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
+                if (!cached) {
+                    try {
+                        Files.write(Paths.get(path + "/iconicwand_item.json"), mainModel.toString().getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int tip = 0; tip < Iconicwands.parts.tips.size(); tip++) {
+                        for (int core = 0; core < Iconicwands.parts.cores.size(); core++) {
+                            for (int handle = 0; handle < Iconicwands.parts.handles.size(); handle++) {
+                                int index = (tip & 0xFF) << 16 | (core & 0xFF) << 8 | (handle & 0xFF);
+                                try {
+                                    Files.write(Paths.get(path + "/wand_model_" + index + ".json"), createSubRecipes(tip, core, handle).toString().getBytes());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }
+                //endregion
+
+                //region textures
+                path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/textures/item").get().toString();
                 for (int i = 0; i < Iconicwands.parts.cores.size(); i++) {
-                    String partPath = path+"/core/"+i+".png";
                     Parts.Core part = Iconicwands.parts.cores.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
+                    String partPath = path+"/core/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
                     if (Files.exists(Paths.get(partPath))) {
                         continue;
@@ -105,10 +134,9 @@ public class IconicwandsClient implements ClientModInitializer {
                     }
                 }
                 for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
-                    String partPath = path+"/tip/"+i+".png";
-
                     Parts.Tip part = Iconicwands.parts.tips.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
+                    String partPath = path+"/tip/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
                     if (Files.exists(Paths.get(partPath))) {
                         continue;
@@ -126,10 +154,9 @@ public class IconicwandsClient implements ClientModInitializer {
                 }
 
                 for (int i = 0; i < Iconicwands.parts.handles.size(); i++) {
-                    String partPath = path+"/handle/"+i+".png";
-
                     Parts.Handle part = Iconicwands.parts.handles.get(i);
                     Identifier sourceItem = new Identifier(part.getIdentifier());
+                    String partPath = path+"/handle/"+sourceItem.getPath()+".png";
                     Identifier sourceTexture =null;
                     if (Files.exists(Paths.get(partPath))) {
                         continue;
@@ -145,7 +172,7 @@ public class IconicwandsClient implements ClientModInitializer {
                         }
                     }
                 }
-
+                //endregion
                 return CompletableFuture.completedFuture(null);
             }
 
@@ -154,6 +181,43 @@ public class IconicwandsClient implements ClientModInitializer {
                 return CompletableFuture.completedFuture(null);
             }
         });
+    }
+
+    private static JsonObject createMainWandRecipe() {
+        JsonObject json = new JsonObject();
+        JsonObject textures = new JsonObject();
+        json.addProperty("parent", "item/generated");
+        textures.addProperty("layer0", "iconicwands:item/wand");
+        textures.addProperty("layer1", "iconicwands:item/wand");
+        textures.addProperty("layer2", "iconicwands:item/wand");
+        json.add("textures", textures);
+        JsonArray overrides = new JsonArray();
+        for (int i = 0; i < Iconicwands.parts.tips.size(); i++) {
+            for (int j = 0; j <Iconicwands.parts.cores.size() ; j++) {
+                for (int k = 0; k <Iconicwands.parts.handles.size() ; k++) {
+                    int index = (i & 0xFF)<< 16 | (j & 0xFF) << 8 | (k & 0xFF);
+                    JsonObject predicate = new JsonObject();
+                    JsonObject custom_model = new JsonObject();
+                    custom_model.addProperty("custom_model_data", index);
+                    predicate.add("predicate", custom_model);
+                    predicate.addProperty("model", "iconicwands:item/wand_model_"+index);
+                    overrides.add(predicate);
+                }
+            }
+        }
+        json.add("overrides", overrides);
+        return json;
+    }
+
+    private static JsonObject createSubRecipes(int tipInt,int coreInt,int handleInt) {
+        JsonObject json = new JsonObject();
+        JsonObject textures = new JsonObject();
+        json.addProperty("parent", "iconicwands:item/iconicwand_item");
+        textures.addProperty("layer1","iconicwands:item/tip/"+ Iconicwands.parts.tips.get(tipInt).getIdentifier().substring(10));
+        textures.addProperty("layer0","iconicwands:item/core/"+ Iconicwands.parts.cores.get(coreInt).getIdentifier().substring(10));
+        textures.addProperty("layer2","iconicwands:item/handle/"+ Iconicwands.parts.handles.get(handleInt).getIdentifier().substring(10));
+        json.add("textures", textures);
+        return json;
     }
 
     private void writeImage(ResourceManager manager, String path, Identifier sourceItem, Identifier sourceTexture,String part) throws IOException {
