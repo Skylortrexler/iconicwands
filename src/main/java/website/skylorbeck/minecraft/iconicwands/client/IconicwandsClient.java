@@ -110,7 +110,6 @@ public class IconicwandsClient implements ClientModInitializer {
                     }
                 }
                 //endregion
-
                 //region textures
                 path = FabricLoader.getInstance().getModContainer("iconicwands").get().findPath("assets/iconicwands/textures/item").get().toString();
                 for (int i = 0; i < Iconicwands.parts.cores.size(); i++) {
@@ -172,6 +171,9 @@ public class IconicwandsClient implements ClientModInitializer {
                         }
                     }
                 }
+                //endregion
+                //region patchouli
+                //todo
                 //endregion
                 return CompletableFuture.completedFuture(null);
             }

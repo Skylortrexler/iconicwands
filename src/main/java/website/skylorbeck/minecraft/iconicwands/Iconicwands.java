@@ -156,7 +156,4 @@ public class Iconicwands implements ModInitializer {
 }
 
 //todo Fix REI related crash?
-//todo crafting noise
-//todo move model generation to reload listener
-//todo make texture generation check to see if it has changed somehow?
-//todo more iconics
+//todo redo iconics

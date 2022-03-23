@@ -11,6 +11,8 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
 
 public class WandCraftingResultSlot
@@ -53,6 +55,7 @@ extends Slot {
     protected void onCrafted(ItemStack stack) {
         if (this.amount > 0) {
             stack.onCraft(this.player.world, this.player, this.amount);
+            this.player.world.playSoundFromEntity(null,player, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS,0.5f,0.5f+player.world.random.nextFloat());
         }
         if (this.inventory instanceof RecipeUnlocker) {
             ((RecipeUnlocker)((Object)this.inventory)).unlockLastRecipe(this.player);
