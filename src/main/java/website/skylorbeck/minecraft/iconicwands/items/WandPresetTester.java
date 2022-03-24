@@ -6,11 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
-import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntity;
 
 public class WandPresetTester extends Item {
     public WandPresetTester(Settings settings) {

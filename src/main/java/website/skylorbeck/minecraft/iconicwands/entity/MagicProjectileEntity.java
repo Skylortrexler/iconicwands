@@ -2,7 +2,6 @@ package website.skylorbeck.minecraft.iconicwands.entity;
 
 import com.google.common.collect.Sets;
 import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -30,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 

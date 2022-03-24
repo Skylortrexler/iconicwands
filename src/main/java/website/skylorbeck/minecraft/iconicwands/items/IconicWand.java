@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -25,7 +24,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
@@ -35,8 +33,6 @@ import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class IconicWand extends RangedWeaponItem{

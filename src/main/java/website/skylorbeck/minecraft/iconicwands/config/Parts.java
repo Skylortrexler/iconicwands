@@ -1,14 +1,9 @@
 package website.skylorbeck.minecraft.iconicwands.config;
 
-import net.minecraft.text.TranslatableText;
-import org.checkerframework.checker.units.qual.A;
-import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Parts {
     public ArrayList<ArrayList<Tip>> tips = new ArrayList<>();

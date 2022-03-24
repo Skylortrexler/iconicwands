@@ -1,36 +1,25 @@
 package website.skylorbeck.minecraft.iconicwands.client;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
 import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
 import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
-import net.fabricmc.fabric.impl.resource.loader.ModResourcePackCreator;
 import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl;
-import net.fabricmc.fabric.mixin.resource.loader.ResourcePackManagerAccessor;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.item.BlockItem;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourcePackManager;
-import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Nullable;
-import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
@@ -40,6 +29,7 @@ import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntityRendere
 import website.skylorbeck.minecraft.iconicwands.items.WandTooltipComponent;
 import website.skylorbeck.minecraft.iconicwands.items.WandTooltipData;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreen;
+import website.skylorbeck.minecraft.skylorlib.Color;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -47,12 +37,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Environment(EnvType.CLIENT)
 public class IconicwandsClient implements ClientModInitializer {
@@ -291,7 +280,7 @@ public class IconicwandsClient implements ClientModInitializer {
                 Color color = Color.ofTransparent(template.getRGB(x,y));
                 if (color.getAlpha()!=0){
                     Color newColor = map.get(color);
-                    template.setRGB(x,y,Color.ofRGBA(newColor.getBlue(),newColor.getGreen(),newColor.getRed(),newColor.getAlpha()).getColor());
+                    template.setRGB(x,y, Color.ofRGBA(newColor.getBlue(),newColor.getGreen(),newColor.getRed(),newColor.getAlpha()).getColor());
                 }
             }
         }

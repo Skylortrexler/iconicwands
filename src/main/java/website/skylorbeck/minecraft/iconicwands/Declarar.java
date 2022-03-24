@@ -12,24 +12,21 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.StackReference;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
-import net.minecraft.util.ClickType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import vazkii.patchouli.api.PatchouliAPI;
+import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandPedestal;
 import website.skylorbeck.minecraft.iconicwands.blocks.WeakLightBlock;
-import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
@@ -88,48 +85,13 @@ public class Declarar {
     public static Item WAND_TESTER = new WandTester(new Item.Settings().group(ICONIC_WAND_GROUP)){
         @Override
         public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add(Text.of("NOT SAFE FOR USE IN SURVIVAL WORLDS"));
+            tooltip.add(Text.of("THIS WILL PROBABLY DESTROY YOUR WORLD"));
+            tooltip.add(Text.of("THIS WILL PROBABLY DESTROY YOUR WORLD"));
+            tooltip.add(Text.of("THIS WILL PROBABLY DESTROY YOUR WORLD"));
             super.appendTooltip(stack, world, tooltip, context);
         }
     };
     public static Item WAND_PRESET_TESTER = new WandPresetTester(new Item.Settings().group(ICONIC_WAND_GROUP));
 
-//    public static Item OVERWORLD_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//
-//    };
-//    public static Item NETHER_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//
-//    };
-//    public static Item END_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//    };
-//    public static Item FOOD_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//    };
-//    public static Item FOREST_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//    };
-//    public static Item MAGUS_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//    };
-//    public static Item BOOMSTICK_WAND_REI = new IconicWand(new FabricItemSettings().group(ICONIC_WAND_GROUP).rarity(Rarity.EPIC).maxCount(1).maxDamage(1024).customDamage((stack, amount, entity, breakCallback) -> {
-//        Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-//        return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
-//    })) {
-//    };
     public static ScreenHandlerType<WandBenchScreenHandler> WANDING;
 }

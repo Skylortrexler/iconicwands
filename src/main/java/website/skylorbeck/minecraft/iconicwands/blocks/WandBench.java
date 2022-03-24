@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.entity.WandBenchEntity;
-import website.skylorbeck.minecraft.iconicwands.entity.WandPedestalEntity;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 
 import java.util.stream.Stream;
