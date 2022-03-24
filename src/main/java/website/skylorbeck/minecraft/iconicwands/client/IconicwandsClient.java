@@ -8,15 +8,25 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
+import net.fabricmc.fabric.impl.client.particle.FabricSpriteProviderImpl;
 import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
 import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
+import net.fabricmc.fabric.impl.client.texture.FabricSprite;
+import net.fabricmc.fabric.impl.resource.loader.ModNioResourcePack;
 import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.NativeImage;
+import net.minecraft.client.texture.NativeImageBackedTexture;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.texture.TextureManager;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
@@ -30,18 +40,25 @@ import website.skylorbeck.minecraft.iconicwands.items.WandTooltipComponent;
 import website.skylorbeck.minecraft.iconicwands.items.WandTooltipData;
 import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreen;
 import website.skylorbeck.minecraft.skylorlib.Color;
+import website.skylorbeck.minecraft.skylorlib.SkylorLib;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static website.skylorbeck.minecraft.skylorlib.SkylorLib.Skylogger;
 
 @Environment(EnvType.CLIENT)
 public class IconicwandsClient implements ClientModInitializer {
@@ -274,7 +291,6 @@ public class IconicwandsClient implements ClientModInitializer {
         for (int i = 0; i < greys.size(); i++) {
             map.put(greys.get(i),colors.get(i));
         }
-
         for (int x = 0; x < template.getWidth(); x++) {
             for (int y = 0; y < template.getHeight(); y++) {
                 Color color = Color.ofTransparent(template.getRGB(x,y));
@@ -284,7 +300,6 @@ public class IconicwandsClient implements ClientModInitializer {
                 }
             }
         }
-//        ImageIO.write(template,"png",new File(path+sourceItem.getPath()+"_"+part+".png"));
         ImageIO.write(template,"png",new File(path));
     }
 }
