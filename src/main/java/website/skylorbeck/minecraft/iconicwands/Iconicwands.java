@@ -163,12 +163,7 @@ public class Iconicwands implements ModInitializer {
         Registrar.regItem("wand_preset_tester_",Declarar.WAND_PRESET_TESTER,MODID);
 
         Declarar.WANDING = ScreenHandlerRegistry.registerSimple(Iconicwands.getId("wand_crafting"),((syncId, inventory) -> new WandBenchScreenHandler(syncId,inventory,new SimpleInventory(4))));
-
-        try {
-            parts = ConfigFileHandler.initConfigFile("iconic_wands.json",parts);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        parts = ConfigFileHandler.initConfigFile("iconic_wands.json",parts);
     }
 
     public static String MODID = "iconicwands";

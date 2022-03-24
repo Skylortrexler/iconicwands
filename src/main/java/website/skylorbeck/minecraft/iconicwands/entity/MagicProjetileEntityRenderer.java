@@ -11,8 +11,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
-import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
+import website.skylorbeck.minecraft.skylorlib.Color;
 
 public class MagicProjetileEntityRenderer
         extends EntityRenderer<MagicProjectileEntity> {

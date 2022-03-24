@@ -25,10 +25,10 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import website.skylorbeck.minecraft.iconicwands.Color;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
 import website.skylorbeck.minecraft.iconicwands.entity.MagicProjectileEntity;
+import website.skylorbeck.minecraft.skylorlib.Color;
 
 import java.util.List;
 import java.util.Optional;
