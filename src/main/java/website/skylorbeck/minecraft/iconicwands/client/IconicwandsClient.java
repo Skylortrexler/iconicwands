@@ -1,5 +1,7 @@
 package website.skylorbeck.minecraft.iconicwands.client;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,12 +12,15 @@ import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
 import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
 import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.texture.*;
-import net.minecraft.resource.*;
+import net.minecraft.client.texture.NativeImage;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
+import net.minecraft.util.registry.Registry;
 import website.skylorbeck.minecraft.iconicwands.Declarar;
 import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 import website.skylorbeck.minecraft.iconicwands.config.Parts;
@@ -31,7 +36,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -138,7 +146,128 @@ public class IconicwandsClient implements ClientModInitializer {
             }
         });
 
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            //core
+            try {
+                Files.createDirectory(Paths.get("cache/patchouli/"));
+            } catch (IOException ignored) {
+            }
+            
+            JsonObject entry = new JsonObject();
+            entry.addProperty("name", "Wand Cores");
+            entry.addProperty("icon", "minecraft:stick");
+            entry.addProperty("category", "iconicwands:parts");
+            JsonArray pages = new JsonArray();
+            JsonObject text = new JsonObject();
+            text.addProperty("type", "patchouli:text");
+            text.addProperty("text", "Every Core contributes a cooldown rate, recharge delay, recharge rate, recharge amount and range to the crafted wand.");
+            pages.add(text);
+            JsonArray finalPages = pages;
+            Iconicwands.parts.getAllCores().forEach(core -> {
+                JsonObject page = new JsonObject();
+                page.addProperty("type", "iconicwands:wand_part_core");
+                page.addProperty("item", core.getIdentifier());
+                Identifier item = new Identifier(core.getIdentifier());
+                page.addProperty("title", Registry.ITEM.get(item).getName().getString());
+                page.addProperty("firerate", core.getFirerate() + " Ticks");
+                page.addProperty("rechargeRate", core.getRechargeRate() + " Seconds");
+                page.addProperty("rechargeDelay", core.getRechargeDelay() + " Seconds");
+                page.addProperty("rechargeAmount", core.getRechargeAmount() + " Mana");
+                page.addProperty("range", core.getRange() + " Blocks");
+                page.addProperty("description", "REPLACE");
+                finalPages.add(page);
+            });
+            entry.add("pages", pages);
+            try {
+                Files.write(Paths.get("cache/patchouli/wand_cores.json"), entry.toString().getBytes());
+            } catch (IOException ignored) {
+            }
+            
+            //handle
+            entry = new JsonObject();
+            entry.addProperty("name", "Wand Handles");
+            entry.addProperty("icon", "minecraft:gold_ingot");
+            entry.addProperty("category", "iconicwands:parts");
+            pages = new JsonArray();
+            text = new JsonObject();
+            text.addProperty("type", "patchouli:text");
+            text.addProperty("text", "Every Handle contributes damage, cooldown rate, mana cost, and crit chance to the crafted wand.");
+            pages.add(text);
+            JsonArray finalPages1 = pages;
+            Iconicwands.parts.getAllHandles().forEach(handle -> {
+                JsonObject page = new JsonObject();
+                page.addProperty("type", "iconicwands:wand_part_handle");
+                page.addProperty("item", handle.getIdentifier());
+                Identifier item = new Identifier(handle.getIdentifier());
+                page.addProperty("title", Registry.ITEM.get(item).getName().getString());
+                page.addProperty("damage", handle.getDamage()+"");
+                page.addProperty("firerate", handle.getFirerate() + " Ticks");
+                page.addProperty("manaCost", handle.getManaCost() + " Mana");
+                page.addProperty("criticalChance", handle.getCriticalChance() + "%");
+                page.addProperty("description", "REPLACE");
+                finalPages1.add(page);
+            });
+            entry.add("pages", finalPages1);
+            try {
+                Files.write(Paths.get("cache/patchouli/wand_handles.json"), entry.toString().getBytes());
+            } catch (IOException ignored) {
+            }
 
+            //tip
+            entry = new JsonObject();
+            entry.addProperty("name", "Wand Tips");
+            entry.addProperty("icon", "minecraft:glow_berries");
+            entry.addProperty("category", "iconicwands:parts");
+            pages = new JsonArray();
+            text = new JsonObject();
+            text.addProperty("type", "patchouli:text");
+            text.addProperty("text", "Every Tip contributes projectile speed, recharge amount, mana cost, crit chance and projectile divergence to the crafted wand.");
+            pages.add(text);
+            JsonArray finalPages2 = pages;
+            Iconicwands.parts.getAllTips().forEach(tip -> {
+                JsonObject page = new JsonObject();
+                page.addProperty("type", "iconicwands:wand_part_tip");
+                page.addProperty("item", tip.getIdentifier());
+                Identifier item = new Identifier(tip.getIdentifier());
+                page.addProperty("title", Registry.ITEM.get(item).getName().getString());
+                page.addProperty("speed", tip.getSpeed()+" Block/s");
+                page.addProperty("recharge", tip.getRechargeAmount() + " Mana");
+                page.addProperty("manaCost", tip.getManaCost() + " Mana");
+                page.addProperty("criticalChance", tip.getCriticalChance() + "%");
+                page.addProperty("divergence", tip.getDivergence() + "x");
+                page.addProperty("description", "REPLACE");
+                finalPages2.add(page);
+            });
+            entry.add("pages", finalPages2);
+            try {
+                Files.write(Paths.get("cache/patchouli/wand_tips.json"), entry.toString().getBytes());
+            } catch (IOException ignored) {
+            }
+
+            //presets
+            entry = new JsonObject();
+            entry.addProperty("name", "Iconic Wands");
+            entry.addProperty("icon", "iconicwands:iconicwand_item");
+            entry.addProperty("category", "iconicwands:crafting");
+            pages = new JsonArray();
+            JsonArray finalPages3 = pages;
+            Arrays.stream(Iconicwands.Presets.values()).toList().forEach(preset -> {
+                JsonObject page = new JsonObject();
+                page.addProperty("type", "iconicwands:wand_preset");
+                page.addProperty("wand", "iconicwands:iconicwand_item{CustomModelData:"+preset.getWandInt()+"}");
+                page.addProperty("title",preset.name());
+                page.addProperty("tip", preset.getWand().getTip().getIdentifier());
+                page.addProperty("core", preset.getWand().getCore().getIdentifier());
+                page.addProperty("handle", preset.getWand().getHandle().getIdentifier());
+                page.addProperty("description", "REPLACE");
+                finalPages3.add(page);
+            });
+            entry.add("pages", finalPages3);
+            try {
+                Files.write(Paths.get("cache/patchouli/wand_presets.json"), entry.toString().getBytes());
+            } catch (IOException ignored) {
+            }
+        }
     }
 
 

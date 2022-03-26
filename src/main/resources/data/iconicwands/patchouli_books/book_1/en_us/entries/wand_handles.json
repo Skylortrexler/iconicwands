@@ -9,53 +9,183 @@
     },
     {
       "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:gold_ingot",
-      "title": "Gold Ingot",
-      "damage": "5",
-      "firerate": "5 Ticks",
-      "manaCost": "40 Mana",
-      "criticalChance": "1%",
-      "description": "Gold is the most common wand handle."
+      "item": "minecraft:oak_planks",
+      "title": "Oak Planks",
+      "damage": "6",
+      "firerate": "15 Ticks",
+      "manaCost": "45 Mana",
+      "criticalChance": "0.01%",
+      "description": "Standard, higher damage"
     },
     {
       "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:iron_ingot",
-      "title": "Iron Ingot",
-      "damage": "3",
-      "firerate": "10 Ticks",
-      "manaCost": "25 Mana",
-      "criticalChance": "1%",
-      "description": "Iron is the second most common wand handle."
-    },
-    {
-      "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:shulker_shell",
-      "title": "Shulker Shell",
+      "item": "minecraft:spruce_planks",
+      "title": "Spruce Planks",
       "damage": "4",
       "firerate": "10 Ticks",
-      "manaCost": "50 Mana",
-      "criticalChance": "5%",
-      "description": "Shulker Shells are the most rare wand handle."
+      "manaCost": "45 Mana",
+      "criticalChance": "0.01%",
+      "description": "Standard, high firerate"
     },
     {
       "type": "iconicwands:wand_part_handle",
-      "item": "minecraft:leather",
-      "title": "Leather",
-      "damage": "3",
-      "firerate": "Instant",
+      "item": "minecraft:birch_planks",
+      "title": "Birch Planks",
+      "damage": "4",
+      "firerate": "15 Ticks",
       "manaCost": "40 Mana",
-      "criticalChance": "2%",
-      "description": "Leather is the handle wrap of choice for those who are closer to the natural world."
+      "criticalChance": "0.01%",
+      "description": "Standard, medium mana cost and firerate"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:jungle_planks",
+      "title": "Jungle Planks",
+      "damage": "4",
+      "firerate": "15 Ticks",
+      "manaCost": "45 Mana",
+      "criticalChance": "0.02%",
+      "description": "Standard"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:acacia_planks",
+      "title": "Acacia Planks",
+      "damage": "4",
+      "firerate": "5 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.01%",
+      "description": "Standard, higher firerate"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:dark_oak_planks",
+      "title": "Dark Oak Planks",
+      "damage": "4",
+      "firerate": "20 Ticks",
+      "manaCost": "35 Mana",
+      "criticalChance": "0.01%",
+      "description": "Standard, lower mana cost"
     },
     {
       "type": "iconicwands:wand_part_handle",
       "item": "minecraft:kelp",
       "title": "Kelp",
       "damage": "2",
+      "firerate": "10 Ticks",
+      "manaCost": "35 Mana",
+      "criticalChance": "0.0%",
+      "description": "Low damage, low cost"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:glass",
+      "title": "Glass",
+      "damage": "8",
       "firerate": "20 Ticks",
-      "manaCost": "30 Mana",
-      "criticalChance": "5%",
-      "description": "Kelp wraps are inexpensive and tap into the Ocean's natural magics."
+      "manaCost": "50 Mana",
+      "criticalChance": "0.02%",
+      "description": "High damage, high cost"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:gold_ingot",
+      "title": "Gold Ingot",
+      "damage": "8",
+      "firerate": "5 Ticks",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.02%",
+      "description": "Average."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:iron_ingot",
+      "title": "Iron Ingot",
+      "damage": "6",
+      "firerate": "10 Ticks",
+      "manaCost": "35 Mana",
+      "criticalChance": "0.03%",
+      "description": "Average."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:leather",
+      "title": "Leather",
+      "damage": "6",
+      "firerate": "-10 Ticks",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.0%",
+      "description": "Low damage, high firerate"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:quartz",
+      "title": "Nether Quartz",
+      "damage": "12",
+      "firerate": "20 Ticks",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.0%",
+      "description": "High damage. Standard for Dark mages."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:emerald",
+      "title": "Emerald",
+      "damage": "6",
+      "firerate": "20 Ticks",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.06%",
+      "description": "Medium damage, medium crit, high mana cost. Showoff."
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:crimson_planks",
+      "title": "Crimson Planks",
+      "damage": "12",
+      "firerate": "-5 Ticks",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.0%",
+      "description": "Fast firerate, high damage"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:warped_planks",
+      "title": "Warped Planks",
+      "damage": "2",
+      "firerate": "20 Ticks",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.049999997%",
+      "description": "Medium crit chance, low damage"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:shulker_shell",
+      "title": "Shulker Shell",
+      "damage": "8",
+      "firerate": "-10 Ticks",
+      "manaCost": "20 Mana",
+      "criticalChance": "0.0%",
+      "description": "Fast firerate, medium damage"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:prismarine_shard",
+      "title": "Prismarine Shard",
+      "damage": "12",
+      "firerate": "20 Ticks",
+      "manaCost": "0 Mana",
+      "criticalChance": "0.0%",
+      "description": "High damage, no manacost"
+    },
+    {
+      "type": "iconicwands:wand_part_handle",
+      "item": "minecraft:netherite_ingot",
+      "title": "Netherite Ingot",
+      "damage": "22",
+      "firerate": "20 Ticks",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.0%",
+      "description": "Enough damage to OHK an unarmored Player. OP."
     }
   ]
 }

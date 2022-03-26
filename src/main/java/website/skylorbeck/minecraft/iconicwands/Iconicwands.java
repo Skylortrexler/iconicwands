@@ -9,8 +9,6 @@ import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 import website.skylorbeck.minecraft.skylorlib.ConfigFileHandler;
 import website.skylorbeck.minecraft.skylorlib.Registrar;
 
-import java.io.IOException;
-
 public class Iconicwands implements ModInitializer {
     public static Parts parts = new Parts();
     public enum Presets{
@@ -57,7 +55,7 @@ public class Iconicwands implements ModInitializer {
                 new Parts.Tip("minecraft:acacia_planks", 2, 2, 0, 3, 3),
                 new Parts.Tip("minecraft:dark_oak_planks", 0, 2, 3, 2, 3),//5
                 new Parts.Tip("minecraft:glow_berries", 3, 3, 2, 2, 0),
-                new Parts.Tip("minecraft:lapis_lazuli", 0, 0, 0, 0, 5),//7
+                new Parts.Tip("minecraft:lapis_lazuli", 0, 5, 0, 0, 5),//7
                 new Parts.Tip("minecraft:potato", 0, 0, 5, 0, 0),
                 new Parts.Tip("minecraft:gold_nugget", 0, 5, 5, 0, 0),//9
                 new Parts.Tip("minecraft:redstone", 6, 2, 0, 2, 0),
@@ -75,8 +73,8 @@ public class Iconicwands implements ModInitializer {
         parts.addTips(2,
                 //t3 20/10 | 10/10/10 | 10/10/5/5 | 6/6/6/6/6
                 new Parts.Tip("minecraft:shulker_shell", 10, 0, 0, 20, 0),
-                new Parts.Tip("minecraft:prismarine_crystals", 0, 0, 0, 0, 0),//1
-                new Parts.Tip("minecraft:nether_star", 0, 0, 0, 0, 0),
+                new Parts.Tip("minecraft:prismarine_crystals", 6, 6, 6, 6, 6),//1
+                new Parts.Tip("minecraft:nether_star", 0, 10, 0, 0, 20),
                 new Parts.Tip("minecraft:netherite_ingot", 10, 0, 0, 10, 10)//3
 
         );

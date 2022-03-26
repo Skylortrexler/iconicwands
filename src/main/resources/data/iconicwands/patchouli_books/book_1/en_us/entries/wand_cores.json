@@ -9,91 +9,179 @@
     },
     {
       "type": "iconicwands:wand_part_core",
-      "item": "minecraft:stick",
-      "title": "Stick",
+      "item": "minecraft:oak_planks",
+      "title": "Oak Planks",
       "firerate": "10 Ticks",
-      "rechargeRate": "5 Second",
+      "rechargeRate": "4 Seconds",
+      "rechargeDelay": "8 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "A standard Wand Core"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:spruce_planks",
+      "title": "Spruce Planks",
+      "firerate": "10 Ticks",
+      "rechargeRate": "7 Seconds",
+      "rechargeDelay": "7 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "30 Blocks",
+      "description": "A slightly longer range standard Core"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:birch_planks",
+      "title": "Birch Planks",
+      "firerate": "20 Ticks",
+      "rechargeRate": "8 Seconds",
+      "rechargeDelay": "8 Seconds",
+      "rechargeAmount": "35 Mana",
+      "range": "10 Blocks",
+      "description": "A standard Core with a focus on recharge amount"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:jungle_planks",
+      "title": "Jungle Planks",
+      "firerate": "20 Ticks",
+      "rechargeRate": "5 Seconds",
       "rechargeDelay": "5 Seconds",
-      "rechargeAmount": "25 Mana",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "This standard Core has a slightly faster recharge rate"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:acacia_planks",
+      "title": "Acacia Planks",
+      "firerate": "5 Ticks",
+      "rechargeRate": "8 Seconds",
+      "rechargeDelay": "8 Seconds",
+      "rechargeAmount": "5 Mana",
       "range": "40 Blocks",
-      "description": "A basic wand core. It's pretty useless, but it's a core."
+      "description": "A fast and far ranged standard Core"
     },
     {
       "type": "iconicwands:wand_part_core",
-      "item": "minecraft:blaze_rod",
-      "title": "Blaze Rod",
-      "firerate": "15 Ticks",
-      "rechargeRate": "5 Second",
-      "rechargeDelay": "5 Seconds",
-      "rechargeAmount": "25 Mana",
-      "range": "20 Blocks",
-      "description": "A firey wand core. Warm to the touch."
-    },
-    {
-      "type": "iconicwands:wand_part_core",
-      "item": "minecraft:end_rod",
-      "title": "End Rod",
-      "firerate": "10 Ticks",
-      "rechargeRate": "10 Second",
+      "item": "minecraft:dark_oak_planks",
+      "title": "Dark Oak Planks",
+      "firerate": "20 Ticks",
+      "rechargeRate": "10 Seconds",
       "rechargeDelay": "10 Seconds",
-      "rechargeAmount": "50 Mana",
-      "range": "100 Blocks",
-      "description": "An otherworldly wand core. It's cold."
+      "rechargeAmount": "30 Mana",
+      "range": "60 Blocks",
+      "description": "The longest range standard Core"
     },
     {
       "type": "iconicwands:wand_part_core",
       "item": "minecraft:bone",
       "title": "Bone",
-      "firerate": "15 Ticks",
-      "rechargeRate": "Instant",
+      "firerate": "45 Ticks",
+      "rechargeRate": "0 Seconds",
       "rechargeDelay": "5 Seconds",
-      "rechargeAmount": "5 Mana/tick",
-      "range": "50 Blocks",
-      "description": "That's morbid."
-    },
-    {
-      "type": "iconicwands:wand_part_core",
-      "item": "minecraft:copper_ingot",
-      "title": "Copper Ingot",
-      "firerate": "10 Ticks",
-      "rechargeRate": "3 Seconds",
-      "rechargeDelay": "3 Seconds",
-      "rechargeAmount": "10 Mana",
-      "range": "40 Blocks",
-      "description": "Copper is known to have ties to witchery."
-    },
-    {
-      "type": "iconicwands:wand_part_core",
-      "item": "minecraft:amethyst_shard",
-      "title": "Amethyst Shard",
-      "firerate": "Instant",
-      "rechargeRate": "4 Second",
-      "rechargeDelay": "4 Seconds",
       "rechargeAmount": "5 Mana",
-      "range": "50 Blocks",
-      "description": "Amethyst channels the power of the universe through it, I'm pretty sure."
-    },
-    {
-      "type": "iconicwands:wand_part_core",
-      "item": "minecraft:bamboo",
-      "title": "Bamboo",
-      "firerate": "30 Ticks",
-      "rechargeRate": "0 Second",
-      "rechargeDelay": "0 Seconds",
-      "rechargeAmount": "5 Mana",
-      "range": "30 Blocks",
-      "description": "Bamboo, while non-traditional, is a flexible wand core."
+      "range": "10 Blocks",
+      "description": "Dark Witches turn to bones for their insane mana recharge rate"
     },
     {
       "type": "iconicwands:wand_part_core",
       "item": "minecraft:carrot",
       "title": "Carrot",
+      "firerate": "10 Ticks",
+      "rechargeRate": "8 Seconds",
+      "rechargeDelay": "8 Seconds",
+      "rechargeAmount": "15 Mana",
+      "range": "30 Blocks",
+      "description": "I mean... I guess"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:blaze_rod",
+      "title": "Blaze Rod",
+      "firerate": "-5 Ticks",
+      "rechargeRate": "5 Seconds",
+      "rechargeDelay": "0 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "It's fast and recharges constantly. Is this a good idea?"
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:amethyst_shard",
+      "title": "Amethyst Shard",
+      "firerate": "-5 Ticks",
+      "rechargeRate": "5 Seconds",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "60 Blocks",
+      "description": "Yeah this feels good. Far range, fast fire rate, quick recharge."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:bamboo",
+      "title": "Bamboo",
       "firerate": "20 Ticks",
-      "rechargeRate": "10 Second",
+      "rechargeRate": "0 Seconds",
+      "rechargeDelay": "0 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "Flexible and instantly recharging."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:crimson_planks",
+      "title": "Crimson Planks",
+      "firerate": "-30 Ticks",
+      "rechargeRate": "5 Seconds",
+      "rechargeDelay": "5 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "10 Blocks",
+      "description": "This Core can compensate for other, slower parts."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:warped_planks",
+      "title": "Warped Planks",
+      "firerate": "20 Ticks",
+      "rechargeRate": "10 Seconds",
       "rechargeDelay": "10 Seconds",
-      "rechargeAmount": "100 Mana",
-      "range": "210 Blocks",
-      "description": "Carrot is a staple in the kitchen. Not in wands."
+      "rechargeAmount": "55 Mana",
+      "range": "110 Blocks",
+      "description": "This core focuses entirely on range and recharge amount."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:golden_carrot",
+      "title": "Golden Carrot",
+      "firerate": "0 Ticks",
+      "rechargeRate": "6 Seconds",
+      "rechargeDelay": "6 Seconds",
+      "rechargeAmount": "25 Mana",
+      "range": "50 Blocks",
+      "description": "Huh... you're really sticking to the food thing..."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:end_rod",
+      "title": "End Rod",
+      "firerate": "-5 Ticks",
+      "rechargeRate": "10 Seconds",
+      "rechargeDelay": "10 Seconds",
+      "rechargeAmount": "30 Mana",
+      "range": "110 Blocks",
+      "description": "This core feels like it could float away at any moment."
+    },
+    {
+      "type": "iconicwands:wand_part_core",
+      "item": "minecraft:netherite_ingot",
+      "title": "Netherite Ingot",
+      "firerate": "-5 Ticks",
+      "rechargeRate": "0 Seconds",
+      "rechargeDelay": "0 Seconds",
+      "rechargeAmount": "5 Mana",
+      "range": "60 Blocks",
+      "description": "Instant recharge, instant fire, low mana cost. OP as hell."
     }
   ]
 }

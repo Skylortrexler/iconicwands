@@ -9,58 +9,80 @@
     },
     {
       "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:oak_planks",
+      "title": "Oak Planks",
+      "speed": "0.65 Block/s",
+      "recharge": "10 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.08%",
+      "divergence": "1.8x",
+      "description": "Standard, Crit Chance"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:spruce_planks",
+      "title": "Spruce Planks",
+      "speed": "0.65 Block/s",
+      "recharge": "15 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.07%",
+      "divergence": "1.8x",
+      "description": "Standard, Recharge Rate"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:birch_planks",
+      "title": "Birch Planks",
+      "speed": "0.6 Block/s",
+      "recharge": "10 Mana",
+      "manaCost": "35 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "1.7x",
+      "description": "Standard, Divergence"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:jungle_planks",
+      "title": "Jungle Planks",
+      "speed": "0.6 Block/s",
+      "recharge": "15 Mana",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.08%",
+      "divergence": "2.0x",
+      "description": "Standard, Recharge and Crit"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:acacia_planks",
+      "title": "Acacia Planks",
+      "speed": "0.6 Block/s",
+      "recharge": "10 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.08%",
+      "divergence": "1.7x",
+      "description": "Standard, Crit and Divergence"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:dark_oak_planks",
+      "title": "Dark Oak Planks",
+      "speed": "0.5 Block/s",
+      "recharge": "10 Mana",
+      "manaCost": "35 Mana",
+      "criticalChance": "0.08%",
+      "divergence": "1.8x",
+      "description": "Standard, Mana Cost and Crit"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
       "item": "minecraft:glow_berries",
       "title": "Glow Berries",
-      "speed": "0.25 Block/s",
-      "recharge": "25 Mana",
-      "manaCost": "0 Mana",
-      "criticalChance": "5.0%",
-      "divergence": "0.5x",
-      "description": "A tip that glows with a bright light."
-    },
-    {
-      "type": "iconicwands:wand_part_tip",
-      "item": "minecraft:ghast_tear",
-      "title": "Ghast Tear",
-      "speed": "0.4 Block/s",
-      "recharge": "75 Mana",
-      "manaCost": "25 Mana",
-      "criticalChance": "7.0%",
-      "divergence": "2.0x",
-      "description": "A crystlized tear from a ghast. It's very sharp."
-    },
-    {
-      "type": "iconicwands:wand_part_tip",
-      "item": "minecraft:shulker_shell",
-      "title": "Shulker Shell",
-      "speed": "0.7 Block/s",
-      "recharge": "25 Mana",
-      "manaCost": "25 Mana",
-      "criticalChance": "3.0%",
-      "divergence": "1.2x",
-      "description": "A shell from a shulker. It's very durable."
-    },
-    {
-      "type": "iconicwands:wand_part_tip",
-      "item": "minecraft:quartz",
-      "title": "Quartz",
-      "speed": "0.75 Block/s",
-      "recharge": "25 Mana",
-      "manaCost": "0 Mana",
-      "criticalChance": "5.0%",
-      "divergence": "2.0x",
-      "description": "A quartz crystal. It's very durable."
-    },
-    {
-      "type": "iconicwands:wand_part_tip",
-      "item": "minecraft:emerald",
-      "title": "Emerald",
-      "speed": "0.5 Block/s",
-      "recharge": "100 Mana",
-      "manaCost": "50 Mana",
-      "criticalChance": "1.0%",
-      "divergence": "1.6x",
-      "description": "Prized by Villagers for it's rarity."
+      "speed": "0.65 Block/s",
+      "recharge": "15 Mana",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "1.8x",
+      "description": "Loved by cavers"
     },
     {
       "type": "iconicwands:wand_part_tip",
@@ -69,31 +91,163 @@
       "speed": "0.5 Block/s",
       "recharge": "25 Mana",
       "manaCost": "50 Mana",
-      "criticalChance": "15.0%",
-      "divergence": "1.5x",
-      "description": "Lapis Lazuli helps channel the ambient magic around you."
-    },
-    {
-      "type": "iconicwands:wand_part_tip",
-      "item": "minecraft:redstone_block",
-      "title": "Redstone Block",
-      "speed": "2 Block/s",
-      "recharge": "10 Mana",
-      "manaCost": "50 Mana",
-      "criticalChance": "3.0%",
-      "divergence": "1.5x",
-      "description": "Redstone blocks are absolutely packed with power, great for speeding up projectiles."
+      "criticalChance": "0.099999994%",
+      "divergence": "2.0x",
+      "description": "High Crit chance, decent recharge"
     },
     {
       "type": "iconicwands:wand_part_tip",
       "item": "minecraft:potato",
       "title": "Potato",
       "speed": "0.5 Block/s",
-      "recharge": "55 Mana",
-      "manaCost": "45 Mana",
-      "criticalChance": "5.0%",
+      "recharge": "0 Mana",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.05%",
       "divergence": "2.0x",
-      "description": "You're really desperate, huh?"
+      "description": "Dude... why..."
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:gold_nugget",
+      "title": "Gold Nugget",
+      "speed": "0.5 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "2.0x",
+      "description": "Low Mana Cost, High Recharge Rate"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:redstone",
+      "title": "Redstone Dust",
+      "speed": "0.8 Block/s",
+      "recharge": "10 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "1.8x",
+      "description": "High Speed"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:glass",
+      "title": "Glass",
+      "speed": "0.6 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "40 Mana",
+      "criticalChance": "0.11%",
+      "divergence": "2.0x",
+      "description": "High Crit"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:ghast_tear",
+      "title": "Ghast Tear",
+      "speed": "0.75 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.099999994%",
+      "divergence": "1.5x",
+      "description": "High Crit, High Speed"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:quartz",
+      "title": "Nether Quartz",
+      "speed": "0.75 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "0 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "2.0x",
+      "description": "High Speed, No Mana Cost"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:emerald",
+      "title": "Emerald",
+      "speed": "0.5 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "25 Mana",
+      "criticalChance": "0.14999999%",
+      "divergence": "2.0x",
+      "description": "Outstanding Crit Chance"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:redstone_block",
+      "title": "Block of Redstone",
+      "speed": "1.0 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "1.0x",
+      "description": "High Speed, Low Divergence"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:crimson_planks",
+      "title": "Crimson Planks",
+      "speed": "0.75 Block/s",
+      "recharge": "25 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "1.0x",
+      "description": "Medium speed, Low Divergence"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:warped_planks",
+      "title": "Warped Planks",
+      "speed": "0.5 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "0 Mana",
+      "criticalChance": "0.14999999%",
+      "divergence": "2.0x",
+      "description": "No Mana Cost, No Mana Regen, High Crit"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:shulker_shell",
+      "title": "Shulker Shell",
+      "speed": "1.0 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.05%",
+      "divergence": "0.0x",
+      "description": "No Mana Regen, No Divergence"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:prismarine_crystals",
+      "title": "Prismarine Crystals",
+      "speed": "0.8 Block/s",
+      "recharge": "30 Mana",
+      "manaCost": "20 Mana",
+      "criticalChance": "0.11%",
+      "divergence": "1.4x",
+      "description": "Average All Around"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:nether_star",
+      "title": "Nether Star",
+      "speed": "0.5 Block/s",
+      "recharge": "50 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.24999999%",
+      "divergence": "2.0x",
+      "description": "Best Crit, High Recharge"
+    },
+    {
+      "type": "iconicwands:wand_part_tip",
+      "item": "minecraft:netherite_ingot",
+      "title": "Netherite Ingot",
+      "speed": "1.0 Block/s",
+      "recharge": "0 Mana",
+      "manaCost": "50 Mana",
+      "criticalChance": "0.14999999%",
+      "divergence": "1.0x",
+      "description": "High Crip, High Speed, Low Divergence"
     }
   ]
 }

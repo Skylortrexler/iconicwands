@@ -5,60 +5,84 @@
   "pages": [
     {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:0}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:393224}",
       "title": "Cavers Friend",
       "tip": "minecraft:glow_berries",
-      "core": "minecraft:stick",
-      "handle": "minecraft:gold_nugget",
-      "description": "This wand can be used to summon a dim light."
-    },{
+      "core": "minecraft:oak_planks",
+      "handle": "minecraft:gold_ingot",
+      "description": "Creates low light sources."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:65793}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:788489}",
       "title": "Burning Passion",
       "tip": "minecraft:ghast_tear",
       "core": "minecraft:blaze_rod",
-      "handle": "minecraft:iron_nugget",
-      "description": "This warm wand allows the user to create fire, like a blaze."
-    },{
+      "handle": "minecraft:iron_ingot",
+      "description": "The power of a Blaze, in your hand."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:131586}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:1183247}",
       "title": "Warped Wand",
       "tip": "minecraft:shulker_shell",
       "core": "minecraft:end_rod",
       "handle": "minecraft:shulker_shell",
-      "description": "Sneaking while using this wand will allow the user to teleport."
-    },{
+      "description": "Crouch while firing to teleport."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:460548}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:526086}",
       "title": "Munchies",
       "tip": "minecraft:potato",
       "core": "minecraft:carrot",
       "handle": "minecraft:kelp",
-      "description": "Using this wand will prevent you from being hungry... and not much else."
-    },{
+      "description": "You'll never feel hungry with this wand in your pocket."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:263683}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:199180}",
       "title": "Chirp",
-      "tip": "minecraft:emerald",
+      "tip": "minecraft:jungle_planks",
       "core": "minecraft:bamboo",
-      "handle": "minecraft:leather",
-      "description": "I swear there's a parrot around here somewhere."
-    },{
+      "handle": "minecraft:emerald",
+      "description": "I swear there is a parrot around here."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:197889}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:854281}",
       "title": "NoobGamers Wand",
       "tip": "minecraft:quartz",
       "core": "minecraft:amethyst_shard",
       "handle": "minecraft:iron_ingot",
-      "description": "Creates explosions at the point of contact."
-    },{
+      "description": "Causes Explosions. Does not destroy blocks."
+    },
+    {
       "type": "iconicwands:wand_preset",
-      "wand": "iconicwands:iconicwand_item{CustomModelData:394754}",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:724234}",
+      "title": "Scar13ts Wand",
+      "tip": "minecraft:glass",
+      "core": "minecraft:golden_carrot",
+      "handle": "minecraft:leather",
+      "description": "Summons Lightning on Crit"
+    },
+    {
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:592654}",
+      "title": "Kynans Wand",
+      "tip": "minecraft:gold_nugget",
+      "core": "minecraft:crimson_planks",
+      "handle": "minecraft:warped_planks",
+      "description": "Fires extra shots sometimes, and explodes on crit"
+    },
+    {
+      "type": "iconicwands:wand_preset",
+      "wand": "iconicwands:iconicwand_item{CustomModelData:985615}",
       "title": "Strikers Wand",
       "tip": "minecraft:redstone_block",
       "core": "minecraft:bamboo",
       "handle": "minecraft:shulker_shell",
-      "description": "Shoots 6 projectiles at once."
+      "description": "Shoots six projectiles like a shotgun."
     }
   ]
 }

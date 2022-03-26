@@ -5,9 +5,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceImpl;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -15,8 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Mixin(SpriteAtlasTexture.class)
 public class SpriteAtlasTextureMixin {
