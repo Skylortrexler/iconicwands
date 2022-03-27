@@ -39,7 +39,11 @@ import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreenHandler;
 import java.util.List;
 
 public class Declarar {
-    public static final ItemGroup ICONIC_WAND_GROUP = FabricItemGroupBuilder.build(Iconicwands.getId("category"), () -> new ItemStack(Declarar.ICONIC_WAND));
+    public static final ItemGroup ICONIC_WAND_GROUP = FabricItemGroupBuilder.build(Iconicwands.getId("category"), () ->{
+        ItemStack itemStack = new ItemStack(Declarar.ICONIC_WAND);
+        IconicWand.saveComponents(itemStack,Iconicwands.Presets.overworld.wand);
+        return itemStack;
+    });
     public static Identifier MAGIC_PROJECTILE_ENTITY_ID = Iconicwands.getId("magic");
 
     public static <T extends Entity> EntityType<T> createMagicEntityType(EntityType.EntityFactory<T> factory) {

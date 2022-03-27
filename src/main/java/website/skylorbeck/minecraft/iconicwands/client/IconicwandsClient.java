@@ -33,6 +33,7 @@ import website.skylorbeck.minecraft.iconicwands.screen.WandBenchScreen;
 import website.skylorbeck.minecraft.skylorlib.Color;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

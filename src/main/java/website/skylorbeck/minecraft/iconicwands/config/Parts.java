@@ -4,6 +4,7 @@ import website.skylorbeck.minecraft.iconicwands.items.IconicWand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Parts {
     public ArrayList<ArrayList<Tip>> tips = new ArrayList<>();
@@ -27,6 +28,7 @@ public class Parts {
         }
         handles.get(tier).addAll(Arrays.asList(handle));
     }
+
 
     public ArrayList<Tip> getAllTips(){
         ArrayList<Tip> allTips = new ArrayList<>();
