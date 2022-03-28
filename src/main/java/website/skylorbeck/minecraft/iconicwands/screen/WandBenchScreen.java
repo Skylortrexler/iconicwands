@@ -21,7 +21,7 @@ import website.skylorbeck.minecraft.iconicwands.Iconicwands;
 @Environment(value=EnvType.CLIENT)
 public class WandBenchScreen
 extends HandledScreen<WandBenchScreenHandler>
-implements RecipeBookProvider {
+ {
     private static final Identifier TEXTURE = Iconicwands.getId("textures/container/wand_bench.png");
     private boolean narrow;
 
@@ -78,18 +78,5 @@ implements RecipeBookProvider {
         super.onMouseClick(slot, slotId, button, actionType);
     }
 
-    @Override
-    public void refreshRecipeBook() {
-    }
-
-    @Override
-    public void removed() {
-        super.removed();
-    }
-
-    @Override
-    public RecipeBookWidget getRecipeBookWidget() {
-        return null;
-    }
 }
 

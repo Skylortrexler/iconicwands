@@ -59,7 +59,7 @@ public class Declarar {
         return wand.getHandle().getManaCost() + wand.getTip().getManaCost();
     }));
 
-    public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
+    public static final Block WAND_BENCH = new WandBench(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).hardness(1f).resistance(1f));
 
     public static final BlockEntityType<WandBenchEntity> WAND_BENCH_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE, Iconicwands.getId("wand_bench_entity"),
@@ -74,8 +74,8 @@ public class Declarar {
             super.onCraft(stack, world, player);
         }
     };
-    public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE));
-    public static final Block WAND_PEDESTAL_DISPLAY = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE));
+    public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
+    public static final Block WAND_PEDESTAL_DISPLAY = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
 
     public static final BlockItem WAND_PEDESTAL_ITEM = new BlockItem(WAND_PEDESTAL, new FabricItemSettings().group(ICONIC_WAND_GROUP));
     public static final BlockItem WAND_PEDESTAL_DISPLAY_ITEM = new BlockItem(WAND_PEDESTAL_DISPLAY, new FabricItemSettings().group(ICONIC_WAND_GROUP));

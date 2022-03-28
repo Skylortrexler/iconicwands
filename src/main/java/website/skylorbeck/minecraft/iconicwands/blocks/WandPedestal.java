@@ -105,6 +105,7 @@ public class WandPedestal extends BlockWithEntity {
             if (!entity.getStack(0).isEmpty()) {
                 player.getInventory().offerOrDrop(entity.getStack(0));
             }
+            player.getInventory().offerOrDrop(new ItemStack(Declarar.WAND_PEDESTAL_ITEM));
         }
         super.onBreak(world, pos, state, player);
     }
