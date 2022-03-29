@@ -49,7 +49,11 @@ public class IconicwandsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistryImpl.register(Declarar.MAGIC_PROJECTILE, MagicProjetileEntityRenderer::new);
-        TooltipComponentCallback.EVENT.register(data -> new WandTooltipComponent((WandTooltipData) data));
+        TooltipComponentCallback.EVENT.register(data -> {
+            if (data instanceof WandTooltipData)
+            return new WandTooltipComponent((WandTooltipData) data);
+            return null;
+        });
         ScreenRegistry.register(Declarar.WANDING, WandBenchScreen::new);
         BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_BENCH, RenderLayer.getTranslucent());
         BlockRenderLayerMapImpl.INSTANCE.putBlock(Declarar.WAND_PEDESTAL, RenderLayer.getTranslucent());
