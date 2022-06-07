@@ -103,9 +103,9 @@ public class MagicProjectileEntity extends PersistentProjectileEntity {
         if (amount <= 0) {
             return;
         }
-        double x = -0.25f + world.random.nextFloat(0.5f);
-        double y = world.random.nextFloat(0.25f);
-        double z = -0.25f +world.random.nextFloat(0.5f);
+        double x = -0.25f + (world.random.nextFloat()*0.5f);
+        double y = world.random.nextFloat()*0.25f;
+        double z = -0.25f +(world.random.nextFloat()*0.5f);
         for (int j = 0; j < amount; ++j) {
             this.world.addParticle(ParticleTypes.ENCHANT, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), x, y, z);
         }

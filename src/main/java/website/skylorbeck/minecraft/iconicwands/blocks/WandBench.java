@@ -13,7 +13,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -37,7 +36,7 @@ public class WandBench extends BlockWithEntity {
     public WandBench(Settings settings) {
         super(settings);
     }
-    private static final Text TITLE = new TranslatableText("container.iconicwands.wand_bench");
+    private static final Text TITLE = Text.translatable("container.iconicwands.wand_bench");
     public static final DirectionProperty FACING = Properties.FACING;
 
     @Override

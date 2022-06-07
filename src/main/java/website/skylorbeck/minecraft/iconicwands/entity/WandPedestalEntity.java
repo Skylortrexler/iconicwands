@@ -17,7 +17,6 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -131,7 +130,7 @@ public class WandPedestalEntity extends BlockEntity implements Inventory, NamedS
 
     @Override
     public Text getDisplayName() {
-        return this.customName != null ? this.customName : new TranslatableText("container.iconicwands.wand_bench");
+        return this.customName != null ? this.customName : Text.translatable("container.iconicwands.wand_bench");
     }
 
     public boolean hasCustomName(){

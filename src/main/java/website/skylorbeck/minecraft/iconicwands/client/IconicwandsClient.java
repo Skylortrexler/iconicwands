@@ -43,6 +43,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Environment(EnvType.CLIENT)
 public class IconicwandsClient implements ClientModInitializer {
@@ -85,12 +87,22 @@ public class IconicwandsClient implements ClientModInitializer {
                             continue;
                         }
                         refresh = true;
+
+
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
-                            writeImage(manager, partPath, sourceItem, sourceTexture, "core");
+                            if (manager.getResource(sourceTexture).isEmpty())
+                            {
+                                throw new IOException();
+                            }
+                                writeImage(manager, partPath, sourceItem, sourceTexture, "core");
                         } catch (IOException e) {
                             try {
                                 sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
+                                if (manager.getResource(sourceTexture).isEmpty())
+                                {
+                                    throw new IOException();
+                                }
                                 writeImage(manager, partPath, sourceItem, sourceTexture, "core");
                             } catch (IOException ignored) {
                             }
@@ -107,10 +119,18 @@ public class IconicwandsClient implements ClientModInitializer {
                         refresh = true;
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
+                            if (manager.getResource(sourceTexture).isEmpty())
+                            {
+                                throw new IOException();
+                            }
                             writeImage(manager, partPath, sourceItem, sourceTexture, "tip");
                         } catch (IOException e) {
                             try {
                                 sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
+                                if (manager.getResource(sourceTexture).isEmpty())
+                                {
+                                    throw new IOException();
+                                }
                                 writeImage(manager, partPath, sourceItem, sourceTexture, "tip");
                             } catch (IOException ignored) {
                             }
@@ -128,10 +148,18 @@ public class IconicwandsClient implements ClientModInitializer {
                         refresh = true;
                         try {
                             sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "item/" + sourceItem.getPath(), ".png"));
+                            if (manager.getResource(sourceTexture).isEmpty())
+                            {
+                                throw new IOException();
+                            }
                             writeImage(manager, partPath, sourceItem, sourceTexture, "handle");
                         } catch (IOException e) {
                             try {
                                 sourceTexture = new Identifier(sourceItem.getNamespace(), String.format("textures/%s%s", "block/" + sourceItem.getPath(), ".png"));
+                                if (manager.getResource(sourceTexture).isEmpty())
+                                {
+                                    throw new IOException();
+                                }
                                 writeImage(manager, partPath, sourceItem, sourceTexture, "handle");
                             } catch (IOException ignored) {
                             }
@@ -280,23 +308,11 @@ public class IconicwandsClient implements ClientModInitializer {
 //        Logger.getGlobal().log(Level.INFO, "Writing image for " + sourceItem.toString());
         ArrayList<Color> colors = new ArrayList<>();
         ArrayList<Color> greys = new ArrayList<>();
-        NativeImage nativeImage = NativeImage.read(manager.getResource(sourceTexture).getInputStream());
-        NativeImage template = NativeImage.read(manager.getResource(Iconicwands.getId("textures/template/" + part + ".png")).getInputStream());
+        NativeImage nativeImage = NativeImage.read(manager.getResource(sourceTexture).get().getInputStream());
+        NativeImage template = NativeImage.read(manager.getResource(Iconicwands.getId("textures/template/" + part + ".png")).get().getInputStream());
 
-        for (int x = 0; x < template.getWidth(); x++) {
-            for (int y = 0; y < template.getHeight(); y++) {
-                Color color = Color.ofTransparent(template.getColor(x, y));
-                if (!greys.contains(color) && color.getAlpha() != 0)
-                    greys.add(color);
-            }
-        }
-        for (int x = 0; x < nativeImage.getWidth(); x++) {
-            for (int y = 0; y < nativeImage.getHeight(); y++) {
-                Color color = Color.ofTransparent(nativeImage.getColor(x, y));
-                if (!colors.contains(color) && color.getAlpha() != 0)
-                    colors.add(color);
-            }
-        }
+        ExtractColor(greys, template);
+        ExtractColor(colors, nativeImage);
         Comparator<Color> comparator = (a, b) -> Float.compare(a.getRed() * 0.21f + a.getBlue() * 0.07f + a.getGreen() * 0.72f, b.getRed() * 0.21f + b.getBlue() * 0.07f + b.getGreen() * 0.72f);
         colors.sort(comparator);
         greys.sort(comparator);
@@ -316,6 +332,16 @@ public class IconicwandsClient implements ClientModInitializer {
             }
         }
         template.writeTo(path);
+    }
+
+    private void ExtractColor(ArrayList<Color> greys, NativeImage template) {
+        for (int x = 0; x < template.getWidth(); x++) {
+            for (int y = 0; y < template.getHeight(); y++) {
+                Color color = Color.ofTransparent(template.getColor(x, y));
+                if (!greys.contains(color) && color.getAlpha() != 0)
+                    greys.add(color);
+            }
+        }
     }
 
 }

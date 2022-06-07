@@ -71,13 +71,13 @@ public class WandPresetTester extends Item {
     private NativeImage generateWandImage(Parts.WandCluster wand) throws IOException {
         InputStream inputStream;
         try {
-            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/core/" + wand.getCore().getIdentifier().substring(10)+".png")).getInputStream();
+            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/core/" + wand.getCore().getIdentifier().substring(10)+".png")).get().getInputStream();
         } catch (IOException ignored) {
             inputStream = Files.newInputStream(Paths.get("cache/assets/iconicwands/textures/item/core/" + wand.getCore().getIdentifier().substring(10) + ".png"));
         }
         NativeImage presetImage = NativeImage.read(inputStream);
         try {
-            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/handle/" + wand.getHandle().getIdentifier().substring(10)+".png")).getInputStream();
+            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/handle/" + wand.getHandle().getIdentifier().substring(10)+".png")).get().getInputStream();
         } catch (IOException ignored) {
             inputStream = Files.newInputStream(Paths.get("cache/assets/iconicwands/textures/item/handle/" + wand.getHandle().getIdentifier().substring(10) + ".png"));
         }
@@ -89,7 +89,7 @@ public class WandPresetTester extends Item {
             }
         }
         try {
-            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/tip/" + wand.getTip().getIdentifier().substring(10)+".png")).getInputStream();
+            inputStream = MinecraftClient.getInstance().getResourceManager().getResource(Iconicwands.getId("textures/item/tip/" + wand.getTip().getIdentifier().substring(10)+".png")).get().getInputStream();
         } catch (IOException ignored) {
             inputStream = Files.newInputStream(Paths.get("cache/assets/iconicwands/textures/item/tip/" + wand.getTip().getIdentifier().substring(10) + ".png"));
         }

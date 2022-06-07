@@ -16,7 +16,6 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
@@ -118,7 +117,7 @@ public class WandBenchEntity extends BlockEntity implements Inventory, NamedScre
 
     @Override
     public Text getDisplayName() {
-        return this.customName != null ? this.customName : new TranslatableText("container.iconicwands.wand_bench");
+        return this.customName != null ? this.customName : Text.translatable("container.iconicwands.wand_bench");
     }
 
     public boolean hasCustomName(){

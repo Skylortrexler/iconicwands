@@ -16,7 +16,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -78,19 +77,19 @@ public class IconicWand extends RangedWeaponItem{
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (stack.getOrCreateNbt().getInt("CustomModelData") >= 0) {
             Parts.WandCluster wand = IconicWand.getPartComobo(stack);
-            tooltip.add(new TranslatableText("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
-            tooltip.add(new TranslatableText("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
-            tooltip.add(new TranslatableText("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
+            tooltip.add(Text.translatable("item.iconicwands.damage").append(": " + wand.getHandle().getDamage()));
+            tooltip.add(Text.translatable("item.iconicwands.mana_cost").append(": " + (wand.getTip().getManaCost() + wand.getHandle().getManaCost())));
+            tooltip.add(Text.translatable("item.iconicwands.firerate").append(": " + (wand.getCore().getFirerate() + wand.getHandle().getFirerate())));
             if (context.isAdvanced() || Screen.hasShiftDown()) {
-                tooltip.add(new TranslatableText("item.iconicwands.crit").append(": " + 100*(wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
-                tooltip.add(new TranslatableText("item.iconicwands.recharge_amount").append(": " + (wand.getTip().getRechargeAmount() + wand.getCore().getRechargeAmount())));
-                tooltip.add(new TranslatableText("item.iconicwands.recharge_rate").append(": " + (wand.getCore().getRechargeRate())));
-                tooltip.add(new TranslatableText("item.iconicwands.recharge_delay").append(": " + (wand.getCore().getRechargeDelay())));
-                tooltip.add(new TranslatableText("item.iconicwands.range").append(": " + (wand.getCore().getRange())));
-                tooltip.add(new TranslatableText("item.iconicwands.speed").append(": " + (wand.getTip().getSpeed())));
-                tooltip.add(new TranslatableText("item.iconicwands.divergence").append(": " + (wand.getTip().getDivergence())));
+                tooltip.add(Text.translatable("item.iconicwands.crit").append(": " + 100*(wand.getTip().getCriticalChance()+wand.getHandle().getCriticalChance())));
+                tooltip.add(Text.translatable("item.iconicwands.recharge_amount").append(": " + (wand.getTip().getRechargeAmount() + wand.getCore().getRechargeAmount())));
+                tooltip.add(Text.translatable("item.iconicwands.recharge_rate").append(": " + (wand.getCore().getRechargeRate())));
+                tooltip.add(Text.translatable("item.iconicwands.recharge_delay").append(": " + (wand.getCore().getRechargeDelay())));
+                tooltip.add(Text.translatable("item.iconicwands.range").append(": " + (wand.getCore().getRange())));
+                tooltip.add(Text.translatable("item.iconicwands.speed").append(": " + (wand.getTip().getSpeed())));
+                tooltip.add(Text.translatable("item.iconicwands.divergence").append(": " + (wand.getTip().getDivergence())));
             } else {
-                tooltip.add(new TranslatableText("item.iconicwands.advanced_tooltip"));
+                tooltip.add(Text.translatable("item.iconicwands.advanced_tooltip"));
             }
         }
         super.appendTooltip(stack, world, tooltip, context);
@@ -196,7 +195,7 @@ public class IconicWand extends RangedWeaponItem{
                 world.spawnEntity(persistentProjectileEntity);
             }
 
-            world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS, 0.5f + world.random.nextFloat(0.5f), (crit ? 2f : 0.25f) + world.random.nextFloat(0.75f));
+            world.playSoundFromEntity(null, playerEntity, SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.PLAYERS, (float) (0.5f+(world.random.nextFloat()*0.5)), (crit ? 2f : 0.25f) + world.random.nextFloat()*0.75f);
             stack.getOrCreateNbt().putInt("recharge_time", wand.getCore().getRechargeDelay());
             stack.getOrCreateNbt().putInt("recharge_delay", 0);
 
@@ -238,31 +237,31 @@ public class IconicWand extends RangedWeaponItem{
     public Text getName(ItemStack stack) {
         int wand = IconicWand.getPartIntCombo(stack);
         if (wand==(Iconicwands.Presets.overworld.getWandInt())){
-            return new TranslatableText("item.iconicwands.overworld_wand");
+            return Text.translatable("item.iconicwands.overworld_wand");
         } else
         if (wand==(Iconicwands.Presets.nether.getWandInt())){
-            return new TranslatableText("item.iconicwands.nether_wand");
+            return Text.translatable("item.iconicwands.nether_wand");
         } else
         if (wand==(Iconicwands.Presets.end.getWandInt())){
-            return new TranslatableText("item.iconicwands.end_wand");
+            return Text.translatable("item.iconicwands.end_wand");
         } else
         if (wand==(Iconicwands.Presets.food.getWandInt())){
-            return new TranslatableText("item.iconicwands.food_wand");
+            return Text.translatable("item.iconicwands.food_wand");
         } else
         if (wand==(Iconicwands.Presets.forest.getWandInt())){
-            return new TranslatableText("item.iconicwands.forest_wand");
+            return Text.translatable("item.iconicwands.forest_wand");
         } else
         if (wand==(Iconicwands.Presets.magus.getWandInt())){
-            return new TranslatableText("item.iconicwands.magus_wand");
+            return Text.translatable("item.iconicwands.magus_wand");
         } else
         if (wand==(Iconicwands.Presets.kynan.getWandInt())){
-            return new TranslatableText("item.iconicwands.kynan_wand");
+            return Text.translatable("item.iconicwands.kynan_wand");
         } else
         if (wand==(Iconicwands.Presets.scarlet.getWandInt())){
-            return new TranslatableText("item.iconicwands.scarlet_wand");
+            return Text.translatable("item.iconicwands.scarlet_wand");
         } else
         if (wand==(Iconicwands.Presets.boomstick.getWandInt())){
-            return new TranslatableText("item.iconicwands.boomstick_wand");
+            return Text.translatable("item.iconicwands.boomstick_wand");
         } else
 
         return super.getName(stack);

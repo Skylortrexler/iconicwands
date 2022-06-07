@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @Mixin(ModelLoader.class)
 public class ModelLoaderMixin {
 
-    @Inject(method = "loadModelFromJson", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceManager;getResource(Lnet/minecraft/util/Identifier;)Lnet/minecraft/resource/Resource;"), cancellable = true)
+    @Inject(method = "loadModelFromJson", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceManager;openAsReader(Lnet/minecraft/util/Identifier;)Ljava/io/BufferedReader;"), cancellable = true)
     public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) throws IOException {
         if (!"iconicwands".equals(id.getNamespace())) return;//filter out everything that isn't from this mod
         String idPath = id.getPath();

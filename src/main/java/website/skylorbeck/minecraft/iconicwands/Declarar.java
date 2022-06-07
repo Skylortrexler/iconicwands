@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -23,7 +24,6 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import vazkii.patchouli.api.PatchouliAPI;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandPedestal;
 import website.skylorbeck.minecraft.iconicwands.blocks.WeakLightBlock;
@@ -66,13 +66,16 @@ public class Declarar {
             FabricBlockEntityTypeBuilder.create(WandBenchEntity::new, WAND_BENCH).build(null));
 
     public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings().group(ICONIC_WAND_GROUP)) {
-        @Override
+        //this was commented out during the update from 1.18.2 to 1.19, patchouli had not updated at the time.
+       /* @Override
         public void onCraft(ItemStack stack, World world, PlayerEntity player) {
-            ItemStack book = PatchouliAPI.get().getBookStack(Iconicwands.getId("book_1"));
-            if (!player.getInventory().contains(book))
-                player.getInventory().offerOrDrop(book);
-            super.onCraft(stack, world, player);
-        }
+            if (FabricLoader.getInstance().isModLoaded("patchouli")) {
+                ItemStack book = PatchouliAPI.get().getBookStack(Iconicwands.getId("book_1"));
+                if (!player.getInventory().contains(book))
+                    player.getInventory().offerOrDrop(book);
+                super.onCraft(stack, world, player);
+            }
+        }*/
     };
     public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
     public static final Block WAND_PEDESTAL_DISPLAY = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
