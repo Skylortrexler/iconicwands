@@ -24,6 +24,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import vazkii.patchouli.api.PatchouliAPI;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandBench;
 import website.skylorbeck.minecraft.iconicwands.blocks.WandPedestal;
 import website.skylorbeck.minecraft.iconicwands.blocks.WeakLightBlock;
@@ -67,7 +68,7 @@ public class Declarar {
 
     public static final BlockItem WAND_BENCH_ITEM = new BlockItem(WAND_BENCH, new FabricItemSettings().group(ICONIC_WAND_GROUP)) {
         //this was commented out during the update from 1.18.2 to 1.19, patchouli had not updated at the time.
-       /* @Override
+        @Override
         public void onCraft(ItemStack stack, World world, PlayerEntity player) {
             if (FabricLoader.getInstance().isModLoaded("patchouli")) {
                 ItemStack book = PatchouliAPI.get().getBookStack(Iconicwands.getId("book_1"));
@@ -75,7 +76,7 @@ public class Declarar {
                     player.getInventory().offerOrDrop(book);
                 super.onCraft(stack, world, player);
             }
-        }*/
+        }
     };
     public static final Block WAND_PEDESTAL = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
     public static final Block WAND_PEDESTAL_DISPLAY = new WandPedestal(FabricBlockSettings.copy(Blocks.BLACKSTONE).hardness(1f).resistance(1f).breakInstantly());
